@@ -9,7 +9,7 @@ function Layout() {
         <div className='quadrant type'><Type></Type></div>
         <div className='quadrant schema'><Schema></Schema></div>
         <div className='quadrant focus'><Focus></Focus></div>
-        <div className='quadrant'>4</div>
+        <div className='quadrant'></div>
     </div>
   )
 }

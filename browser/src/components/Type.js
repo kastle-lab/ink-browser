@@ -2,7 +2,7 @@ import React from 'react'
 
 function Type() {
   return (
-    <div>Type</div>
+      <div><h2>Type</h2></div>
   )
 }
 
