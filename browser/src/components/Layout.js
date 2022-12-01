@@ -1,12 +1,15 @@
-import React from 'react'
+import React from 'react';
+import Schema from './Schema';
+import Type from './Type';
+import Focus from './Focus';
 
 function Layout() {
   return (
     <div className='grid'>
-        <div>1</div>
-        <div>2</div>
-        <div>3</div>
-        <div>4</div>
+        <div className='quadrant type'><Type></Type></div>
+        <div className='quadrant schema'><Schema></Schema></div>
+        <div className='quadrant focus'><Focus></Focus></div>
+        <div className='quadrant'>4</div>
     </div>
   )
 }
