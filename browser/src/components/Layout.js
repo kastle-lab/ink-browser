@@ -5,11 +5,11 @@ import Focus from './Focus';
 
 function Layout() {
   return (
-    <div className='grid'>
-        <div className='quadrant type'><Type></Type></div>
-        <div className='quadrant schema'><Schema></Schema></div>
-        <div className='quadrant focus'><Focus></Focus></div>
-        <div className='quadrant'></div>
+    <div className='gridlayout'>
+      <div className='quadrant type topTwo'><Type></Type></div>
+      <div className='quadrant schema topTwo'><Schema></Schema></div>
+      <div className='quadrant focus bottomTwo'><Focus></Focus></div>
+      <div className='quadrant bottomTwo'></div>
     </div>
   )
 }
