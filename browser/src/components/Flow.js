@@ -1,9 +1,10 @@
-import ReactFlow, { Controls, Background } from 'reactflow';
+import ReactFlow, { Controls, Background, applyEdgeChanges, applyNodeChanges } from 'reactflow';
 import 'reactflow/dist/style.css';
+import { useState, useCallback } from 'react';
 
 const edges = [{ id: '1-2', source: '1', target: '2', label: 'to the', type: 'step' }];
 
-const nodes = [
+const initialNodes = [
     {
         id: '1',
         position: { x: 0, y: 0 },
@@ -18,9 +19,28 @@ const nodes = [
 ];
 
 function Flow() {
+
+    const [nodes, setNodes] = useState(initialNodes);
+
+    const onNodesChange = useCallback(
+        (changes) => setNodes((nds) => applyNodeChanges(changes, nds)),
+        []
+    );
+
+    const [clicked, setClicked] = useState();
+
+    const onNodeClick = () => {
+        console.log('test');
+    }
+
     return (
         <div style={{ height: '100%' }}>
-            <ReactFlow nodes={nodes} edges={edges}>
+            <ReactFlow 
+                nodes={nodes}
+                onNodeClick={onNodeClick}
+                edges={edges}
+                
+            >
                 <Background />
                 <Controls />
             </ReactFlow>

@@ -4,7 +4,7 @@ function Type() {
   return (
     <div>
       <h2>Type</h2>
-      {/* <div className='elements'>
+      <div className='elements'>
         <div>
           <h3>
             Element
@@ -70,7 +70,7 @@ function Type() {
             Element
           </h3>
         </div>
-      </div> */}
+      </div>
     </div>
   )
 }
