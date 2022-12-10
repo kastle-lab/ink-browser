@@ -1,51 +1,68 @@
-import ReactFlow, { Controls, Background, applyEdgeChanges, applyNodeChanges } from 'reactflow';
+import React, { useCallback } from 'react';
+import ReactFlow, {
+    ReactFlowProvider,
+    useNodesState,
+    useEdgesState,
+    addEdge,
+    Controls,
+    useOnSelectionChange,
+} from 'reactflow';
 import 'reactflow/dist/style.css';
-import { useState, useCallback } from 'react';
-
-const edges = [{ id: '1-2', source: '1', target: '2', label: 'to the', type: 'step' }];
 
 const initialNodes = [
     {
-        id: '1',
-        position: { x: 0, y: 0 },
-        data: { label: 'Hello' },
+        id: 'provider-1',
         type: 'input',
+        data: { label: 'Node 1' },
+        position: { x: 250, y: 5 },
     },
-    {
-        id: '2',
-        position: { x: 100, y: 100 },
-        data: { label: 'World' },
-    },
+    { id: 'provider-2', data: { label: 'Node 2' }, position: { x: 100, y: 100 } },
+    { id: 'provider-3', data: { label: 'Node 3' }, position: { x: 400, y: 100 } },
+    { id: 'provider-4', data: { label: 'Node 4' }, position: { x: 400, y: 200 } },
 ];
 
-function Flow() {
+const initialEdges = [
+    {
+        id: 'provider-e1-2',
+        source: 'provider-1',
+        target: 'provider-2',
+        animated: true,
+    },
+    { id: 'provider-e1-3', source: 'provider-1', target: 'provider-3' },
+];
 
-    const [nodes, setNodes] = useState(initialNodes);
+function SelectionChangeLogger() {
+    useOnSelectionChange({
+        onChange: ({ nodes, edges }) => console.log('changed selection', nodes, edges),
+    });
 
-    const onNodesChange = useCallback(
-        (changes) => setNodes((nds) => applyNodeChanges(changes, nds)),
-        []
-    );
+    return null;
+}
 
-    const [clicked, setClicked] = useState();
-
-    const onNodeClick = () => {
-        console.log('test');
-    }
+const Flow = () => {
+    const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
+    const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
+    const onConnect = useCallback((params) => setEdges((els) => addEdge(params, els)), []);
 
     return (
-        <div style={{ height: '100%' }}>
-            <ReactFlow 
-                nodes={nodes}
-                onNodeClick={onNodeClick}
-                edges={edges}
-                
-            >
-                <Background />
-                <Controls />
-            </ReactFlow>
+        <div className="providerflow">
+            <ReactFlowProvider>
+                <div className="reactflow-wrapper">
+                    <ReactFlow
+                        nodes={nodes}
+                        edges={edges}
+                        onNodesChange={onNodesChange}
+                        onEdgesChange={onEdgesChange}
+                        onConnect={onConnect}
+                        fitView
+                        onNodeClick={SelectionChangeLogger}
+                    >
+                        <Controls />
+                    </ReactFlow>
+                </div>
+            </ReactFlowProvider>
         </div>
     );
-}
+};
 
 export default Flow;
