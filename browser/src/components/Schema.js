@@ -6,7 +6,6 @@ function Schema({data, setData}) {
 
     return (
         <div>
-            <h2>Schema</h2>
             <div className='flowDiv'>
                 <Flow data={data} setData={setData}></Flow>
             </div>

@@ -5,7 +5,7 @@ import ReactFlow, {
     useEdgesState,
     addEdge,
     Controls,
-    useOnSelectionChange,
+    MiniMap,
 } from 'reactflow';
 import 'reactflow/dist/style.css';
 
@@ -57,6 +57,7 @@ const Flow = ({data, setData}) => {
                         fitView
                         onNodeClick={nodeClick}
                     >
+                        <MiniMap zoomable pannable nodeColor={'#999'} position={'top-right'}/>
                         <Controls />
                     </ReactFlow>
                 </div>
