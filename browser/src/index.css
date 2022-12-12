@@ -10,10 +10,12 @@ body {
 
 ::-webkit-scrollbar-track {
   background: #f1f1f1;
+  border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb {
   background: #888;
+  border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
@@ -21,15 +23,18 @@ body {
 }
 
 :root {
-  --topbarHeight: 65px;
+  --topbarHeight: 80px;
   --quadrantMargin: 5px;
+  --quadrantPadding: 5px;
+  --quadrantBorderThickness: 2px;
   --restOfScreenHeight: calc(100vh - var(--topbarHeight));
   --halfRestOfScreenHeight: calc(var(--restOfScreenHeight)/2);
-  --innerQuadrantHeight: calc(var(--halfRestOfScreenHeight) - (var(--quadrantMargin) * 4) - var(--quadrantMargin));
+  --innerQuadrantHeight: calc(var(--halfRestOfScreenHeight) - (var(--quadrantMargin) * 2) - var(--quadrantPadding) * 2 - var(--quadrantBorderThickness));
 }
 
 .topbar h1 {
-  margin: 10px;
+  padding: 15px;
+  margin: 0px;
 }
 
 .topbar {
@@ -41,7 +46,6 @@ body {
   width: 100%;
   position: absolute;
   top: var(--topbarHeight);
-  left: 0;
   bottom: 0;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -49,29 +53,11 @@ body {
 }
 
 .quadrant {
-  border: 2px solid black;
+  border: var(--quadrantBorderThickness) solid black;
   border-radius: 15px;
   background: #e5e5ff;
-  padding: 5px;
+  padding: var(--quadrantPadding);
   margin: var(--quadrantMargin);
-}
-
-.quadrant h2 {
-  padding: 0;
-  margin: 0;
-  margin-left: 5px;
-}
-
-/* .flowDiv {
-  background-color: white;
-  border-radius: 5px;
-  width: 100%;
-  height: 375px;
-} */
-
-.elements {
-  overflow-y: scroll;
-  height: 375px;
 }
 
 .reactflow-wrapper {
@@ -79,4 +65,17 @@ body {
   border-radius: 15px;
   width: 100%;
   height: var(--innerQuadrantHeight);
+}
+
+.type {
+  height: var(--innerQuadrantHeight);
+  overflow-y: auto;
+  border-radius: 15px;
+  padding-left: 5px;
+}
+
+p {
+  padding: 0;
+  margin: 0;
+  margin-bottom: 15px;
 }

@@ -1,15 +1,28 @@
 import React from 'react'
 
 function Type({ data, setData }) {
-
+  
   return (
-    <div>
-      <h2>Type</h2>
-      <div className='elements'>
-        
-        <p>{data && data.data.label}</p>
-        
-      </div>
+    <div className='type'>
+      <p>Data from node {data && data.data.label}</p>
+      <p>Data from node {data && data.data.label}</p>
+      <p>Data from node {data && data.data.label}</p>
+      <p>Data from node {data && data.data.label}</p>
+      <p>Data from node {data && data.data.label}</p>
+      <p>Data from node {data && data.data.label}</p>
+      <p>Data from node {data && data.data.label}</p>
+      <p>Data from node {data && data.data.label}</p>
+      <p>Data from node {data && data.data.label}</p>
+      <p>Data from node {data && data.data.label}</p>
+      <p>Data from node {data && data.data.label}</p>
+      <p>Data from node {data && data.data.label}</p>
+      <p>Data from node {data && data.data.label}</p>
+      <p>Data from node {data && data.data.label}</p>
+      <p>Data from node {data && data.data.label}</p>
+      <p>Data from node {data && data.data.label}</p>
+      <p>Data from node {data && data.data.label}</p>
+      <p>Data from node {data && data.data.label}</p>
+      <p>Data from node {data && data.data.label}</p>
     </div>
   )
 }
