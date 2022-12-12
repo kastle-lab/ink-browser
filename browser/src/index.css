@@ -23,7 +23,7 @@ body {
 }
 
 :root {
-  --topbarHeight: 80px;
+  --topbarHeight: 60px;
   --quadrantMargin: 5px;
   --quadrantPadding: 5px;
   --quadrantBorderThickness: 2px;
@@ -32,14 +32,64 @@ body {
   --innerQuadrantHeight: calc(var(--halfRestOfScreenHeight) - (var(--quadrantMargin) * 2) - var(--quadrantPadding) * 2 - var(--quadrantBorderThickness));
 }
 
+.topbar {
+  display: flex;
+  width: 100%;
+  height: var(--topbarHeight);
+  align-items: center;
+  justify-content: space-between;
+}
+
 .topbar h1 {
-  padding: 15px;
+  padding-left: 15px;
   margin: 0px;
 }
 
-.topbar {
-  width: 100%;
-  height: var(--topbarHeight);
+.topbar a {
+ padding-top: 15px;
+ padding-left: 30px;
+}
+
+.left {
+  display: flex;
+}
+
+.right {
+  margin-right: 15px;
+}
+
+.right input, button {
+  background-color: #888;
+  border: none;
+  padding: 10px 15px;
+  color: white;
+}
+
+.right input {
+  border-top-left-radius: 15px;
+  border-bottom-left-radius: 15px;
+}
+
+.right button {
+  border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px;
+}
+
+.right button:hover {
+  background-color: #555;
+  cursor: pointer;
+}
+
+.right input:hover {
+  background-color: #555;
+}
+
+.right input:focus {
+  background: #555;
+}
+
+::placeholder {
+  color: #cccccc;
 }
 
 .gridlayout {
