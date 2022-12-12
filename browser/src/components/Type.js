@@ -1,75 +1,14 @@
 import React from 'react'
 
-function Type() {
+function Type({ data, setData }) {
+
   return (
     <div>
       <h2>Type</h2>
       <div className='elements'>
-        <div>
-          <h3>
-            Element
-          </h3>
-        </div>
-        <div>
-          <h3>
-            Element
-          </h3>
-        </div>
-        <div>
-          <h3>
-            Element
-          </h3>
-        </div>
-        <div>
-          <h3>
-            Element
-          </h3>
-        </div>
-        <div>
-          <h3>
-            Element
-          </h3>
-        </div>
-        <div>
-          <h3>
-            Element
-          </h3>
-        </div>
-        <div>
-          <h3>
-            Element
-          </h3>
-        </div>
-        <div>
-          <h3>
-            Element
-          </h3>
-        </div>
-        <div>
-          <h3>
-            Element
-          </h3>
-        </div>
-        <div>
-          <h3>
-            Element
-          </h3>
-        </div>
-        <div>
-          <h3>
-            Element
-          </h3>
-        </div>
-        <div>
-          <h3>
-            Element
-          </h3>
-        </div>
-        <div>
-          <h3>
-            Element
-          </h3>
-        </div>
+        
+        <p>{data && data.data.label}</p>
+        
       </div>
     </div>
   )

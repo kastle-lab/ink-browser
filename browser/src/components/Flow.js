@@ -31,18 +31,18 @@ const initialEdges = [
     { id: 'provider-e1-3', source: 'provider-1', target: 'provider-3' },
 ];
 
-function SelectionChangeLogger() {
-    useOnSelectionChange({
-        onChange: ({ nodes, edges }) => console.log('changed selection', nodes, edges),
-    });
-
-    return null;
-}
-
-const Flow = () => {
+const Flow = ({data, setData}) => {
     const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
     const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
     const onConnect = useCallback((params) => setEdges((els) => addEdge(params, els)), []);
+
+    function nodeClick() {
+        nodes.map((node) => {
+            if (node.selected == true) {
+                setData(node)
+            }
+        })
+    }
 
     return (
         <div className="providerflow">
@@ -55,7 +55,7 @@ const Flow = () => {
                         onEdgesChange={onEdgesChange}
                         onConnect={onConnect}
                         fitView
-                        onNodeClick={SelectionChangeLogger}
+                        onNodeClick={nodeClick}
                     >
                         <Controls />
                     </ReactFlow>
