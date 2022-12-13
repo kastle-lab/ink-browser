@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
 
-function Topbar() {
+function Topbar(layout) {
 
-  const views = ['Type', 'Schema', 'Focus']
+  const views = ['Type', 'Schema', 'Focus', 'Empty']
   const [search, setSearch] = useState('');
+  const {setTopLeft, setTopRight, setBottomLeft, setBottomRight, topLeft, topRight, bottomLeft, bottomRight} = layout;
 
   return (
 
@@ -30,31 +31,54 @@ function Topbar() {
       <div className='bottom'>
         <div>
           <label>Top Left</label>
-          <select>
+          <select
+            value={topLeft}
+            onChange={(e) => {
+              setTopLeft(e.target.value)
+            }}
+          >
             {views.map((view) => (
               <option key={view}>{view}</option>
             ))}
           </select>
         </div>
+
         <div>
           <label>Top Right</label>
-          <select>
+          <select
+            value={topRight}
+            onChange={(e) => {
+              setTopRight(e.target.value)
+            }}
+          >
             {views.map((view) => (
               <option key={view}>{view}</option>
             ))}
           </select>
         </div>
+
         <div>
           <label>Bottom Left</label>
-          <select>
+          <select
+            value={bottomLeft}
+            onChange={(e) => {
+              setBottomLeft(e.target.value)
+            }}
+          >
             {views.map((view) => (
               <option key={view}>{view}</option>
             ))}
           </select>
         </div>
+
         <div>
           <label>Bottom Right</label>
-          <select>
+          <select
+            value={bottomRight}
+            onChange={(e) => {
+              setBottomRight(e.target.value)
+            }}
+          >
             {views.map((view) => (
               <option key={view}>{view}</option>
             ))}
