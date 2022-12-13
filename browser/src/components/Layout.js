@@ -3,7 +3,7 @@ import Schema from './Schema';
 import Type from './Type';
 import Focus from './Focus';
 
-function Layout() {
+function Layout(layout) {
 
   const [data, setData] = useState(null);
 

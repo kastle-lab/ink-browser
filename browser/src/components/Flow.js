@@ -37,7 +37,6 @@ const Flow = ({data, setData}) => {
     const onConnect = useCallback((params) => setEdges((els) => addEdge(params, els)), []);
 
     function nodeClick() {
-        console.log('test')
         nodes.map((node) => {
             if (node.selected == true) {
                 setData(node)

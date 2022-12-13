@@ -23,7 +23,9 @@ body {
 }
 
 :root {
-  --topbarHeight: 60px;
+  --topHeight: 50px;
+  --bottomHeight: 30px;
+  --topbarHeight: calc(var(--bottomHeight) + var(--topHeight));
   --quadrantMargin: 5px;
   --quadrantPadding: 5px;
   --quadrantBorderThickness: 2px;
@@ -33,10 +35,8 @@ body {
 }
 
 .topbar {
-  display: flex;
   width: 100%;
   height: var(--topbarHeight);
-  align-items: center;
   justify-content: space-between;
 }
 
@@ -48,6 +48,35 @@ body {
 .topbar a {
  padding-top: 15px;
  padding-left: 30px;
+}
+
+.top {
+  display: flex;
+  justify-content: space-between;
+  height: var(--topHeight);
+  align-items: center;
+}
+
+.bottom {
+  display: flex;
+  height: var(--bottomHeight);
+  align-items: center;
+  justify-content: center;
+}
+
+.bottom div {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.bottom label {
+  padding-right: 5px;
+}
+
+.bottom select {
+  border-radius: 15px;
+  background: #888;
+  padding: 5px;
 }
 
 .left {
@@ -62,7 +91,6 @@ body {
   background-color: #888;
   border: none;
   padding: 10px 15px;
-  color: white;
 }
 
 .right input {
