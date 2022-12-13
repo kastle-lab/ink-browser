@@ -24,7 +24,7 @@ body {
 
 :root {
   --topHeight: 50px;
-  --bottomHeight: 30px;
+  --bottomHeight: 40px;
   --topbarHeight: calc(var(--bottomHeight) + var(--topHeight));
   --quadrantMargin: 5px;
   --quadrantPadding: 5px;
@@ -57,23 +57,23 @@ body {
   align-items: center;
 }
 
-.bottom {
+.bottoms {
   display: flex;
   height: var(--bottomHeight);
   align-items: center;
   justify-content: center;
 }
 
-.bottom div {
+.bottoms div {
   padding-left: 15px;
   padding-right: 15px;
 }
 
-.bottom label {
+.bottoms label {
   padding-right: 5px;
 }
 
-.bottom select {
+.bottoms select {
   border-radius: 15px;
   background: #888;
   padding: 5px;
@@ -118,6 +118,13 @@ body {
 
 ::placeholder {
   color: #cccccc;
+}
+
+.line {
+  border: 2px solid black;
+  margin-left: 15px;
+  margin-right: 15px;
+  border-radius: 2px;
 }
 
 .gridlayout {

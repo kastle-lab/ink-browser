@@ -2,20 +2,30 @@ import React, { useState } from 'react'
 
 function Topbar(layout) {
 
+  // Destructuring the variables passed down from the parent component into their own variables
+  const { setTopLeft, setTopRight, setBottomLeft, setBottomRight, topLeft, topRight, bottomLeft, bottomRight } = layout;
+
+  // Array of views that can be chosen from as drop down options
   const views = ['Type', 'Schema', 'Focus', 'Empty']
+
+  // Variable for what is typed into the search bar
   const [search, setSearch] = useState('');
-  const {setTopLeft, setTopRight, setBottomLeft, setBottomRight, topLeft, topRight, bottomLeft, bottomRight} = layout;
 
   return (
-
     <div className='topbar'>
+
+      {/* Div for the upper section of the top bar */}
       <div className="top">
+
+        {/* Elements on the left side of the screen */}
         <div className='left'>
           <h1>ink-browser</h1>
           <a>Class Hierarchy</a>
           <a>Client</a>
           <a>Statistics</a>
         </div>
+
+        {/* Elements on the right side of the screen */}
         <div className='right'>
           <input
             placeholder='Lookup Schema'
@@ -28,7 +38,14 @@ function Topbar(layout) {
         </div>
         
       </div>
-      <div className='bottom'>
+
+      {/* Div to create the line seperating the top bar sections */}
+      <div className='line'></div>
+
+      {/* Div for the lower section of the top bar */}
+      <div className='bottoms'>
+
+        {/* Drop down menu to choose the view for top left quadrant */}
         <div>
           <label>Top Left</label>
           <select
@@ -43,6 +60,7 @@ function Topbar(layout) {
           </select>
         </div>
 
+        {/* Drop down menu to choose the view for top right quadrant */}
         <div>
           <label>Top Right</label>
           <select
@@ -57,6 +75,7 @@ function Topbar(layout) {
           </select>
         </div>
 
+        {/* Drop down menu to choose the view for bottom left quadrant */}
         <div>
           <label>Bottom Left</label>
           <select
@@ -71,6 +90,7 @@ function Topbar(layout) {
           </select>
         </div>
 
+        {/* Drop down menu to choose the view for bottom right quadrant */}
         <div>
           <label>Bottom Right</label>
           <select
