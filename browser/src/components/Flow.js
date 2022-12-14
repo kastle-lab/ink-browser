@@ -34,13 +34,13 @@ const initialEdges = [
 const Flow = ({data, setData}) => {
     const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
     const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
-    const onConnect = useCallback((params) => setEdges((els) => addEdge(params, els)), []);
 
     function nodeClick() {
         nodes.map((node) => {
             if (node.selected == true) {
                 setData(node)
             }
+            console.log(node.selected)
         })
     }
 
@@ -52,8 +52,6 @@ const Flow = ({data, setData}) => {
                         nodes={nodes}
                         edges={edges}
                         onNodesChange={onNodesChange}
-                        onEdgesChange={onEdgesChange}
-                        onConnect={onConnect}
                         fitView
                         onNodeClick={nodeClick}
                     >

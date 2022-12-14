@@ -6,7 +6,7 @@ function Topbar(layout) {
   const { setTopLeft, setTopRight, setBottomLeft, setBottomRight, topLeft, topRight, bottomLeft, bottomRight } = layout;
 
   // Array of views that can be chosen from as drop down options
-  const views = ['Type', 'Schema', 'Focus', 'Empty']
+  const views = ['Type', 'Schema', 'Focus', 'Class Hierarchy', 'Client', 'Statistics', 'Search', 'Empty']
 
   // Variable for what is typed into the search bar
   const [search, setSearch] = useState('');
@@ -20,9 +20,6 @@ function Topbar(layout) {
         {/* Elements on the left side of the screen */}
         <div className='left'>
           <h1>ink-browser</h1>
-          <a>Class Hierarchy</a>
-          <a>Client</a>
-          <a>Statistics</a>
         </div>
 
         {/* Elements on the right side of the screen */}
