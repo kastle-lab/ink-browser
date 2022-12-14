@@ -52,6 +52,7 @@ function Topbar(layout) {
             value={topLeft}
             onChange={(e) => {
               setTopLeft(e.target.value)
+              localStorage.setItem('topLeft', e.target.value)
             }}
           >
             {views.map((view) => (
@@ -67,6 +68,7 @@ function Topbar(layout) {
             value={topRight}
             onChange={(e) => {
               setTopRight(e.target.value)
+              localStorage.setItem('topRight', e.target.value)
             }}
           >
             {views.map((view) => (
@@ -82,6 +84,7 @@ function Topbar(layout) {
             value={bottomLeft}
             onChange={(e) => {
               setBottomLeft(e.target.value)
+              localStorage.setItem('bottomLeft', e.target.value)
             }}
           >
             {views.map((view) => (
@@ -97,6 +100,7 @@ function Topbar(layout) {
             value={bottomRight}
             onChange={(e) => {
               setBottomRight(e.target.value)
+              localStorage.setItem('bottomRight', e.target.value)
             }}
           >
             {views.map((view) => (
