@@ -173,3 +173,35 @@ p {
   margin-left: 10px;
   margin-right: 10px;
 }
+
+@media (max-width:1000px) {
+
+  .bottoms label {
+    display: none;
+  }
+
+  .search-top {
+    display: block;
+    padding-bottom: 5px;
+  }
+  
+}
+
+@media (max-width: 660px) {
+  :root {
+    --bottomHeight: 0px;
+  }
+
+  .bottoms {
+    display: none;
+  }
+
+  .line {
+    display: none;
+  }
+
+  .right {
+    display: none;
+  }
+
+}
