@@ -205,3 +205,20 @@ p {
   }
 
 }
+
+table, th, td {
+  border: 1px solid;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th {
+  background: gray;
+}
+
+td {
+  background: white;
+}

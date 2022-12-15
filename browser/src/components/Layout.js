@@ -3,6 +3,7 @@ import Schema from './Schema';
 import Type from './Type';
 import Focus from './Focus';
 import Search from './Search';
+import Statistics from './Statistics';
 
 function Layout(layout) {
 
@@ -21,7 +22,7 @@ function Layout(layout) {
       {topLeft === 'Focus' && <div className='quadrant'><Focus></Focus></div>}
       {topLeft === 'Class Hierarchy' && <div className='quadrant'><h2>Class Hierarchy</h2></div>}
       {topLeft === 'Client' && <div className='quadrant'><h2>Client</h2></div>}
-      {topLeft === 'Statistics' && <div className='quadrant'><h2>Statistics</h2></div>}
+      {topLeft === 'Statistics' && <div className='quadrant'><Statistics></Statistics></div>}
       {topLeft === 'Search' && <div className='quadrant'><Search></Search></div>}
       {topLeft === 'Empty' && <div className='quadrant'></div>}
 
@@ -31,7 +32,7 @@ function Layout(layout) {
       {topRight === 'Focus' && <div className='quadrant'><Focus></Focus></div>}
       {topRight === 'Class Hierarchy' && <div className='quadrant'><h2>Class Hierarchy</h2></div>}
       {topRight === 'Client' && <div className='quadrant'><h2>Client</h2></div>}
-      {topRight === 'Statistics' && <div className='quadrant'><h2>Statistics</h2></div>}
+      {topRight === 'Statistics' && <div className='quadrant'><Statistics></Statistics></div>}
       {topRight === 'Search' && <div className='quadrant'><Search></Search></div>}
       {topRight === 'Empty' && <div className='quadrant'></div>}
 
@@ -41,7 +42,7 @@ function Layout(layout) {
       {bottomLeft === 'Schema' && <div className='quadrant'><Schema data={data} setData={setData}></Schema></div>}
       {bottomLeft === 'Class Hierarchy' && <div className='quadrant'><h2>Class Hierarchy</h2></div>}
       {bottomLeft === 'Client' && <div className='quadrant'><h2>Client</h2></div>}
-      {bottomLeft === 'Statistics' && <div className='quadrant'><h2>Statistics</h2></div>}
+      {bottomLeft === 'Statistics' && <div className='quadrant'><Statistics></Statistics></div>}
       {bottomLeft === 'Search' && <div className='quadrant'><Search></Search></div>}
       {bottomLeft === 'Empty' && <div className='quadrant'></div>}
 
@@ -51,7 +52,7 @@ function Layout(layout) {
       {bottomRight === 'Schema' && <div className='quadrant'><Schema data={data} setData={setData}></Schema></div>}
       {bottomRight === 'Class Hierarchy' && <div className='quadrant'><h2>Class Hierarchy</h2></div>}
       {bottomRight === 'Client' && <div className='quadrant'><h2>Client</h2></div>}
-      {bottomRight === 'Statistics' && <div className='quadrant'><h2>Statistics</h2></div>}
+      {bottomRight === 'Statistics' && <div className='quadrant'><Statistics></Statistics></div>}
       {bottomRight === 'Search' && <div className='quadrant'><Search></Search></div>}
       {bottomRight === 'Focus' && <div className='quadrant'><Focus></Focus></div>}
 
