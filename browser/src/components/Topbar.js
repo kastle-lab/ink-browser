@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 function Topbar(layout) {
 
@@ -9,7 +9,6 @@ function Topbar(layout) {
   const views = ['Type', 'Schema', 'Focus', 'Class Hierarchy', 'Client', 'Statistics', 'Search', 'Empty']
 
   // Variable for what is typed into the search bar
-  const [search, setSearch] = useState('');
 
   return (
     <div className='topbar'>
@@ -20,18 +19,6 @@ function Topbar(layout) {
         {/* Elements on the left side of the screen */}
         <div className='left'>
           <h1>ink-browser</h1>
-        </div>
-
-        {/* Elements on the right side of the screen */}
-        <div className='right'>
-          <input
-            placeholder='Lookup Schema'
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-          />
-          <button>
-            Search
-          </button>
         </div>
         
       </div>
