@@ -6,8 +6,8 @@ function Search() {
 
   return (
     <div className='search-top'>
-        <h2 className='left'>Search</h2>
-        <div className='right'>
+        <h2 className='left-search'>Search</h2>
+        <div className='right-search'>
             <input
                 placeholder='Lookup Schema'
                 value={search}

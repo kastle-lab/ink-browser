@@ -6,6 +6,7 @@ body {
 
 ::-webkit-scrollbar {
   width: 10px;
+  height: 10px;
 }
 
 ::-webkit-scrollbar-track {
@@ -24,7 +25,7 @@ body {
 
 :root {
   --topHeight: 50px;
-  --bottomHeight: 40px;
+  --bottomHeight: 0px;
   --topbarHeight: calc(var(--bottomHeight) + var(--topHeight));
   --quadrantMargin: 5px;
   --quadrantPadding: 5px;
@@ -38,6 +39,8 @@ body {
   width: 100%;
   height: var(--topbarHeight);
   justify-content: space-between;
+  display: flex;
+  align-items: center;
 }
 
 .topbar h1 {
@@ -87,32 +90,32 @@ body {
   margin-right: 15px;
 }
 
-.right input, button {
+.right-search input, button {
   background-color: #888;
   border: none;
   padding: 10px 15px;
 }
 
-.right input {
+.right-search input {
   border-top-left-radius: 15px;
   border-bottom-left-radius: 15px;
 }
 
-.right button {
+.right-search button {
   border-top-right-radius: 15px;
   border-bottom-right-radius: 15px;
 }
 
-.right button:hover {
+.right-search button:hover {
   background-color: #555;
   cursor: pointer;
 }
 
-.right input:hover {
+.right-search input:hover {
   background-color: #555;
 }
 
-.right input:focus {
+.right-search input:focus {
   background: #555;
 }
 
@@ -125,6 +128,7 @@ body {
   margin-left: 15px;
   margin-right: 15px;
   border-radius: 2px;
+  display: none;
 }
 
 .gridlayout {
@@ -143,6 +147,7 @@ body {
   background: #e5e5ff;
   padding: var(--quadrantPadding);
   margin: var(--quadrantMargin);
+  overflow: hidden;
 }
 
 .reactflow-wrapper {
@@ -174,36 +179,37 @@ p {
   margin-right: 10px;
 }
 
-@media (max-width:1000px) {
-
-  .bottoms label {
-    display: none;
-  }
-
-  .search-top {
-    display: block;
-    padding-bottom: 5px;
-  }
-  
-}
-
-@media (max-width: 660px) {
-  :root {
-    --bottomHeight: 0px;
-  }
-
+@media (max-width: 740px) {
   .bottoms {
     display: none;
+  }
+
+  .right-search {
+    display: none;
+  }
+}
+
+@media (max-width: 835px) {
+
+  .bottoms div {
+    padding-left: 0px;
+    padding-right: 5px;
   }
 
   .line {
     display: none;
   }
 
-  .right {
-    display: none;
+  .right-search input {
+    width: 140px;
   }
 
+}
+
+@media (max-width: 1165px) {
+  .bottoms label {
+    display: none;
+  }
 }
 
 table, th, td {
@@ -221,4 +227,22 @@ th {
 
 td {
   background: white;
+}
+
+.quad-head {
+  border-bottom: 3px solid black;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.table-div {
+  margin-left: 10px;
+  margin-right: 10px;
+  height: calc(var(--innerQuadrantHeight) - 90px);
+  overflow: auto;
+}
+
+.left-search {
+  margin: 0;
+  margin-top: 20px;
 }
