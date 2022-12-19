@@ -15,6 +15,8 @@ function Layout(layout) {
   // Variable that is used to transfer data between different quadrants
   const [data, setData] = useState(null);
 
+  const [bindings, setBindings] = useState();
+
   return (
     <div className='gridlayout'>
 
@@ -55,7 +57,7 @@ function Layout(layout) {
       {bottomRight === 'Class Hierarchy' && <div className='quadrant'><ClassHierarchy></ClassHierarchy></div>}
       {bottomRight === 'Client' && <div className='quadrant'><Client></Client></div>}
       {bottomRight === 'Statistics' && <div className='quadrant'><Statistics></Statistics></div>}
-      {bottomRight === 'Search' && <div className='quadrant'><Search></Search></div>}
+      {bottomRight === 'Search' && <div className='quadrant'><Search bindings={bindings} setBindings={setBindings}></Search></div>}
       {bottomRight === 'Focus' && <div className='quadrant'><Focus></Focus></div>}
 
     </div>
