@@ -247,3 +247,7 @@ td {
   margin: 0;
   margin-top: 20px;
 }
+
+.react-flow__node-default {
+  background:#e5e5ff;
+}

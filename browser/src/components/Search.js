@@ -9,16 +9,15 @@ function Search({bindings, setBindings}) {
         const myEngine = new QueryEngine();
 
         const bindingsStream = await myEngine.queryBindings(`
-        SELECT ?subject ?predicate ?object
-        WHERE {
-            ?subject ?predicate ?object
-        }
-        LIMIT 25`, {
+        PREFIX owl: <http://www.w3.org/2002/07/owl#>
+        select * where {
+        ?s a owl:Class .
+        }`, {
             sources: ['http://localhost:3030/earthquake-usgs/'],
         });
 
         bindingsStream.on('data', (binding) => {
-            // console.log(binding.toString()); // Quick way to print bindings for testing
+            // console.log(binding); // Quick way to print bindings for testing
         });
         bindingsStream.on('end', () => {
             // The data-listener will not be called anymore once we get here.
@@ -50,7 +49,7 @@ function Search({bindings, setBindings}) {
             </div>
         </div>
         <div className='search-bottom'>
-            {bindings && bindings.map((binding) => (
+            {/* {bindings && bindings.map((binding) => (
                 <>
                     <a>{binding.entries._root.entries[0][0] + ': '}</a>
                     <a href={binding.entries._root.entries[0][1].id}>{binding.entries._root.entries[0][1].id}</a>
@@ -63,7 +62,7 @@ function Search({bindings, setBindings}) {
                     <br></br>
                     <br></br>
                 </>
-            ))}
+            ))} */}
         </div>
     </>
   )

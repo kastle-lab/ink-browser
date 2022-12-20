@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useEffect } from 'react';
 import ReactFlow, {
     ReactFlowProvider,
     useNodesState,
@@ -31,20 +31,45 @@ const initialEdges = [
     { id: 'provider-e1-3', source: 'provider-1', target: 'provider-3' },
 ];
 
-const Flow = ({data, setData}) => {
-    const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
-    const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
+
+
+const Flow = ({bindings, setData}) => {
+    const [nodes, setNodes, onNodesChange] = useNodesState([]);
+    const [edges, setEdges, onEdgesChange] = useEdgesState([]);
+
+    
+    useEffect(() => {
+        let boxes = []
+        let y = 0
+        bindings && bindings.map((binding) => {
+            let url = binding.entries._root.entries[0][1].id
+            url = url.split("/").pop()
+            url = url.split("#").pop()
+
+            boxes.push(
+                {
+                    id: binding.entries._root.entries[0][1].id,
+                    data: { label: url },
+                    position: { x: 250, y: y },
+                }
+            )
+            y+=75
+        })
+        setNodes(boxes)
+    }, [bindings, setNodes])
+
+    
 
     function nodeClick() {
         nodes.map((node) => {
-            if (node.selected == true) {
+            if (node.selected === true) {
                 setData(node)
             }
-            console.log(node.selected)
         })
     }
 
     return (
+
         <div className="providerflow">
             <ReactFlowProvider>
                 <div className="reactflow-wrapper">
