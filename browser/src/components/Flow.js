@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback, useState } from 'react';
 import ReactFlow, {
     ReactFlowProvider,
     useNodesState,
@@ -6,15 +6,16 @@ import ReactFlow, {
     addEdge,
     Controls,
     MiniMap,
-    useOnSelectionChange,
 } from 'reactflow';
 import 'reactflow/dist/style.css';
+const QueryEngine = require('@comunica/query-sparql').QueryEngine;
 
-const Flow = ({bindings, setData}) => {
+const Flow = ({bindings, data, setData}) => {
     const [nodes, setNodes, onNodesChange] = useNodesState([]);
     const [edges, setEdges, onEdgesChange] = useEdgesState([]);
+    const onConnect = useCallback((params) => setEdges((els) => addEdge(params, els)), []);
+    const [selected, setSelected] = useState();
 
-    
     useEffect(() => {
         let boxes = []
         let y = 0
@@ -34,15 +35,17 @@ const Flow = ({bindings, setData}) => {
             y+=50
         })
         setNodes(boxes)
-    }, [bindings, setNodes])
 
-    
+    }, [bindings, setNodes])
 
     function selectionChange() {
         nodes.map((node) => {
             if (node.selected === true) {
-                setData(node)
+
+                setSelected(node.data.label)
+
             }
+
         })
     }
 
@@ -58,6 +61,7 @@ const Flow = ({bindings, setData}) => {
                         onEdgesChange={onEdgesChange}
                         fitView
                         onSelectionChange={selectionChange}
+                        onConnect={onConnect}
                     >
                         <MiniMap zoomable pannable nodeColor={'#999'} position={'top-right'}/>
                         <Controls />

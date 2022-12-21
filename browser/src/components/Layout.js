@@ -13,7 +13,7 @@ function Layout(layout) {
   const {topLeft, topRight, bottomLeft, bottomRight} = layout;
 
   // Variable that is used to transfer data between different quadrants
-  const [data, setData] = useState(null);
+  const [data, setData] = useState();
 
   const [bindings, setBindings] = useState();
 
@@ -31,7 +31,7 @@ function Layout(layout) {
       {topLeft === 'Empty' && <div className='quadrant'></div>}
 
       {/* Logic for which view to render in the top right qudrant */}
-      {topRight === 'Schema' && <div className='quadrant'><Schema bindings={bindings} setData={setData}></Schema></div>}
+      {topRight === 'Schema' && <div className='quadrant'><Schema bindings={bindings} data={data} setData={setData}></Schema></div>}
       {topRight === 'Type' && <div className='quadrant'><Type data={data} setData={setData}></Type></div>}
       {topRight === 'Focus' && <div className='quadrant'><Focus></Focus></div>}
       {topRight === 'Class Hierarchy' && <div className='quadrant'><ClassHierarchy></ClassHierarchy></div>}

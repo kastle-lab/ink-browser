@@ -7,6 +7,7 @@ function Search({bindings, setBindings}) {
     const [isPening, setIsPending] = useState(false)
 
     async function engine() {
+
         setIsPending(true)
 
         const myEngine = new QueryEngine();
@@ -54,7 +55,7 @@ function Search({bindings, setBindings}) {
             </div>
         </div>
         <div className='search-bottom'>
-            {isPening && <h3>Loading...</h3>}
+            {isPening && <h3>Gathering Data...</h3>}
             <ol>
                 {bindings && bindings.map((binding) => (
 

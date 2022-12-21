@@ -236,8 +236,14 @@ td {
   margin-right: 10px;
 }
 
-.table-div, .search-bottom {
+.table-div {
   margin-left: 10px;
+  margin-right: 10px;
+  height: calc(var(--innerQuadrantHeight) - 90px);
+  overflow: auto;
+}
+
+.search-bottom {
   margin-right: 10px;
   height: calc(var(--innerQuadrantHeight) - 90px);
   overflow: auto;
