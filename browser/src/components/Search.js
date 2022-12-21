@@ -4,8 +4,11 @@ const QueryEngine = require('@comunica/query-sparql').QueryEngine;
 function Search({bindings, setBindings}) {
 
     const [search, setSearch] = useState('');
+    const [isPening, setIsPending] = useState(false)
 
     async function engine() {
+        setIsPending(true)
+
         const myEngine = new QueryEngine();
 
         const bindingsStream = await myEngine.queryBindings(`
@@ -30,6 +33,8 @@ function Search({bindings, setBindings}) {
         let query = await (await bindingsStream.toArray())
 
         setBindings(query);
+
+        setIsPending(false)
         
     }
 
@@ -49,20 +54,14 @@ function Search({bindings, setBindings}) {
             </div>
         </div>
         <div className='search-bottom'>
-            {/* {bindings && bindings.map((binding) => (
-                <>
-                    <a>{binding.entries._root.entries[0][0] + ': '}</a>
-                    <a href={binding.entries._root.entries[0][1].id}>{binding.entries._root.entries[0][1].id}</a>
-                    <br></br>
-                    <a>{binding.entries._root.entries[1][0] + ': '}</a>
-                    <a href={binding.entries._root.entries[1][1].id}>{binding.entries._root.entries[1][1].id}</a>
-                    <br></br>
-                    <a>{binding.entries._root.entries[2][0] + ': '}</a>
-                    <a href={binding.entries._root.entries[2][1].id}>{binding.entries._root.entries[2][1].id}</a>
-                    <br></br>
-                    <br></br>
-                </>
-            ))} */}
+            {isPening && <h3>Loading...</h3>}
+            <ol>
+                {bindings && bindings.map((binding) => (
+
+                    <li key={binding.entries._root.entries[0][1].id} href={binding.entries._root.entries[0][1].id}>{binding.entries._root.entries[0][1].id}</li>
+
+                ))}
+            </ol>
         </div>
     </>
   )

@@ -248,6 +248,11 @@ td {
   margin-top: 20px;
 }
 
-.react-flow__node-default {
+.react-flow__node.myNodes {
   background:#e5e5ff;
+  width: fit-content;
+}
+
+.type-bottom {
+  margin-left: 10px;
 }
