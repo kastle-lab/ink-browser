@@ -6,6 +6,7 @@ import ReactFlow, {
     addEdge,
     Controls,
     MiniMap,
+    Background,
 } from 'reactflow';
 import 'reactflow/dist/style.css';
 const QueryEngine = require('@comunica/query-sparql').QueryEngine;
@@ -22,7 +23,7 @@ const Flow = ({bindings, data, setData, setTypeIsPending}) => {
         
         if (selected) {
 
-            setData(null)
+            setData([])
             setTypeIsPending(true)
 
             async function engine() {
@@ -65,7 +66,11 @@ const Flow = ({bindings, data, setData, setTypeIsPending}) => {
     useEffect(() => {
         let boxes = []
         let y = 0
+        let x = 250
+        let loop = 0
+
         bindings && bindings.map((binding) => {
+            const div = Math.ceil(bindings.length / 3)
             let url = binding.entries._root.entries[0][1].id
             url = url.split("/").pop()
             url = url.split("#").pop()
@@ -74,11 +79,18 @@ const Flow = ({bindings, data, setData, setTypeIsPending}) => {
                 {
                     id: binding.entries._root.entries[0][1].id,
                     data: { label: url },
-                    position: { x: 250, y: y },
+                    position: { x: x, y: y },
                     className: 'myNodes'
                 }
             )
             y+=50
+            loop++
+
+            if (loop === div || loop === (div *2)) {
+                x+=250
+                y = 0
+            }
+
         })
         setNodes(boxes)
 
@@ -109,6 +121,7 @@ const Flow = ({bindings, data, setData, setTypeIsPending}) => {
                         onSelectionChange={selectionChange}
                         onConnect={onConnect}
                     >
+                        <Background/>
                         <MiniMap zoomable pannable nodeColor={'#999'} position={'top-right'}/>
                         <Controls />
                     </ReactFlow>
