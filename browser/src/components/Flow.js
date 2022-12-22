@@ -10,11 +10,57 @@ import ReactFlow, {
 import 'reactflow/dist/style.css';
 const QueryEngine = require('@comunica/query-sparql').QueryEngine;
 
-const Flow = ({bindings, data, setData}) => {
+const Flow = ({bindings, data, setData, setTypeIsPending}) => {
     const [nodes, setNodes, onNodesChange] = useNodesState([]);
     const [edges, setEdges, onEdgesChange] = useEdgesState([]);
     const onConnect = useCallback((params) => setEdges((els) => addEdge(params, els)), []);
     const [selected, setSelected] = useState();
+
+    
+
+    useEffect(() => {
+        
+        if (selected) {
+
+            setData(null)
+            setTypeIsPending(true)
+
+            async function engine() {
+
+                const myEngine = new QueryEngine();
+
+                const bindingsStream = await myEngine.queryBindings(`
+                PREFIX kwg-ont: <http://stko-kwg.geog.ucsb.edu/lod/ontology/>
+                select * where {
+                ?s a kwg-ont:${selected} .
+                }`, {
+                    sources: ['http://localhost:3030/earthquake-usgs/'],
+                });
+
+                bindingsStream.on('data', (binding) => {
+                    // console.log(binding); // Quick way to print bindings for testing
+                });
+                bindingsStream.on('end', () => {
+                    // The data-listener will not be called anymore once we get here.
+                });
+                bindingsStream.on('error', (error) => {
+                    console.error(error);
+                });
+
+                // Consume results as an array (easier)
+                let query = await(await bindingsStream.toArray())
+
+                setData(query);
+
+                setTypeIsPending(false)
+
+            }
+
+            engine()
+
+        }
+
+    }, [selected])
 
     useEffect(() => {
         let boxes = []

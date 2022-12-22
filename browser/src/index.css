@@ -236,7 +236,7 @@ td {
   margin-right: 10px;
 }
 
-.table-div {
+.table-div, .type-bottom {
   margin-left: 10px;
   margin-right: 10px;
   height: calc(var(--innerQuadrantHeight) - 90px);
@@ -257,8 +257,4 @@ td {
 .react-flow__node.myNodes {
   background:#e5e5ff;
   width: fit-content;
-}
-
-.type-bottom {
-  margin-left: 10px;
 }

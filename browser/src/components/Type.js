@@ -1,8 +1,6 @@
 import React from 'react'
 
-function Type({ data, bindings }) {
-
-  console.log(data)
+function Type({ data, bindings, typeIsPending }) {
   
   return (
     <div className='type'>
@@ -10,8 +8,10 @@ function Type({ data, bindings }) {
         <h2 className='quad-head'>Type</h2>
       </div>
       <div className='type-bottom'>
-        {!data && <p>Click a node on the diagram</p>}
-        {data && <p>Data from node </p>}
+        {typeIsPending && <h2>Gathering Data...</h2>}
+        {data && data.map((entity) => (
+          <p key={entity.entries._root.entries[0][1].id}>{entity.entries._root.entries[0][1].id}</p>
+        ))}
       </div>
     </div>
   )
