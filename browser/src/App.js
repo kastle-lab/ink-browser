@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Bottombar from './components/Bottombar';
 import Layout from './components/Layout';
 import Topbar from './components/Topbar';
 
@@ -32,6 +33,8 @@ function App() {
       bottomLeft={bottomLeft} 
       bottomRight={bottomRight}
       ></Layout>
+
+      {/* <Bottombar></Bottombar> */}
 
     </div>
   );

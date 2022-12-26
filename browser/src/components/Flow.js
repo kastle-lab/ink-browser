@@ -17,19 +17,21 @@ const Flow = ({bindings, data, setData, setTypeIsPending}) => {
     const onConnect = useCallback((params) => setEdges((els) => addEdge(params, els)), []);
     const [selected, setSelected] = useState();
 
-    
-
+    // useEffect hook is called when the selected node changes
     useEffect(() => {
         
         if (selected) {
 
+            // Data is set to empty and pending is set to true
             setData([])
             setTypeIsPending(true)
 
+            // function for querying data when a node is clicked
             async function engine() {
 
                 const myEngine = new QueryEngine();
 
+                // Query that is ran
                 const bindingsStream = await myEngine.queryBindings(`
                 PREFIX kwg-ont: <http://stko-kwg.geog.ucsb.edu/lod/ontology/>
                 select * where {
@@ -48,11 +50,11 @@ const Flow = ({bindings, data, setData, setTypeIsPending}) => {
                     console.error(error);
                 });
 
-                // Consume results as an array (easier)
+                // Converts the results to an array
                 let query = await(await bindingsStream.toArray())
 
+                // Sets the data and sets pending to false
                 setData(query);
-
                 setTypeIsPending(false)
 
             }
@@ -63,6 +65,7 @@ const Flow = ({bindings, data, setData, setTypeIsPending}) => {
 
     }, [selected])
 
+    // Logic for setting up the node diagram
     useEffect(() => {
         let boxes = []
         let y = 0
@@ -96,6 +99,7 @@ const Flow = ({bindings, data, setData, setTypeIsPending}) => {
 
     }, [bindings, setNodes])
 
+    // Called when a node is clicked on
     function selectionChange() {
         nodes.map((node) => {
             if (node.selected === true) {
