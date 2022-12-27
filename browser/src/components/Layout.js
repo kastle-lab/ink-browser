@@ -17,48 +17,60 @@ function Layout(layout) {
   const [bindings, setBindings] = useState();
   const [typeIsPending, setTypeIsPending] = useState(false);
 
+  // Set view components equal to a variable
+  const type = <div className='quadrant'><Type data={data} bindings={bindings} typeIsPending={typeIsPending}></Type></div>;
+  const schema = <div className='quadrant'><Schema bindings={bindings} data={data} setData={setData} setTypeIsPending={setTypeIsPending}></Schema></div>;
+  const focus = <div className='quadrant'><Focus></Focus></div>;
+  const classHierarchy = <div className='quadrant'><ClassHierarchy></ClassHierarchy></div>;
+  const client = <div className='quadrant'><Client></Client></div>
+  const statistics = <div className='quadrant'><Statistics></Statistics></div>;
+  const search = <div className='quadrant'><Search bindings={bindings} setBindings={setBindings}></Search></div>;
+  const empty = <div className='quadrant'></div>;
+
   return (
     <div className='gridlayout'>
 
       {/* Logic for which view to render in the top left qudrant */}
-      {topLeft === 'Type' && <div className='quadrant'><Type data={data} bindings={bindings} typeIsPending={typeIsPending}></Type></div>}
-      {topLeft === 'Schema' && <div className='quadrant'><Schema bindings={bindings} data={data} setData={setData} setTypeIsPending={setTypeIsPending}></Schema></div>}
-      {topLeft === 'Focus' && <div className='quadrant'><Focus></Focus></div>}
-      {topLeft === 'Class Hierarchy' && <div className='quadrant'><ClassHierarchy></ClassHierarchy></div>}
-      {topLeft === 'Client' && <div className='quadrant'><Client></Client></div>}
-      {topLeft === 'Statistics' && <div className='quadrant'><Statistics></Statistics></div>}
-      {topLeft === 'Search' && <div className='quadrant'><Search bindings={bindings} setBindings={setBindings}></Search></div>}
-      {topLeft === 'Empty' && <div className='quadrant'></div>}
+      {topLeft === 'Type' && type}
+      {topLeft === 'Schema' && schema}
+      {topLeft === 'Focus' && focus}
+      {topLeft === 'Class Hierarchy' && classHierarchy}
+      {topLeft === 'Client' && client}
+      {topLeft === 'Statistics' && statistics}
+      {topLeft === 'Search' && search}
+      {topLeft === 'Empty' && empty}
+
+
 
       {/* Logic for which view to render in the top right qudrant */}
-      {topRight === 'Schema' && <div className='quadrant'><Schema bindings={bindings} data={data} setData={setData} setTypeIsPending={setTypeIsPending}></Schema></div>}
-      {topRight === 'Type' && <div className='quadrant'><Type data={data} bindings={bindings} typeIsPending={typeIsPending}></Type></div>}
-      {topRight === 'Focus' && <div className='quadrant'><Focus></Focus></div>}
-      {topRight === 'Class Hierarchy' && <div className='quadrant'><ClassHierarchy></ClassHierarchy></div>}
-      {topRight === 'Client' && <div className='quadrant'><Client></Client></div>}
-      {topRight === 'Statistics' && <div className='quadrant'><Statistics></Statistics></div>}
-      {topRight === 'Search' && <div className='quadrant'><Search bindings={bindings} setBindings={setBindings}></Search></div>}
-      {topRight === 'Empty' && <div className='quadrant'></div>}
+      {topRight === 'Type' && type}
+      {topRight === 'Schema' && schema}
+      {topRight === 'Focus' && focus}
+      {topRight === 'Class Hierarchy' && classHierarchy}
+      {topRight === 'Client' && client}
+      {topRight === 'Statistics' && statistics}
+      {topRight === 'Search' && search}
+      {topRight === 'Empty' && empty}
 
       {/* Logic for which view to render in the bottom left qudrant */}
-      {bottomLeft === 'Focus' && <div className='quadrant'><Focus></Focus></div>}
-      {bottomLeft === 'Type' && <div className='quadrant'><Type data={data} bindings={bindings} typeIsPending={typeIsPending}></Type></div>}
-      {bottomLeft === 'Schema' && <div className='quadrant'><Schema bindings={bindings} data={data} setData={setData} setTypeIsPending={setTypeIsPending}></Schema></div>}
-      {bottomLeft === 'Class Hierarchy' && <div className='quadrant'><ClassHierarchy></ClassHierarchy></div>}
-      {bottomLeft === 'Client' && <div className='quadrant'><Client></Client></div>}
-      {bottomLeft === 'Statistics' && <div className='quadrant'><Statistics></Statistics></div>}
-      {bottomLeft === 'Search' && <div className='quadrant'><Search bindings={bindings} setBindings={setBindings}></Search></div>}
-      {bottomLeft === 'Empty' && <div className='quadrant'></div>}
+      {bottomLeft === 'Type' && type}
+      {bottomLeft === 'Schema' && schema}
+      {bottomLeft === 'Focus' && focus}
+      {bottomLeft === 'Class Hierarchy' && classHierarchy}
+      {bottomLeft === 'Client' && client}
+      {bottomLeft === 'Statistics' && statistics}
+      {bottomLeft === 'Search' && search}
+      {bottomLeft === 'Empty' && empty}
 
       {/* Logic for which view to render in the bottom right qudrant */}
-      {bottomRight === 'Empty' && <div className='quadrant'></div>}
-      {bottomRight === 'Type' && <div className='quadrant'><Type data={data} bindings={bindings} typeIsPending={typeIsPending}></Type></div>}
-      {bottomRight === 'Schema' && <div className='quadrant'><Schema bindings={bindings} data={data} setData={setData} setTypeIsPending={setTypeIsPending}></Schema></div>}
-      {bottomRight === 'Class Hierarchy' && <div className='quadrant'><ClassHierarchy></ClassHierarchy></div>}
-      {bottomRight === 'Client' && <div className='quadrant'><Client></Client></div>}
-      {bottomRight === 'Statistics' && <div className='quadrant'><Statistics></Statistics></div>}
-      {bottomRight === 'Search' && <div className='quadrant'><Search bindings={bindings} setBindings={setBindings}></Search></div>}
-      {bottomRight === 'Focus' && <div className='quadrant'><Focus></Focus></div>}
+      {bottomRight === 'Type' && type}
+      {bottomRight === 'Schema' && schema}
+      {bottomRight === 'Focus' && focus}
+      {bottomRight === 'Class Hierarchy' && classHierarchy}
+      {bottomRight === 'Client' && client}
+      {bottomRight === 'Statistics' && statistics}
+      {bottomRight === 'Search' && search}
+      {bottomRight === 'Empty' && empty}
 
     </div>
   )
