@@ -139,7 +139,7 @@ body {
   width: 100%;
   position: absolute;
   top: var(--topbarHeight);
-  bottom: 0;
+  bottom: 25px;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   grid-template-rows: repeat(2, minmax(0, 1fr));
@@ -270,4 +270,13 @@ td {
   height: calc(var(--innerQuadrantHeight) - 90px);
   margin-left: 5px;
   margin-right: 5px;
+}
+
+.bottombar {
+  position: absolute;
+  bottom: 0;
+}
+
+.bottombar p {
+  margin: 5px;
 }

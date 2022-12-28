@@ -34,7 +34,7 @@ function App() {
       bottomRight={bottomRight}
       ></Layout>
 
-      {/* <Bottombar></Bottombar> */}
+      <Bottombar></Bottombar>
 
     </div>
   );
