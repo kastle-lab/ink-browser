@@ -1,3 +1,7 @@
+*, ::before, ::after {
+  box-sizing: inherit;
+}
+
 body {
   margin: 0;
   width: 100%;
@@ -170,7 +174,7 @@ p {
   margin-bottom: 15px;
 }
 
-.search-top {
+.search-top, .quad-head {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -178,6 +182,12 @@ p {
   margin-left: 10px;
   margin-right: 10px;
   margin-bottom: 15px;
+}
+
+.quad-head h2 {
+  margin-bottom: 0;
+  overflow: hidden;
+  display: inline-block;
 }
 
 @media (max-width: 740px) {
@@ -230,12 +240,6 @@ td {
   background: white;
 }
 
-.quad-head {
-  border-bottom: 3px solid black;
-  margin-left: 10px;
-  margin-right: 10px;
-}
-
 .table-div, .type-bottom {
   margin-left: 10px;
   margin-right: 10px;
@@ -245,6 +249,7 @@ td {
 
 .search-bottom {
   margin-right: 10px;
+  margin-left: 10px;
   height: calc(var(--innerQuadrantHeight) - 90px);
   overflow: auto;
 }
@@ -257,4 +262,12 @@ td {
 .react-flow__node.myNodes {
   background:#e5e5ff;
   width: fit-content;
+}
+
+.class-box {
+  overflow: auto;
+  box-sizing: border-box;
+  height: calc(var(--innerQuadrantHeight) - 90px);
+  margin-left: 5px;
+  margin-right: 5px;
 }
