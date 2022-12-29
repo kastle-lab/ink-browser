@@ -8,6 +8,7 @@ body {
   font-family: 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
 }
 
+/* Scrollbar */
 ::-webkit-scrollbar {
   width: 10px;
   height: 10px;
@@ -27,10 +28,9 @@ body {
   background: #555;
 }
 
+/* Variables */
 :root {
-  --topHeight: 70px;
-  --bottomHeight: 0px;
-  --topbarHeight: calc(var(--bottomHeight) + var(--topHeight));
+  --topbarHeight: 60px;
   --quadrantMargin: 5px;
   --quadrantPadding: 5px;
   --quadrantBorderThickness: 2px;
@@ -39,6 +39,7 @@ body {
   --innerQuadrantHeight: calc(var(--halfRestOfScreenHeight) - (var(--quadrantMargin) * 2) - var(--quadrantPadding) * 2 - var(--quadrantBorderThickness));
 }
 
+/* Topbar */
 .topbar {
   width: 100%;
   height: var(--topbarHeight);
@@ -50,49 +51,27 @@ body {
 .topbar h1 {
   padding-left: 15px;
   margin: 0px;
+  font-size: 40px;
 }
 
-.topbar a {
- padding-top: 15px;
- padding-left: 30px;
-}
-
-.top {
+.topbar-right {
   display: flex;
-  justify-content: space-between;
-  height: var(--topHeight);
-  align-items: center;
-}
-
-.bottoms {
-  display: flex;
-  height: var(--bottomHeight);
   align-items: center;
   justify-content: center;
+  padding-top: 5px;
 }
+/* Topbar */
 
-/* .bottoms div {
-  padding-left: 15px;
-  padding-right: 15px;
-} */
-
-.bottoms label {
-  padding-right: 5px;
-}
-
-.bottoms select {
-  border-radius: 15px;
-  background: #888;
-  padding: 5px;
-}
-
+/* Diagram */
+/* Changes the diagram buttom to be horizontal */
 .left {
   display: flex;
 }
 
-.right {
-  margin-right: 15px;
+.top {
+  display: flex;
 }
+/* Diagram */
 
 .right-search input, button {
   background-color: #888;
@@ -158,7 +137,7 @@ body {
   background-color: white;
   border-radius: 15px;
   width: 100%;
-  height: var(--innerQuadrantHeight);
+  height: calc(var(--innerQuadrantHeight) - 15px);
 }
 
 .type {
@@ -202,25 +181,10 @@ p {
 
 @media (max-width: 835px) {
 
-  .bottoms div {
-    padding-left: 0px;
-    padding-right: 5px;
-  }
-
-  .line {
-    display: none;
-  }
-
   .right-search input {
     width: 140px;
   }
 
-}
-
-@media (max-width: 1165px) {
-  .bottoms label {
-    display: none;
-  }
 }
 
 table, th, td {

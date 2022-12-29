@@ -13,34 +13,25 @@ function Topbar(layout) {
   // Array of views that can be chosen from as drop down options
   const views = ['Type', 'Schema', 'Focus', 'Class Hierarchy', 'Client', 'Statistics', 'Search', 'Empty']
 
-  const [age, setAge] = React.useState('');
-
-  const handleChange = (event) => {
-    setAge(event.target.value);
-  };
-
   return (
     <div className='topbar'>
 
-      {/* Div for the upper section of the top bar */}
-      <div className="top">
+      {/* Div for the left section of the top bar */}
+      <div className="topbar-left">
 
-        {/* Elements on the left side of the screen */}
-        <div className='left'>
-          <h1>ink-browser</h1>
-        </div>
+        <h1>ink-browser</h1>
         
       </div>
 
       {/* Div for the right section of the top bar */}
-      <div className='bottoms'>
+      <div className='topbar-right'>
 
         {/* Drop down menu to choose the view for top left quadrant */}
         <div>
           <FormControl sx={{ m: 1, minWidth: 100 }} size="small">
-            <InputLabel id="top-left">Top Left</InputLabel>
+            <InputLabel id="top-left-label">Top Left</InputLabel>
             <Select
-              labelId="top-left"
+              labelId="top-left-label"
               id="top-left"
               value={topLeft}
               label="Top Left"
@@ -60,9 +51,9 @@ function Topbar(layout) {
         {/* Drop down menu to choose the view for top right quadrant */}
         <div>
           <FormControl sx={{ m: 1, minWidth: 100 }} size="small">
-            <InputLabel id="top-right">Top Right</InputLabel>
+            <InputLabel id="top-right-label">Top Right</InputLabel>
             <Select
-              labelId="top-right"
+              labelId="top-right-label"
               id="top-right"
               value={topRight}
               label="Top Right"
@@ -82,9 +73,9 @@ function Topbar(layout) {
         {/* Drop down menu to choose the view for bottom left quadrant */}
         <div>
           <FormControl sx={{ m: 1, minWidth: 100 }} size="small">
-            <InputLabel id="bottom-left">Bottom Left</InputLabel>
+            <InputLabel id="bottom-left-label">Bottom Left</InputLabel>
             <Select
-              labelId="bottom-left"
+              labelId="bottom-left-label"
               id="bottom-left"
               value={bottomLeft}
               label="Bottom Left"
@@ -104,9 +95,9 @@ function Topbar(layout) {
         {/* Drop down menu to choose the view for bottom right quadrant */}
         <div>
           <FormControl sx={{ m: 1, minWidth: 100}} size="small">
-            <InputLabel id="bottom-right">Bottom Right</InputLabel>
+            <InputLabel id="bottom-right-label">Bottom Right</InputLabel>
             <Select
-              labelId="bottom-right"
+              labelId="bottom-right-label"
               id="bottom-right"
               value={bottomRight}
               label="Bottom Right"
