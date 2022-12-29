@@ -12,6 +12,7 @@ function App() {
   const [bottomRight, setBottomRight] = useState(localStorage.getItem('bottomRight') != null ? localStorage.getItem('bottomRight') : 'Empty');
 
   return (
+
     <div className="app">
 
       {/* Everything above the quadrants is rendered here  */}
@@ -37,6 +38,7 @@ function App() {
       <Bottombar></Bottombar>
 
     </div>
+
   );
 }
 

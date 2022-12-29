@@ -1,13 +1,10 @@
 import React from 'react'
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import PropTypes from 'prop-types';
 import SvgIcon from '@mui/material/SvgIcon';
 import { alpha, styled } from '@mui/material/styles';
 import TreeView from '@mui/lab/TreeView';
 import TreeItem, { treeItemClasses } from '@mui/lab/TreeItem';
-import Collapse from '@mui/material/Collapse';
-import { useSpring, animated } from '@react-spring/web';
 
 function MinusSquare(props) {
   return (
@@ -41,34 +38,8 @@ function CloseSquare(props) {
   );
 }
 
-function TransitionComponent(props) {
-  const style = useSpring({
-    from: {
-      opacity: 0,
-      transform: 'translate3d(20px,0,0)',
-    },
-    to: {
-      opacity: props.in ? 1 : 0,
-      transform: `translate3d(${props.in ? 0 : 20}px,0,0)`,
-    },
-  });
-
-  return (
-    <animated.div style={style}>
-      <Collapse {...props} />
-    </animated.div>
-  );
-}
-
-TransitionComponent.propTypes = {
-  /**
-   * Show the component; triggers the enter or exit states
-   */
-  in: PropTypes.bool,
-};
-
 const StyledTreeItem = styled((props) => (
-  <TreeItem {...props} TransitionComponent={TransitionComponent} />
+  <TreeItem {...props}  />
 ))(({ theme }) => ({
   [`& .${treeItemClasses.iconContainer}`]: {
     '& .close': {
