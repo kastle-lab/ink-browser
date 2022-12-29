@@ -31,6 +31,7 @@ function Topbar(layout) {
           <FormControl sx={{ m: 1, minWidth: 100 }} size="small">
             <InputLabel id="top-left-label">Top Left</InputLabel>
             <Select
+              className='view-select'
               labelId="top-left-label"
               id="top-left"
               value={topLeft}
@@ -53,6 +54,7 @@ function Topbar(layout) {
           <FormControl sx={{ m: 1, minWidth: 100 }} size="small">
             <InputLabel id="top-right-label">Top Right</InputLabel>
             <Select
+              className='view-select'
               labelId="top-right-label"
               id="top-right"
               value={topRight}
@@ -75,6 +77,7 @@ function Topbar(layout) {
           <FormControl sx={{ m: 1, minWidth: 100 }} size="small">
             <InputLabel id="bottom-left-label">Bottom Left</InputLabel>
             <Select
+              className='view-select'
               labelId="bottom-left-label"
               id="bottom-left"
               value={bottomLeft}
@@ -97,6 +100,7 @@ function Topbar(layout) {
           <FormControl sx={{ m: 1, minWidth: 100}} size="small">
             <InputLabel id="bottom-right-label">Bottom Right</InputLabel>
             <Select
+              className='view-select'
               labelId="bottom-right-label"
               id="bottom-right"
               value={bottomRight}
