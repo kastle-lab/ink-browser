@@ -28,7 +28,7 @@ body {
 }
 
 :root {
-  --topHeight: 50px;
+  --topHeight: 70px;
   --bottomHeight: 0px;
   --topbarHeight: calc(var(--bottomHeight) + var(--topHeight));
   --quadrantMargin: 5px;
@@ -71,10 +71,10 @@ body {
   justify-content: center;
 }
 
-.bottoms div {
+/* .bottoms div {
   padding-left: 15px;
   padding-right: 15px;
-}
+} */
 
 .bottoms label {
   padding-right: 5px;
