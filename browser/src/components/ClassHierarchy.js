@@ -55,7 +55,7 @@ const StyledTreeItem = styled((props) => (
 
 function ClassHierarchy() {
 
-  const [expanded, setExpanded] = React.useState([]);
+  const [expanded, setExpanded] = React.useState(['1']);
   const [selected, setSelected] = React.useState([]);
 
   const handleToggle = (event, nodeIds) => {
@@ -95,7 +95,6 @@ function ClassHierarchy() {
       <Box className='class-box'>
         <TreeView
           aria-label="customized"
-          defaultExpanded={['1']}
           defaultCollapseIcon={<MinusSquare />}
           defaultExpandIcon={<PlusSquare />}
           defaultEndIcon={<CloseSquare />}
