@@ -139,7 +139,7 @@ body {
   background-color: white;
   border-radius: 15px;
   width: 100%;
-  height: calc(var(--innerQuadrantHeight) - 15px);
+  height: var(--innerQuadrantHeight);
 }
 
 .type {
@@ -245,4 +245,12 @@ td {
 
 .bottombar p {
   margin: 5px;
+}
+
+.schema {
+  border: var(--quadrantBorderThickness) solid black;
+  border-radius: 15px;
+  background: #e5e5ff;
+  margin: var(--quadrantMargin);
+  overflow: hidden;
 }

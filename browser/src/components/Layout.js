@@ -19,7 +19,7 @@ function Layout(layout) {
 
   // Set view components equal to a variable
   const type = <div className='quadrant'><Type data={data} bindings={bindings} typeIsPending={typeIsPending}></Type></div>;
-  const schema = <div className='quadrant'><Schema bindings={bindings} data={data} setData={setData} setTypeIsPending={setTypeIsPending}></Schema></div>;
+  const schema = <div className='schema'><Schema bindings={bindings} data={data} setData={setData} setTypeIsPending={setTypeIsPending}></Schema></div>;
   const focus = <div className='quadrant'><Focus></Focus></div>;
   const classHierarchy = <div className='quadrant'><ClassHierarchy></ClassHierarchy></div>;
   const client = <div className='quadrant'><Client></Client></div>
