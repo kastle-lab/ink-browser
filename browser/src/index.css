@@ -252,6 +252,6 @@ p {
   margin: 0;
 }
 
-.test {
-  height: calc(var(--innerQuadrantHeight) - 5px);
+.table-container {
+  height: calc(var(--innerQuadrantHeight) - 2px);
 }

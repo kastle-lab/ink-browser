@@ -60,7 +60,7 @@ function Statistics() {
   return (
     <div className='table-div'>
           <Paper>
-              <TableContainer className='test'>
+              <TableContainer className='table-container'>
                   <Table stickyHeader aria-label="customized table">
                       <TableHead>
                           <TableRow>
