@@ -23,7 +23,7 @@ function Layout(layout) {
   const focus = <div className='quadrant'><Focus></Focus></div>;
   const classHierarchy = <div className='quadrant'><ClassHierarchy></ClassHierarchy></div>;
   const client = <div className='quadrant'><Client></Client></div>
-  const statistics = <div className='quadrant'><Statistics></Statistics></div>;
+  const statistics = <div className='statistics'><Statistics></Statistics></div>;
   const search = <div className='quadrant'><Search bindings={bindings} setBindings={setBindings}></Search></div>;
   const empty = <div className='quadrant'></div>;
 

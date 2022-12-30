@@ -119,7 +119,7 @@ body {
   width: 100%;
   position: absolute;
   top: var(--topbarHeight);
-  bottom: 25px;
+  bottom: 20px;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   grid-template-rows: repeat(2, minmax(0, 1fr));
@@ -171,7 +171,7 @@ p {
   display: inline-block;
 }
 
-@media (max-width: 740px) {
+@media (max-width: 782px) {
   .bottoms {
     display: none;
   }
@@ -179,6 +179,11 @@ p {
   .right-search {
     display: none;
   }
+
+  .topbar-right {
+    display: none;
+  }
+
 }
 
 @media (max-width: 835px) {
@@ -189,33 +194,9 @@ p {
 
 }
 
-table, th, td {
-  border: 1px solid;
-}
-
-table {
-  border-collapse: collapse;
-  width: 100%;
-}
-
-th {
-  background: gray;
-}
-
-td {
-  background: white;
-}
-
-.table-div, .type-bottom {
+.type-bottom, .search-bottom {
   margin-left: 10px;
   margin-right: 10px;
-  height: calc(var(--innerQuadrantHeight) - 90px);
-  overflow: auto;
-}
-
-.search-bottom {
-  margin-right: 10px;
-  margin-left: 10px;
   height: calc(var(--innerQuadrantHeight) - 90px);
   overflow: auto;
 }
@@ -241,6 +222,7 @@ td {
 .bottombar {
   position: absolute;
   bottom: 0;
+  font-size: 12px;
 }
 
 .bottombar p {
@@ -253,4 +235,23 @@ td {
   background: #e5e5ff;
   margin: var(--quadrantMargin);
   overflow: hidden;
+}
+
+.statistics {
+  border: var(--quadrantBorderThickness) solid black;
+  border-radius: 15px;
+  background: #e5e5ff;
+  margin: var(--quadrantMargin);
+  overflow: hidden;
+}
+
+.table-div {
+  /* overflow-x: auto;
+  overflow-y: auto; */
+  height: calc(var(--innerQuadrantHeight));
+  margin: 0;
+}
+
+.test {
+  height: calc(var(--innerQuadrantHeight) - 5px);
 }
