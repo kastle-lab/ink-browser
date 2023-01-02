@@ -11,7 +11,7 @@ function Topbar(layout) {
   const { setTopLeft, setTopRight, setBottomLeft, setBottomRight, topLeft, topRight, bottomLeft, bottomRight } = layout;
 
   // Array of views that can be chosen from as drop down options
-  const views = ['Type', 'Schema', 'Focus', 'Class Hierarchy', 'Client', 'Statistics', 'Search', 'Empty']
+  const views = ['Type', 'Schema', 'Focus', 'Class Hierarchy', 'Client', 'Statistics', 'Search', 'Map' ,'Empty']
 
   return (
     <div className='topbar'>

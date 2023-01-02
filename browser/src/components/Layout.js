@@ -6,6 +6,7 @@ import Search from './Search';
 import Statistics from './Statistics';
 import ClassHierarchy from './ClassHierarchy';
 import Client from './Client'
+import LeafMap from './LeafMap'
 
 function Layout(layout) {
 
@@ -19,12 +20,13 @@ function Layout(layout) {
 
   // Set view components equal to a variable
   const type = <div className='quadrant'><Type data={data} bindings={bindings} typeIsPending={typeIsPending}></Type></div>;
-  const schema = <div className='schema'><Schema bindings={bindings} data={data} setData={setData} setTypeIsPending={setTypeIsPending}></Schema></div>;
+  const schema = <div className='view-full'><Schema bindings={bindings} data={data} setData={setData} setTypeIsPending={setTypeIsPending}></Schema></div>;
   const focus = <div className='quadrant'><Focus></Focus></div>;
   const classHierarchy = <div className='quadrant'><ClassHierarchy></ClassHierarchy></div>;
   const client = <div className='quadrant'><Client></Client></div>
   const statistics = <div className='statistics'><Statistics></Statistics></div>;
   const search = <div className='quadrant'><Search bindings={bindings} setBindings={setBindings}></Search></div>;
+  const map = <div className='view-full'><LeafMap></LeafMap></div>;
   const empty = <div className='quadrant'></div>;
 
   return (
@@ -38,9 +40,8 @@ function Layout(layout) {
       {topLeft === 'Client' && client}
       {topLeft === 'Statistics' && statistics}
       {topLeft === 'Search' && search}
+      {topLeft === 'Map' && map}
       {topLeft === 'Empty' && empty}
-
-
 
       {/* Logic for which view to render in the top right qudrant */}
       {topRight === 'Type' && type}
@@ -50,6 +51,7 @@ function Layout(layout) {
       {topRight === 'Client' && client}
       {topRight === 'Statistics' && statistics}
       {topRight === 'Search' && search}
+      {topRight === 'Map' && map}
       {topRight === 'Empty' && empty}
 
       {/* Logic for which view to render in the bottom left qudrant */}
@@ -60,6 +62,7 @@ function Layout(layout) {
       {bottomLeft === 'Client' && client}
       {bottomLeft === 'Statistics' && statistics}
       {bottomLeft === 'Search' && search}
+      {bottomLeft === 'Map' && map}
       {bottomLeft === 'Empty' && empty}
 
       {/* Logic for which view to render in the bottom right qudrant */}
@@ -70,6 +73,7 @@ function Layout(layout) {
       {bottomRight === 'Client' && client}
       {bottomRight === 'Statistics' && statistics}
       {bottomRight === 'Search' && search}
+      {bottomRight === 'Map' && map}
       {bottomRight === 'Empty' && empty}
 
     </div>
