@@ -42,9 +42,21 @@ function Search({bindings, setBindings}) {
 
         setIsPending(false)
 
-        console.log(query)
+        const bindingsStream2 = await myEngine.queryBindings(`
+                PREFIX kwgr: <http://stko-kwg.geog.ucsb.edu/lod/resource>
+                select * where {
+                ?s a kwgr:Earthquake.pr2020359052 .
+                }`, {
+            sources: ['http://localhost:3030/earthquake-usgs/'],
+        });
+
+        let query2 = await (await bindingsStream2.toArray())
+
+        console.log(query2)
         
     }
+
+
 
   return (
     <>
