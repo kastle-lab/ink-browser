@@ -1,4 +1,7 @@
 import React, { useState } from 'react'
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+
 const QueryEngine = require('@comunica/query-sparql').QueryEngine;
 
 function Search({bindings, setBindings}) {
@@ -7,6 +10,8 @@ function Search({bindings, setBindings}) {
     const [isPening, setIsPending] = useState(false)
 
     async function engine() {
+
+        setSearch('');
 
         setIsPending(true)
 
@@ -36,6 +41,8 @@ function Search({bindings, setBindings}) {
         setBindings(query);
 
         setIsPending(false)
+
+        console.log(query)
         
     }
 
@@ -44,14 +51,14 @@ function Search({bindings, setBindings}) {
         <div className='search-top'>
             <h2 className='left-search'>Search</h2>
             <div className='right-search'>
-                <input
-                    placeholder='Lookup Schema'
+                <TextField
+                    size="small"
+                    id="search-field"
+                    label="Lookup Schema"
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
                 />
-                <button onClick={engine}>
-                    Search
-                </button>
+                <Button onClick={engine} variant="contained" >Search</Button>
             </div>
         </div>
         <div className='search-bottom'>
