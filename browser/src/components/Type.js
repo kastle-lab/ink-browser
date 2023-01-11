@@ -5,36 +5,52 @@ const QueryEngine = require('@comunica/query-sparql').QueryEngine;
 function Type({ data, bindings, typeIsPending, setCoordinates }) {
 
   async function getPoint(e) {
+
+    let isEarthquake = false;
+
     let earthquake = e.currentTarget.id
-    earthquake = earthquake.split(".").pop()
+    let earthquakeID = '';
+    earthquake = earthquake.split("/").pop()
 
     console.log(earthquake)
 
-    const myEngine = new QueryEngine();
+    if (earthquake.substring(0, 11) === 'Earthquake.' || earthquake.substring(0, 32) === 'EarthquakeObservationCollection.') {
+      earthquakeID = earthquake.split(".").pop()
+      isEarthquake = true;
+    }
 
-    // Query that is ran
-    const bindingsStream = await myEngine.queryBindings(`
+    if (earthquake.substring(0, 22) === 'EarthquakeObservation.') {
+      earthquakeID = earthquake.split(".")[1]
+      isEarthquake = true;
+    }
+
+    if (isEarthquake) {
+      const myEngine = new QueryEngine();
+
+      // Query that is ran
+      const bindingsStream = await myEngine.queryBindings(`
       PREFIX kwgr: <http://stko-kwg.geog.ucsb.edu/lod/resource>
       select * where {
-      kwgr:geometry.point.${earthquake} ?p ?o.
+      kwgr:geometry.point.${earthquakeID} ?p ?o.
       }`, {
-      sources: ['http://localhost:3030/earthquake-usgs/'],
-    });
+        sources: ['http://localhost:3030/earthquake-usgs/'],
+      });
 
-    bindingsStream.on('data', (binding) => {
-      // console.log(binding); // Quick way to print bindings for testing
-    });
-    bindingsStream.on('end', () => {
-      // The data-listener will not be called anymore once we get here.
-    });
-    bindingsStream.on('error', (error) => {
-      console.error(error);
-    });
+      bindingsStream.on('data', (binding) => {
+        // console.log(binding); // Quick way to print bindings for testing
+      });
+      bindingsStream.on('end', () => {
+        // The data-listener will not be called anymore once we get here.
+      });
+      bindingsStream.on('error', (error) => {
+        console.error(error);
+      });
 
-    // Converts the results to an array
-    let query = await (await bindingsStream.toArray())
+      // Converts the results to an array
+      let query = await (await bindingsStream.toArray())
 
-    console.log(query)
+      console.log(query)
+    }
 
   }
   
