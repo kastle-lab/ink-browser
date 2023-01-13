@@ -33,9 +33,8 @@ const Flow = ({bindings, data, setData, setTypeIsPending}) => {
 
                 // Query that is ran
                 const bindingsStream = await myEngine.queryBindings(`
-                PREFIX kwg-ont: <http://stko-kwg.geog.ucsb.edu/lod/ontology/>
                 select * where {
-                ?s a kwg-ont:${selected} .
+                ?s a <${selected}> .
                 }`, {
                     sources: ['http://localhost:3030/earthquake-usgs/'],
                 });
@@ -104,7 +103,7 @@ const Flow = ({bindings, data, setData, setTypeIsPending}) => {
         nodes.map((node) => {
             if (node.selected === true) {
 
-                setSelected(node.data.label)
+                setSelected(node.id)
 
             }
 

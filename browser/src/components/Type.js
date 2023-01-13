@@ -6,51 +6,62 @@ function Type({ data, bindings, typeIsPending, setCoordinates }) {
 
   async function getPoint(e) {
 
-    let isEarthquake = false;
+    const myEngine = new QueryEngine();
 
-    let earthquake = e.currentTarget.id
-    let earthquakeID = '';
-    earthquake = earthquake.split("/").pop()
+    
 
-    console.log(earthquake)
+    // Query that is ran
+    let bindingsStream = await myEngine.queryBindings(`
+    select * where {
+    <${e.currentTarget.id}> ?p ?o.
+    }`, {
+      sources: ['http://localhost:3030/earthquake-usgs/'],
+    });
 
-    if (earthquake.substring(0, 11) === 'Earthquake.' || earthquake.substring(0, 32) === 'EarthquakeObservationCollection.') {
-      earthquakeID = earthquake.split(".").pop()
-      isEarthquake = true;
-    }
+    bindingsStream.on('error', (error) => {
+      console.error(error);
+    });
 
-    if (earthquake.substring(0, 22) === 'EarthquakeObservation.') {
-      earthquakeID = earthquake.split(".")[1]
-      isEarthquake = true;
-    }
+    // Converts the results to an array
+    let query = (await bindingsStream.toArray())
+    query = JSON.stringify(query)
+    query = JSON.parse(query)
 
-    if (isEarthquake) {
-      const myEngine = new QueryEngine();
+    if (query.length > 3 && query[3].entries.p.value === 'http://www.opengis.net/ont/geosparql#hasGeometry') {
 
-      // Query that is ran
-      const bindingsStream = await myEngine.queryBindings(`
-      PREFIX kwgr: <http://stko-kwg.geog.ucsb.edu/lod/resource>
+      bindingsStream = await myEngine.queryBindings(`
       select * where {
-      kwgr:geometry.point.${earthquakeID} ?p ?o.
+      <${query[3].entries.o.value}> ?p ?o.
       }`, {
         sources: ['http://localhost:3030/earthquake-usgs/'],
       });
 
-      bindingsStream.on('data', (binding) => {
-        // console.log(binding); // Quick way to print bindings for testing
-      });
-      bindingsStream.on('end', () => {
-        // The data-listener will not be called anymore once we get here.
-      });
       bindingsStream.on('error', (error) => {
         console.error(error);
       });
 
-      // Converts the results to an array
-      let query = await (await bindingsStream.toArray())
+      query = (await bindingsStream.toArray())
+      query = JSON.stringify(query)
+      query = JSON.parse(query)
 
-      console.log(query)
     }
+
+    if (query[2].entries.p.value === 'http://www.opengis.net/ont/geosparql#asWKT') {
+      let point = query[2].entries.o.value
+      point = point.split("(").pop()
+      point = point.substring(0, point.length - 1)
+      point = point.split(' ')
+      point = [point[1] * 1, point[0] * 1];
+      setCoordinates(point)
+    }
+
+    
+
+    
+
+    
+
+    
 
   }
   
