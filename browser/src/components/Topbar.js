@@ -1,14 +1,16 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
+import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
+import Drawer from '@mui/material/Drawer';
+import { ListItem, ListItemText } from '@mui/material';
 
 
 function Topbar(layout) {
@@ -27,6 +29,16 @@ function Topbar(layout) {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const [DrawerOpen, setDrawerOpen] = useState(false);
+
+  const openDrawer = (open) => {
+    setDrawerOpen(true)
+  }
+
+  const closeDrawer = (open => {
+    setDrawerOpen(false)
+  })
 
   return (
     <div className='topbar'>
@@ -55,7 +67,6 @@ function Topbar(layout) {
           </Tooltip>
 
           <Menu
-          
             id="basic-menu"
             anchorEl={anchorEl}
             open={open}
@@ -240,6 +251,31 @@ function Topbar(layout) {
               </Select>
             </FormControl>
           </div>
+        </div>
+
+        <div className='setting-menu'>
+
+          <Tooltip title="Settings">
+            <IconButton
+              onClick={openDrawer}
+            >
+              <SettingsOutlinedIcon />
+            </IconButton>
+          </Tooltip>
+          <Drawer
+            sx={{
+              width: 500,
+              flexShrink: 0,
+            }}
+            anchor="right"
+            open={DrawerOpen}
+            onClose={closeDrawer}
+          >
+            <div className='settings-drawer'>
+              <h2>Drawer</h2>
+            </div>
+          </Drawer>
+          
         </div>
         
       </div>
