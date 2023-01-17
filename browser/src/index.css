@@ -55,7 +55,7 @@ body {
   font-size: 40px;
 }
 
-.topbar-right {
+.visible-layout {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -105,9 +105,13 @@ body {
 
 .right-search {
   display: flex;
+  gap: 10px;
+}
+
+.topbar-right {
+  display: flex;
   align-items: center;
   align-content: center;
-  gap: 10px;
 }
 
 ::placeholder {
@@ -182,16 +186,26 @@ p {
   display: inline-block;
 }
 
-@media (max-width: 782px) {
-  .bottoms {
-    display: none;
-  }
+.views-menu {
+  display: none;
+  padding-right: 5px;
+}
+
+@media screen and (max-width: 782px) {
 
   .right-search {
     display: none;
   }
 
-  .topbar-right {
+  .visible-layout {
+    display: none;
+  }
+
+  .views-menu {
+    display: flex;
+  }
+
+  button {
     display: none;
   }
 
