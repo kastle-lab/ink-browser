@@ -15,6 +15,8 @@ function ViewsSelect(layout) {
 
     // Array of views that can be chosen from as drop down options
     const views = ['Type', 'Schema', 'Focus', 'Class Hierarchy', 'Client', 'Statistics', 'Search', 'Map', 'Empty']
+    
+    // 
     const quadrants = [
         { name: 'Top Left',
         id: 'top-left',

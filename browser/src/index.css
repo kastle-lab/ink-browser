@@ -286,6 +286,10 @@ p {
   height: 100%;
 }
 
-.settings-drawer {
+.settings-menu {
   width: 300px;
+}
+
+.setting-icon {
+  margin-right: 10px;
 }

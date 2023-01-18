@@ -17,7 +17,7 @@ function SettingsMenu() {
     }
 
     return (
-      <div className='setting-menu'>
+      <div className='setting-icon'>
 
         <Tooltip title="Settings">
             <IconButton
@@ -35,7 +35,7 @@ function SettingsMenu() {
             open={DrawerOpen}
             onClose={closeDrawer}
         >
-            <div className='settings-drawer'>
+            <div className='settings-menu'>
                 <h2>Drawer</h2>
             </div>
         </Drawer>
