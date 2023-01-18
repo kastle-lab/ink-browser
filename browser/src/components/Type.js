@@ -8,8 +8,6 @@ function Type({ data, bindings, typeIsPending, setCoordinates }) {
 
     const myEngine = new QueryEngine();
 
-    
-
     // Query that is ran
     let bindingsStream = await myEngine.queryBindings(`
     select * where {
@@ -27,11 +25,18 @@ function Type({ data, bindings, typeIsPending, setCoordinates }) {
     query = JSON.stringify(query)
     query = JSON.parse(query)
 
-    if (query.length > 3 && query[3].entries.p.value === 'http://www.opengis.net/ont/geosparql#hasGeometry') {
+    let geometry = null;
 
+    query && query.map((item) => {
+      if (item.entries.p.value === "http://www.opengis.net/ont/geosparql#hasGeometry") {
+        geometry = item.entries.o.value;
+      }
+    })
+
+    if (geometry != null) {
       bindingsStream = await myEngine.queryBindings(`
       select * where {
-      <${query[3].entries.o.value}> ?p ?o.
+      <${geometry}> ?p ?o.
       }`, {
         sources: ['http://localhost:3030/earthquake-usgs/'],
       });
@@ -46,22 +51,18 @@ function Type({ data, bindings, typeIsPending, setCoordinates }) {
 
     }
 
-    if (query[2].entries.p.value === 'http://www.opengis.net/ont/geosparql#asWKT') {
-      let point = query[2].entries.o.value
-      point = point.split("(").pop()
-      point = point.substring(0, point.length - 1)
-      point = point.split(' ')
-      point = [point[1] * 1, point[0] * 1];
-      setCoordinates(point)
-    }
+    let point = null;
 
-    
-
-    
-
-    
-
-    
+      query.map((item) => {
+        if (item.entries.p.value === "http://www.opengis.net/ont/geosparql#asWKT") {
+          point = item.entries.o.value;
+          point = point.split("(").pop()
+          point = point.substring(0, point.length - 1)
+          point = point.split(' ')
+          point = [point[1] * 1, point[0] * 1];
+          setCoordinates(point)
+        }
+      })
 
   }
   
