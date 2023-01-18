@@ -72,7 +72,7 @@ function ViewsSelect(layout) {
 
                 {quadrants.map((quadrant) => (
                     
-                    <FormControl sx={{ m: 1, minWidth: 100 }} size="small">
+                    <FormControl sx={{ m: 1, minWidth: 100 }} size="small" key={quadrant.id}>
                         <InputLabel id={quadrant.id + "-label"}>{quadrant.name}</InputLabel>
                         <Select
                             className='view-select'
@@ -99,7 +99,7 @@ function ViewsSelect(layout) {
             <div className='visible-layout'>
                 <div>
                     {quadrants.map((quadrant) => (
-                        <FormControl sx={{ m: 1, minWidth: 100 }} size="small">
+                        <FormControl sx={{ m: 1, minWidth: 100 }} size="small" key={quadrant.id}>
                             <InputLabel id={quadrant.id + "-label"}>{quadrant.name}</InputLabel>
                             <Select
                                 className='view-select'
