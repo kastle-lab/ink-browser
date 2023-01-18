@@ -25,6 +25,8 @@ function Type({ data, bindings, typeIsPending, setCoordinates }) {
     query = JSON.stringify(query)
     query = JSON.parse(query)
 
+    console.log(query)
+
     let geometry = null;
 
     query && query.map((item) => {

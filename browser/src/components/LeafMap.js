@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { MapContainer, Marker, Popup, TileLayer, useMap } from "react-leaflet";
-import { Icon } from 'leaflet';
 
 function ChangeCenter(coordinates) {
+
+  console.log(coordinates.coordinates)
 
   const map = useMap()
   map.setView(coordinates.coordinates)
@@ -22,12 +23,6 @@ function LeafMap({coordinates}) {
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
       <Marker position={coordinates}>
-        <Popup>
-          <div>
-            <h2>Wright State University</h2>
-            <p>Main Campus in Dayton, Ohio</p>
-          </div>
-        </Popup>
       </Marker>
       <ChangeCenter coordinates={coordinates} />
     </MapContainer>

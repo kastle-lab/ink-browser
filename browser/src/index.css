@@ -257,7 +257,6 @@ p {
 .view-full {
   border: var(--quadrantBorderThickness) solid black;
   border-radius: 15px;
-  background: #e5e5ff;
   margin: var(--quadrantMargin);
   overflow: hidden;
 }
