@@ -21,18 +21,22 @@ function ViewsSelect(layout) {
         { name: 'Top Left',
         id: 'top-left',
         value: topLeft,
+        valueString: 'topLeft',
         set: setTopLeft}, 
         { name: 'Top Right',
         id: 'top-right',
         value: topRight,
+        valueString: 'topRight',
         set: setTopRight}, 
         { name: 'Bottom Left',
         id: 'bottom-left',
         value: bottomLeft,
+        valueString: 'bottomLeft',
         set: setBottomLeft }, 
         { name: 'Bottom Right',
         id: 'bottom-right',
         value: bottomRight,
+        valueString: 'bottomRight',
         set: setBottomRight }
     ];
 
@@ -83,7 +87,7 @@ function ViewsSelect(layout) {
                             autoWidth
                             onChange={(e) => {
                                 quadrant.set(e.target.value)
-                                localStorage.setItem(quadrant.value, e.target.value)
+                                localStorage.setItem(quadrant.valueString, e.target.value)
                             }}
                         >
                             {views.map((view) => (
@@ -110,7 +114,7 @@ function ViewsSelect(layout) {
                                 autoWidth
                                 onChange={(e) => {
                                     quadrant.set(e.target.value)
-                                    localStorage.setItem(quadrant.value, e.target.value)
+                                    localStorage.setItem(quadrant.valueString, e.target.value)
                                 }}
                             >
                                 {views.map((view) => (
