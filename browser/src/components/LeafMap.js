@@ -2,7 +2,7 @@ import React, { useEffect, useState, useCallback } from 'react'
 
 import { MapContainer, Marker, Popup, TileLayer, useMap } from "react-leaflet";
 
-const zoom = 8
+const zoom = 18
 
 function MoveMap({ map, coordinates }) {
 

@@ -286,9 +286,20 @@ p {
 }
 
 .settings-menu {
-  width: 300px;
+  margin: 0 5px 0 5px;
 }
 
-.setting-icon {
+.close-drawer-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid black;
+}
+
+.setting-menu {
   margin-right: 10px;
+}
+
+.settings-menu p {
+  padding-top: 30px;
 }
