@@ -12,7 +12,7 @@ import FormControl from '@mui/material/FormControl';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 
-function SettingsMenu() {
+function SettingsMenu({zoomLevel, setZoomLevel}) {
 
     const [DrawerOpen, setDrawerOpen] = useState(false);
 
@@ -24,8 +24,6 @@ function SettingsMenu() {
         setDrawerOpen(false)
     }
 
-    const [zoom, setZoom] = useState(8);
-
     const zoomLevels = []
 
     for (let i=1; i<19 ; i++) {
@@ -35,79 +33,80 @@ function SettingsMenu() {
     const [colorMode, setColorMode] = useState("Light");
 
     return (
-      <div className='setting-menu'>
+        <div className='setting-menu'>
 
-        <Tooltip title="Settings">
-            <IconButton
-                onClick={openDrawer}
+            <Tooltip title="Settings">
+                <IconButton
+                    onClick={openDrawer}
+                >
+                    <SettingsOutlinedIcon />
+                </IconButton>
+            </Tooltip>
+            <Drawer
+                PaperProps={{
+                sx: {
+                    width: 300,
+                    height: '100vh',
+                    borderRadius: '15px 0 0 15px',
+                }
+                }}
+                anchor="right"
+                open={DrawerOpen}
+                onClose={closeDrawer}
             >
-                <SettingsOutlinedIcon />
-            </IconButton>
-        </Tooltip>
-        <Drawer
-            PaperProps={{
-            sx: {
-                width: 300,
-                height: '100vh',
-                borderRadius: '15px 0 0 15px',
-            }
-            }}
-            anchor="right"
-            open={DrawerOpen}
-            onClose={closeDrawer}
-        >
-            <div className='settings-menu'>
-                <div className='close-drawer-btn'>
-                    <h4>Settings</h4>
-                    <IconButton 
-                    onClick={closeDrawer}
-                    >
-                        <CloseIcon />
-                    </IconButton>
-                </div>
+                <div className='settings-menu'>
+                    <div className='close-drawer-btn'>
+                        <h4>Settings</h4>
+                        <IconButton 
+                        onClick={closeDrawer}
+                        >
+                            <CloseIcon />
+                        </IconButton>
+                    </div>
 
-                <p>Data Endpoint</p>
-                <TextField 
-                    size='small'
-                    id="URL" 
-                    label="URL" 
-                    variant="outlined" 
-                    required
-                />
+                    <p>Data Endpoint</p>
+                    <TextField 
+                        size='small'
+                        id="URL" 
+                        label="URL" 
+                        variant="outlined" 
+                        required
+                    />
 
-                <p>Default Map zoom</p>
-                <FormControl sx={{minWidth: 80 }} size="small">
-                    <InputLabel id='zoom-level-label'>Zoom</InputLabel>
-                    <Select
-                        
-                        labelId='zoom-level-label'
-                        label="Zoom"
-                        value={zoom}
-                        id='zoom-select'
+                    <p>Default Map zoom</p>
+                    <FormControl sx={{minWidth: 80 }} size="small">
+                        <InputLabel id='zoom-level-label'>Zoom</InputLabel>
+                        <Select
+                            
+                            labelId='zoom-level-label'
+                            label="Zoom"
+                            value={zoomLevel}
+                            id='zoom-select'
+                            onChange={(e) => {
+                                setZoomLevel(e.target.value)
+                                localStorage.setItem('zoomLevel', e.target.value)
+                            }}
+                        >
+                            {zoomLevels}
+                        </Select>
+                    </FormControl>
+                    
+                    <p>Color Mode</p>
+                    <ToggleButtonGroup
+                        value={colorMode}
+                        exclusive
                         onChange={(e) => {
-                            setZoom(e.target.value)
+                            setColorMode(e.target.value)
                         }}
                     >
-                        {zoomLevels}
-                    </Select>
-                </FormControl>
-                
-                <p>Color Mode</p>
-                <ToggleButtonGroup
-                    value={colorMode}
-                    exclusive
-                    onChange={(e) => {
-                        setColorMode(e.target.value)
-                    }}
-                >
-                    <ToggleButton value="Light">Light</ToggleButton>
-                    <ToggleButton value="Dark">Dark</ToggleButton>
-                </ToggleButtonGroup>
-            </div>
-        </Drawer>
+                        <ToggleButton value="Light">Light</ToggleButton>
+                        <ToggleButton value="Dark">Dark</ToggleButton>
+                    </ToggleButtonGroup>
+                </div>
+            </Drawer>
 
-    </div>
-  )
+        </div>
+    )
 }
 
 export default SettingsMenu

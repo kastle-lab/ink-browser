@@ -7,6 +7,7 @@ import Statistics from './Statistics';
 import ClassHierarchy from './ClassHierarchy';
 import Client from './Client'
 import LeafMap from './LeafMap'
+import SettingsMenu from './SettingsMenu';
 
 function Layout(layout) {
 
@@ -27,7 +28,7 @@ function Layout(layout) {
   const client = <div className='quadrant'><Client></Client></div>
   const statistics = <div className='statistics'><Statistics></Statistics></div>;
   const search = <div className='quadrant'><Search bindings={bindings} setBindings={setBindings}></Search></div>;
-  const map = <div className='view-full'><LeafMap coordinates={coordinates}></LeafMap></div>;
+  const map = <div className='view-full'><LeafMap coordinates={coordinates} zoomLevel={layout.zoomLevel}></LeafMap></div>;
   const empty = <div className='quadrant'></div>;
 
   return (

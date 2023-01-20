@@ -11,6 +11,8 @@ function App() {
   const [bottomLeft, setBottomLeft] = useState(localStorage.getItem('bottomLeft') != null ? localStorage.getItem('bottomLeft') : 'Focus');
   const [bottomRight, setBottomRight] = useState(localStorage.getItem('bottomRight') != null ? localStorage.getItem('bottomRight') : 'Empty');
 
+  const [zoomLevel, setZoomLevel] = useState(localStorage.getItem('zoomLevel') != null ? localStorage.getItem('zoomLevel') : 8);
+
   return (
 
     <div className="app">
@@ -25,6 +27,8 @@ function App() {
       topRight={topRight}
       bottomLeft={bottomLeft}
       bottomRight={bottomRight}
+      zoomLevel={zoomLevel}
+      setZoomLevel={setZoomLevel}
       ></Topbar>
 
       {/* The quadrants and everything inside is rendere here */}
@@ -33,6 +37,7 @@ function App() {
       topRight={topRight} 
       bottomLeft={bottomLeft} 
       bottomRight={bottomRight}
+      zoomLevel={zoomLevel}
       ></Layout>
 
       <Bottombar></Bottombar>

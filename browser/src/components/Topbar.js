@@ -4,6 +4,8 @@ import ViewsSelect from './ViewsSelect';
 
 function Topbar(layout) {
 
+  console.log(layout.zoomLevel)
+
   return (
     <div className='topbar'>
 
@@ -19,7 +21,7 @@ function Topbar(layout) {
 
         <ViewsSelect layout={layout} />
 
-        <SettingsMenu />
+        <SettingsMenu  zoomLevel={layout.zoomLevel} setZoomLevel={layout.setZoomLevel}/>
         
       </div>
     </div>
