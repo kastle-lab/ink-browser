@@ -219,7 +219,7 @@ p {
 
 }
 
-.type-bottom, .search-bottom {
+.type-bottom, .search-bottom, .focus-lower {
   margin-left: 10px;
   margin-right: 10px;
   height: calc(var(--innerQuadrantHeight) - 90px);
@@ -302,4 +302,25 @@ p {
 
 .settings-menu p {
   padding-top: 30px;
+}
+
+.focus-lower {
+padding: 20px;
+  
+}
+
+.focus-lower-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.focus-lower-items {
+  display: flex;
+  gap: 20px;
+  border-bottom: 1px solid black;
+}
+
+.focus-lower-item {
+  width: calc(100%/ 2);
+  overflow-wrap: break-word;
 }

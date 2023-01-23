@@ -17,11 +17,12 @@ function Layout(layout) {
   const [bindings, setBindings] = useState();
   const [typeIsPending, setTypeIsPending] = useState(false);
   const [coordinates, setCoordinates] = useState([39.781710, -84.063274]);
+  const [dataFromType, setDataFromType] = useState();
 
   // Set view components equal to a variable
-  const type = <div className='quadrant'><Type data={data} bindings={bindings} typeIsPending={typeIsPending} setCoordinates={setCoordinates} endpoint={layout.endpoint}></Type></div>;
+  const type = <div className='quadrant'><Type data={data} bindings={bindings} typeIsPending={typeIsPending} setCoordinates={setCoordinates} endpoint={layout.endpoint} setDataFromType={setDataFromType}></Type></div>;
   const schema = <div className='view-full'><Schema bindings={bindings} data={data} setData={setData} setTypeIsPending={setTypeIsPending} endpoint={layout.endpoint}></Schema></div>;
-  const focus = <div className='quadrant'><Focus></Focus></div>;
+  const focus = <div className='quadrant'><Focus dataFromType={dataFromType}></Focus></div>;
   const classHierarchy = <div className='quadrant'><ClassHierarchy></ClassHierarchy></div>;
   const statistics = <div className='statistics'><Statistics></Statistics></div>;
   const search = <div className='quadrant'><Search bindings={bindings} setBindings={setBindings} endpoint={layout.endpoint}></Search></div>;

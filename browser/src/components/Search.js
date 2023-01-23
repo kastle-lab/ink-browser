@@ -24,13 +24,6 @@ function Search({bindings, setBindings, endpoint}) {
         }`, {
             sources: [endpoint],
         });
-
-        bindingsStream.on('data', (binding) => {
-            // console.log(binding); // Quick way to print bindings for testing
-        });
-        bindingsStream.on('end', () => {
-            // The data-listener will not be called anymore once we get here.
-        });
         bindingsStream.on('error', (error) => {
             console.error(error);
         });
@@ -41,6 +34,8 @@ function Search({bindings, setBindings, endpoint}) {
         setBindings(query);
 
         setIsPending(false)
+
+        console.log(query)
         
     }
 

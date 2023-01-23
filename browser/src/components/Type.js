@@ -2,7 +2,7 @@ import React from 'react'
 
 const QueryEngine = require('@comunica/query-sparql').QueryEngine;
 
-function Type({ data, bindings, typeIsPending, setCoordinates, endpoint }) {
+function Type({ data, bindings, typeIsPending, setCoordinates, endpoint, setDataFromType }) {
 
   async function getPoint(e) {
 
@@ -24,6 +24,8 @@ function Type({ data, bindings, typeIsPending, setCoordinates, endpoint }) {
     let query = (await bindingsStream.toArray())
     query = JSON.stringify(query)
     query = JSON.parse(query)
+
+    setDataFromType(query)
 
     let geometry = null;
 
