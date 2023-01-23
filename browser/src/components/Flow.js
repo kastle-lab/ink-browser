@@ -11,7 +11,7 @@ import ReactFlow, {
 import 'reactflow/dist/style.css';
 const QueryEngine = require('@comunica/query-sparql').QueryEngine;
 
-const Flow = ({bindings, data, setData, setTypeIsPending}) => {
+const Flow = ({bindings, data, setData, setTypeIsPending, endpoint}) => {
     const [nodes, setNodes, onNodesChange] = useNodesState([]);
     const [edges, setEdges, onEdgesChange] = useEdgesState([]);
     const onConnect = useCallback((params) => setEdges((els) => addEdge(params, els)), []);
@@ -36,7 +36,7 @@ const Flow = ({bindings, data, setData, setTypeIsPending}) => {
                 select * where {
                 ?s a <${selected}> .
                 }`, {
-                    sources: ['http://localhost:3030/earthquake-usgs/'],
+                    sources: [endpoint],
                 });
 
                 bindingsStream.on('data', (binding) => {

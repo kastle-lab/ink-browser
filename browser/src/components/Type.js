@@ -2,7 +2,7 @@ import React from 'react'
 
 const QueryEngine = require('@comunica/query-sparql').QueryEngine;
 
-function Type({ data, bindings, typeIsPending, setCoordinates }) {
+function Type({ data, bindings, typeIsPending, setCoordinates, endpoint }) {
 
   async function getPoint(e) {
 
@@ -13,7 +13,7 @@ function Type({ data, bindings, typeIsPending, setCoordinates }) {
     select * where {
     <${e.currentTarget.id}> ?p ?o.
     }`, {
-      sources: ['http://localhost:3030/earthquake-usgs/'],
+      sources: [endpoint],
     });
 
     bindingsStream.on('error', (error) => {
@@ -38,7 +38,7 @@ function Type({ data, bindings, typeIsPending, setCoordinates }) {
       select * where {
       <${geometry}> ?p ?o.
       }`, {
-        sources: ['http://localhost:3030/earthquake-usgs/'],
+        sources: [endpoint],
       });
 
       bindingsStream.on('error', (error) => {

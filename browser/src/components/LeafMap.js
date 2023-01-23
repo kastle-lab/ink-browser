@@ -4,8 +4,6 @@ import { MapContainer, Marker, Popup, TileLayer, useMap } from "react-leaflet";
 
 const zoom = 8
 
-
-
 function MoveMap({ map, coordinates, zoomLevel }) {
 
   useEffect(() => {
@@ -17,8 +15,6 @@ function MoveMap({ map, coordinates, zoomLevel }) {
 }
 
 function LeafMap({coordinates, zoomLevel}) {
-
-  console.log(zoomLevel)
 
   const [map, setMap] = useState(null)
 

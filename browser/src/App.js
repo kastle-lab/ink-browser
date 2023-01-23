@@ -10,8 +10,8 @@ function App() {
   const [topRight, setTopRight] = useState(localStorage.getItem('topRight') != null ? localStorage.getItem('topRight') : 'Schema');
   const [bottomLeft, setBottomLeft] = useState(localStorage.getItem('bottomLeft') != null ? localStorage.getItem('bottomLeft') : 'Focus');
   const [bottomRight, setBottomRight] = useState(localStorage.getItem('bottomRight') != null ? localStorage.getItem('bottomRight') : 'Empty');
-
   const [zoomLevel, setZoomLevel] = useState(localStorage.getItem('zoomLevel') != null ? localStorage.getItem('zoomLevel') : 8);
+  const [endpoint, setEndpoint] = useState('http://localhost:3030/earthquake-usgs/');
 
   return (
 
@@ -29,6 +29,8 @@ function App() {
       bottomRight={bottomRight}
       zoomLevel={zoomLevel}
       setZoomLevel={setZoomLevel}
+      endpoint={endpoint}
+      setEndpoint={setEndpoint}
       ></Topbar>
 
       {/* The quadrants and everything inside is rendere here */}
@@ -38,6 +40,7 @@ function App() {
       bottomLeft={bottomLeft} 
       bottomRight={bottomRight}
       zoomLevel={zoomLevel}
+      endpoint={endpoint}
       ></Layout>
 
       <Bottombar></Bottombar>

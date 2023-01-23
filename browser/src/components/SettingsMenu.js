@@ -12,7 +12,7 @@ import FormControl from '@mui/material/FormControl';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 
-function SettingsMenu({zoomLevel, setZoomLevel}) {
+function SettingsMenu({zoomLevel, setZoomLevel, endpoint, setEndpoint}) {
 
     const [DrawerOpen, setDrawerOpen] = useState(false);
 
@@ -71,6 +71,10 @@ function SettingsMenu({zoomLevel, setZoomLevel}) {
                         label="URL" 
                         variant="outlined" 
                         required
+                        value={endpoint}
+                        onChange={(e) => {
+                            setEndpoint(e.target.value)
+                        }}
                     />
 
                     <p>Default Map zoom</p>

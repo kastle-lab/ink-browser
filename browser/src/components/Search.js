@@ -4,7 +4,7 @@ import Button from '@mui/material/Button';
 
 const QueryEngine = require('@comunica/query-sparql').QueryEngine;
 
-function Search({bindings, setBindings}) {
+function Search({bindings, setBindings, endpoint}) {
 
     const [search, setSearch] = useState('');
     const [isPening, setIsPending] = useState(false)
@@ -22,7 +22,7 @@ function Search({bindings, setBindings}) {
         select * where {
         ?s a owl:Class .
         }`, {
-            sources: ['http://localhost:3030/earthquake-usgs/'],
+            sources: [endpoint],
         });
 
         bindingsStream.on('data', (binding) => {
