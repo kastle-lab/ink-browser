@@ -5,9 +5,7 @@ import Focus from './Focus';
 import Search from './Search';
 import Statistics from './Statistics';
 import ClassHierarchy from './ClassHierarchy';
-import Client from './Client'
 import LeafMap from './LeafMap'
-import SettingsMenu from './SettingsMenu';
 
 function Layout(layout) {
 
@@ -25,7 +23,6 @@ function Layout(layout) {
   const schema = <div className='view-full'><Schema bindings={bindings} data={data} setData={setData} setTypeIsPending={setTypeIsPending}></Schema></div>;
   const focus = <div className='quadrant'><Focus></Focus></div>;
   const classHierarchy = <div className='quadrant'><ClassHierarchy></ClassHierarchy></div>;
-  const client = <div className='quadrant'><Client></Client></div>
   const statistics = <div className='statistics'><Statistics></Statistics></div>;
   const search = <div className='quadrant'><Search bindings={bindings} setBindings={setBindings}></Search></div>;
   const map = <div className='view-full'><LeafMap coordinates={coordinates} zoomLevel={layout.zoomLevel}></LeafMap></div>;
@@ -39,7 +36,6 @@ function Layout(layout) {
       {topLeft === 'Schema' && schema}
       {topLeft === 'Focus' && focus}
       {topLeft === 'Class Hierarchy' && classHierarchy}
-      {topLeft === 'Client' && client}
       {topLeft === 'Statistics' && statistics}
       {topLeft === 'Search' && search}
       {topLeft === 'Map' && map}
@@ -50,7 +46,6 @@ function Layout(layout) {
       {topRight === 'Schema' && schema}
       {topRight === 'Focus' && focus}
       {topRight === 'Class Hierarchy' && classHierarchy}
-      {topRight === 'Client' && client}
       {topRight === 'Statistics' && statistics}
       {topRight === 'Search' && search}
       {topRight === 'Map' && map}
@@ -61,7 +56,6 @@ function Layout(layout) {
       {bottomLeft === 'Schema' && schema}
       {bottomLeft === 'Focus' && focus}
       {bottomLeft === 'Class Hierarchy' && classHierarchy}
-      {bottomLeft === 'Client' && client}
       {bottomLeft === 'Statistics' && statistics}
       {bottomLeft === 'Search' && search}
       {bottomLeft === 'Map' && map}
@@ -72,7 +66,6 @@ function Layout(layout) {
       {bottomRight === 'Schema' && schema}
       {bottomRight === 'Focus' && focus}
       {bottomRight === 'Class Hierarchy' && classHierarchy}
-      {bottomRight === 'Client' && client}
       {bottomRight === 'Statistics' && statistics}
       {bottomRight === 'Search' && search}
       {bottomRight === 'Map' && map}
