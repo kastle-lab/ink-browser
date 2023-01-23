@@ -74,6 +74,7 @@ function SettingsMenu({zoomLevel, setZoomLevel, endpoint, setEndpoint}) {
                         value={endpoint}
                         onChange={(e) => {
                             setEndpoint(e.target.value)
+                            localStorage.setItem('endpoint', e.target.value)
                         }}
                     />
 
