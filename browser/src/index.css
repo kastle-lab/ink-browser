@@ -304,23 +304,20 @@ p {
   padding-top: 30px;
 }
 
-.focus-lower {
-padding: 20px;
-  
-}
-
 .focus-lower-header {
   display: flex;
-  justify-content: space-between;
+}
+
+.focus-lower-header h3 {
+  width: calc(100%/ 2);
 }
 
 .focus-lower-items {
   display: flex;
-  gap: 20px;
-  border-bottom: 1px solid black;
+  border-top: 1px solid black;
 }
 
-.focus-lower-item {
+.focus-lower-item-left, .focus-lower-item-right {
   width: calc(100%/ 2);
   overflow-wrap: break-word;
 }

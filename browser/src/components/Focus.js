@@ -2,8 +2,6 @@ import React from 'react'
 
 function Focus({dataFromType}) {
 
-  console.log(dataFromType)
-
   return (
     <>
       <div>
@@ -16,10 +14,10 @@ function Focus({dataFromType}) {
         </div>
         {dataFromType && dataFromType.map((item) => (
           <div key={item.entries.o.value} className='focus-lower-items'>
-            <div className='focus-lower-item'>
+            <div className='focus-lower-item-left'>
               <p>{item.entries.p.value}</p>
             </div>
-            <div className='focus-lower-item'>
+            <div className='focus-lower-item-right'>
               <p>{item.entries.o.value}</p>
             </div>
           </div>
