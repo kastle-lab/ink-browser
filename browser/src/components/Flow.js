@@ -14,7 +14,7 @@ const QueryEngine = require('@comunica/query-sparql').QueryEngine;
 const Flow = ({bindings, data, setData, setTypeIsPending, endpoint}) => {
     const [nodes, setNodes, onNodesChange] = useNodesState([]);
     const [edges, setEdges, onEdgesChange] = useEdgesState([]);
-    const onConnect = useCallback((params) => setEdges((els) => addEdge(params, els)), []);
+    const onConnect = useCallback((params) => setEdges((els) => addEdge(params, els)), [setEdges]);
     const [selected, setSelected] = useState();
 
     // useEffect hook is called when the selected node changes
@@ -33,18 +33,14 @@ const Flow = ({bindings, data, setData, setTypeIsPending, endpoint}) => {
 
                 // Query that is ran
                 const bindingsStream = await myEngine.queryBindings(`
+                prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
                 select * where {
-                ?s a <${selected}> .
+                ?s a <${selected}> ;
+                rdfs:label ?label .
                 }`, {
                     sources: [endpoint],
                 });
 
-                bindingsStream.on('data', (binding) => {
-                    // console.log(binding); // Quick way to print bindings for testing
-                });
-                bindingsStream.on('end', () => {
-                    // The data-listener will not be called anymore once we get here.
-                });
                 bindingsStream.on('error', (error) => {
                     console.error(error);
                 });
@@ -56,13 +52,15 @@ const Flow = ({bindings, data, setData, setTypeIsPending, endpoint}) => {
                 setData(query);
                 setTypeIsPending(false)
 
+                console.log(query)
+
             }
 
             engine()
 
         }
 
-    }, [selected])
+    }, [selected, endpoint, setData, setTypeIsPending])
 
     // Logic for setting up the node diagram
     useEffect(() => {
@@ -71,7 +69,7 @@ const Flow = ({bindings, data, setData, setTypeIsPending, endpoint}) => {
         let x = 250
         let loop = 0
 
-        bindings && bindings.map((binding) => {
+        bindings && bindings.forEach((binding) => {
             const div = Math.ceil(bindings.length / 3)
             let url = binding.entries._root.entries[0][1].id
             url = url.split("/").pop()
@@ -100,7 +98,7 @@ const Flow = ({bindings, data, setData, setTypeIsPending, endpoint}) => {
 
     // Called when a node is clicked on
     function selectionChange() {
-        nodes.map((node) => {
+        nodes.forEach((node) => {
             if (node.selected === true) {
 
                 setSelected(node.id)

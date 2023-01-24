@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import SettingsMenu from './SettingsMenu';
 import ViewsSelect from './ViewsSelect';
 

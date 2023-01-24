@@ -1,14 +1,12 @@
-import React, { useEffect, useState, useCallback } from 'react'
+import React, { useEffect, useState} from 'react'
 
-import { MapContainer, Marker, Popup, TileLayer, useMap } from "react-leaflet";
-
-const zoom = 8
+import { MapContainer, Marker, TileLayer} from "react-leaflet";
 
 function MoveMap({ map, coordinates, zoomLevel }) {
 
   useEffect(() => {
     map.setView(coordinates, zoomLevel)
-  }, [coordinates])
+  }, [coordinates, map, zoomLevel])
 
   return null;
 
