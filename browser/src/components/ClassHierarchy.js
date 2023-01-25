@@ -6,6 +6,7 @@ import { alpha, styled } from '@mui/material/styles';
 import TreeView from '@mui/lab/TreeView';
 import TreeItem, { treeItemClasses } from '@mui/lab/TreeItem';
 
+// Function that returns the svg for the Minus square
 function MinusSquare(props) {
   return (
     <SvgIcon fontSize="inherit" style={{ width: 14, height: 14 }} {...props}>
@@ -15,6 +16,7 @@ function MinusSquare(props) {
   );
 }
 
+// Function that returns the svg for the Plus square
 function PlusSquare(props) {
   return (
     <SvgIcon fontSize="inherit" style={{ width: 14, height: 14 }} {...props}>
@@ -24,6 +26,7 @@ function PlusSquare(props) {
   );
 }
 
+// Function that returns the svg for the Close square
 function CloseSquare(props) {
   return (
     <SvgIcon

@@ -72,36 +72,6 @@ body {
 .top {
   display: flex;
 }
-/* Diagram */
-
-/* .right-search input, button {
-  background-color: #888;
-  border: none;
-  padding: 10px 15px;
-}
-
-.right-search input {
-  border-top-left-radius: 15px;
-  border-bottom-left-radius: 15px;
-}
-
-.right-search button {
-  border-top-right-radius: 15px;
-  border-bottom-right-radius: 15px;
-}
-
-.right-search button:hover {
-  background-color: #555;
-  cursor: pointer;
-}
-
-.right-search input:hover {
-  background-color: #555;
-}
-
-.right-search input:focus {
-  background: #555;
-} */
 
 .right-search {
   display: flex;

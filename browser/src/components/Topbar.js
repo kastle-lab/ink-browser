@@ -1,5 +1,5 @@
 import React from 'react'
-import SettingsMenu from './SettingsMenu';
+import SettingsMenu from './settings_menu/SettingsMenu';
 import ViewsSelect from './ViewsSelect';
 
 function Topbar(layout) {

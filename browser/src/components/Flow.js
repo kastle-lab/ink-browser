@@ -11,7 +11,9 @@ import ReactFlow, {
 import 'reactflow/dist/style.css';
 const QueryEngine = require('@comunica/query-sparql').QueryEngine;
 
-const Flow = ({bindings, data, setData, setTypeIsPending, endpoint}) => {
+const Flow = ({bindings, setData, setTypeIsPending, endpoint}) => {
+
+    // Initialize variables and state
     const [nodes, setNodes, onNodesChange] = useNodesState([]);
     const [edges, setEdges, onEdgesChange] = useEdgesState([]);
     const onConnect = useCallback((params) => setEdges((els) => addEdge(params, els)), [setEdges]);
@@ -51,8 +53,6 @@ const Flow = ({bindings, data, setData, setTypeIsPending, endpoint}) => {
                 // Sets the data and sets pending to false
                 setData(query);
                 setTypeIsPending(false)
-
-                console.log(query)
 
             }
 
@@ -96,7 +96,7 @@ const Flow = ({bindings, data, setData, setTypeIsPending, endpoint}) => {
 
     }, [bindings, setNodes])
 
-    // Called when a node is clicked on
+    // Called when a node is clicked on to figure out which is selected
     function selectionChange() {
         nodes.forEach((node) => {
             if (node.selected === true) {
@@ -110,6 +110,7 @@ const Flow = ({bindings, data, setData, setTypeIsPending, endpoint}) => {
 
     return (
 
+        // React flow Schema Diagram
         <div className="providerflow">
             <ReactFlowProvider>
                 <div className="reactflow-wrapper">

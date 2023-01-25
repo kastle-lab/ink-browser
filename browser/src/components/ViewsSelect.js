@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Tooltip from '@mui/material/Tooltip';
 import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -16,7 +16,7 @@ function ViewsSelect(layout) {
     // Array of views that can be chosen from as drop down options
     const views = ['Type', 'Schema', 'Focus', 'Class Hierarchy', 'Statistics', 'Search', 'Map', 'Empty']
     
-    // 
+    // Array to map through for setting up the view select
     const quadrants = [
         { name: 'Top Left',
         id: 'top-left',
@@ -40,7 +40,8 @@ function ViewsSelect(layout) {
         set: setBottomRight }
     ];
 
-    const [anchorEl, setAnchorEl] = React.useState(null);
+    // Initialize variables for state and function to control it
+    const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -51,7 +52,11 @@ function ViewsSelect(layout) {
 
     return (
         <>
+
+            {/* Menu to change views when screen gets too small */}
             <div className='views-menu'>
+
+                {/* Button to open menu */}
                 <Tooltip title="Change Views">
                     <IconButton
                         variant="contained"
@@ -64,6 +69,7 @@ function ViewsSelect(layout) {
                     </IconButton>
                 </Tooltip>
 
+                {/* Menu component to hold the select elements */}
                 <Menu
                     id="basic-menu"
                     anchorEl={anchorEl}
@@ -74,32 +80,34 @@ function ViewsSelect(layout) {
                     }}
                 >
 
-                {quadrants.map((quadrant) => (
-                    
-                    <FormControl sx={{ m: 1, minWidth: 100 }} size="small" key={quadrant.id}>
-                        <InputLabel id={quadrant.id + "-label"}>{quadrant.name}</InputLabel>
-                        <Select
-                            className='view-select'
-                            labelId={quadrant.id + "-label"}
-                            id={quadrant.id}
-                            value={quadrant.value}
-                            label={quadrant.name}
-                            autoWidth
-                            onChange={(e) => {
-                                quadrant.set(e.target.value)
-                                localStorage.setItem(quadrant.valueString, e.target.value)
-                            }}
-                        >
-                            {views.map((view) => (
-                                <MenuItem key={view} value={view}>{view}</MenuItem>
-                            ))}
-                        </Select>
-                    </FormControl>
-                ))}
+                    {quadrants.map((quadrant) => (
+                        
+                        <FormControl sx={{ m: 1, minWidth: 100 }} size="small" key={quadrant.id}>
+                            <InputLabel id={quadrant.id + "-label"}>{quadrant.name}</InputLabel>
+                            <Select
+                                className='view-select'
+                                labelId={quadrant.id + "-label"}
+                                id={quadrant.id}
+                                value={quadrant.value}
+                                label={quadrant.name}
+                                autoWidth
+                                onChange={(e) => {
+                                    quadrant.set(e.target.value)
+                                    localStorage.setItem(quadrant.valueString, e.target.value)
+                                }}
+                            >
+                                {views.map((view) => (
+                                    <MenuItem key={view} value={view}>{view}</MenuItem>
+                                ))}
+                            </Select>
+                        </FormControl>
+                    ))}
 
-            </Menu>
+                </Menu>
+
             </div>
 
+            {/* View selectors that are visible when screen is wide enough */}
             <div className='visible-layout'>
                 <div>
                     {quadrants.map((quadrant) => (
