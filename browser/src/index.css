@@ -241,7 +241,7 @@ p {
   overflow: hidden;
 }
 
-.statistics {
+.full-table {
   border: var(--quadrantBorderThickness) solid black;
   border-radius: 15px;
   background: #e5e5ff;
@@ -250,9 +250,6 @@ p {
 }
 
 .table-div {
-  /* overflow-x: auto;
-  overflow-y: auto; */
-  height: calc(var(--innerQuadrantHeight));
   margin: 0;
 }
 

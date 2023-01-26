@@ -45,49 +45,36 @@ const rows = [
 
 function Statistics() {
 
-    const [page, setPage] = React.useState(0);
-    const [rowsPerPage, setRowsPerPage] = React.useState(10);
-
-    const handleChangePage = (event, newPage) => {
-        setPage(newPage);
-    };
-
-    const handleChangeRowsPerPage = (event) => {
-        setRowsPerPage(+event.target.value);
-        setPage(0);
-    };
-
   return (
     <div className='table-div'>
-          <Paper>
-              <TableContainer className='table-container'>
-                  <Table stickyHeader aria-label="customized table">
-                      <TableHead>
-                          <TableRow>
-                              <StyledTableCell>Earthquakes</StyledTableCell>
-                              <StyledTableCell align="right">Depth</StyledTableCell>
-                              <StyledTableCell align="right">Gap</StyledTableCell>
-                              <StyledTableCell align="right">Error</StyledTableCell>
-                              <StyledTableCell align="right">Mag</StyledTableCell>
-                          </TableRow>
-                      </TableHead>
-                      <TableBody>
-                          {rows.map((row) => (
-                              <StyledTableRow key={row.name}>
-                                  <StyledTableCell component="th" scope="row">
-                                      {row.name}
-                                  </StyledTableCell>
-                                  <StyledTableCell align="right">{row.calories}</StyledTableCell>
-                                  <StyledTableCell align="right">{row.fat}</StyledTableCell>
-                                  <StyledTableCell align="right">{row.carbs}</StyledTableCell>
-                                  <StyledTableCell align="right">{row.protein}</StyledTableCell>
-                              </StyledTableRow>
-                          ))}
-                      </TableBody>
-                  </Table>
-              </TableContainer>
-             
-          </Paper>
+        <Paper>
+            <TableContainer className='table-container'>
+                <Table stickyHeader aria-label="customized table">
+                    <TableHead>
+                        <TableRow>
+                            <StyledTableCell>Earthquakes</StyledTableCell>
+                            <StyledTableCell align="right">Depth</StyledTableCell>
+                            <StyledTableCell align="right">Gap</StyledTableCell>
+                            <StyledTableCell align="right">Error</StyledTableCell>
+                            <StyledTableCell align="right">Mag</StyledTableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {rows.map((row) => (
+                            <StyledTableRow key={row.name}>
+                                <StyledTableCell component="th" scope="row">
+                                    {row.name}
+                                </StyledTableCell>
+                                <StyledTableCell align="right">{row.calories}</StyledTableCell>
+                                <StyledTableCell align="right">{row.fat}</StyledTableCell>
+                                <StyledTableCell align="right">{row.carbs}</StyledTableCell>
+                                <StyledTableCell align="right">{row.protein}</StyledTableCell>
+                            </StyledTableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+            </TableContainer>
+        </Paper>
     </div>
   )
 }

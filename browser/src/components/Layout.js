@@ -22,9 +22,9 @@ function Layout(layout) {
   // Set view components equal to a variable
   const type = <div className='quadrant' key={'type'}><Type data={data} bindings={bindings} typeIsPending={typeIsPending} setCoordinates={setCoordinates} endpoint={layout.endpoint} setDataFromType={setDataFromType}></Type></div>;
   const schema = <div className='view-full' key={'schema'}><Schema bindings={bindings} data={data} setData={setData} setTypeIsPending={setTypeIsPending} endpoint={layout.endpoint}></Schema></div>;
-  const focus = <div className='quadrant' key={'focus'}><Focus dataFromType={dataFromType}></Focus></div>;
+  const focus = <div className='full-table' key={'focus'}><Focus dataFromType={dataFromType}></Focus></div>;
   const classHierarchy = <div className='quadrant' key={'classHierarchy'}><ClassHierarchy></ClassHierarchy></div>;
-  const statistics = <div className='statistics' key={'statistics'}><Statistics></Statistics></div>;
+  const statistics = <div className='full-table' key={'statistics'}><Statistics></Statistics></div>;
   const search = <div className='quadrant' key={'search'}><Search bindings={bindings} setBindings={setBindings} endpoint={layout.endpoint}></Search></div>;
   const map = <div className='view-full' key={'map'}><LeafMap coordinates={coordinates} zoomLevel={layout.zoomLevel}></LeafMap></div>;
   const empty = <div className='quadrant' key={'empty'}></div>;

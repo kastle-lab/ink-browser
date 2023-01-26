@@ -1,42 +1,70 @@
 import React from 'react'
 
+import Paper from '@mui/material/Paper';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell, { tableCellClasses } from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import { styled } from '@mui/material/styles';
+
 function Focus({dataFromType}) {
 
+  const StyledTableCell = styled(TableCell)(({ theme }) => ({
+    [`&.${tableCellClasses.head}`]: {
+      backgroundColor: theme.palette.common.black,
+      color: theme.palette.common.white,
+    },
+    [`&.${tableCellClasses.body}`]: {
+      fontSize: 14,
+    },
+  }));
+
+  const StyledTableRow = styled(TableRow)(({ theme }) => ({
+    '&:nth-of-type(odd)': {
+      backgroundColor: theme.palette.action.hover,
+    },
+    // hide last border
+    '&:last-child td, &:last-child th': {
+      border: 0,
+    },
+  }));
+
   return (
-    <>
-      {/* Heading of view */}
-      <div>
-        <h2 className='quad-head'>Focus</h2>
-      </div>
+    <div className='table-div'>
 
-      {/* Lower portion of view */}
-      <div className='focus-lower'>
+      <Paper>
+        <TableContainer className='table-container'>
+          <Table stickyHeader aria-label="customized table">
+            <TableHead>
+              <TableRow>
+                <StyledTableCell>Predicate</StyledTableCell>
+                <StyledTableCell>Object</StyledTableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {dataFromType && dataFromType.map((item) => (
+                <StyledTableRow key={item.entries.o.value}>
 
-        {/* Heading of lower portion */}
-        <div className='focus-lower-header'>
-          <h3>Predicate</h3>
-          <h3>Object</h3>
-        </div>
+                  {/* Predicate items on the left */}
+                  <StyledTableCell>
+                    {item.entries.p.value}
+                  </StyledTableCell>
 
-        {/* Map over the data and display it in the lower portion */}
-        {dataFromType && dataFromType.map((item) => (
-          <div key={item.entries.o.value} className='focus-lower-items'>
+                  {/* Object item on the right*/}
+                  <StyledTableCell>
+                    {item.entries.o.value}
+                  </StyledTableCell>
 
-            {/* Predicate items on the left */}
-            <div className='focus-lower-item-left'>
-              <p>{item.entries.p.value}</p>
-            </div>
+                </StyledTableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </Paper>
 
-            {/* Object item on the right*/}
-            <div className='focus-lower-item-right'>
-              <p>{item.entries.o.value}</p>
-            </div>
-            
-          </div>
-        ))}
-
-      </div>
-    </>
+    </div>
   )
 }
 
