@@ -20,7 +20,7 @@ function Layout(layout) {
   const [dataFromType, setDataFromType] = useState();
 
   // Set view components equal to a variable
-  const type = <div className='quadrant' key={'type'}><Type data={data} bindings={bindings} typeIsPending={typeIsPending} setCoordinates={setCoordinates} endpoint={layout.endpoint} setDataFromType={setDataFromType}></Type></div>;
+  const type = <div className='full-table' key={'type'}><Type data={data} bindings={bindings} typeIsPending={typeIsPending} setCoordinates={setCoordinates} endpoint={layout.endpoint} setDataFromType={setDataFromType}></Type></div>;
   const schema = <div className='view-full' key={'schema'}><Schema bindings={bindings} data={data} setData={setData} setTypeIsPending={setTypeIsPending} endpoint={layout.endpoint}></Schema></div>;
   const focus = <div className='full-table' key={'focus'}><Focus dataFromType={dataFromType}></Focus></div>;
   const classHierarchy = <div className='quadrant' key={'classHierarchy'}><ClassHierarchy></ClassHierarchy></div>;

@@ -2,6 +2,15 @@ import React from 'react'
 import IconButton from '@mui/material/IconButton';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 
+import Paper from '@mui/material/Paper';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell, { tableCellClasses } from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import { styled } from '@mui/material/styles';
+
 const QueryEngine = require('@comunica/query-sparql').QueryEngine;
 
 function Type({ data, bindings, typeIsPending, setCoordinates, endpoint, setDataFromType }) {
@@ -70,42 +79,70 @@ function Type({ data, bindings, typeIsPending, setCoordinates, endpoint, setData
     })
 
   }
+
+  const StyledTableCell = styled(TableCell)(({ theme }) => ({
+    [`&.${tableCellClasses.head}`]: {
+      backgroundColor: theme.palette.common.black,
+      color: theme.palette.common.white,
+    },
+    [`&.${tableCellClasses.body}`]: {
+      fontSize: 14,
+    },
+  }));
+
+  const StyledTableRow = styled(TableRow)(({ theme }) => ({
+    '&:nth-of-type(odd)': {
+      backgroundColor: theme.palette.action.hover,
+    },
+    // hide last border
+    '&:last-child td, &:last-child th': {
+      border: 0,
+    },
+  }));
   
   return (
+
     <div className='type'>
 
-      {/* Heading for the view */}
-      <div>
-        <h2 className='quad-head'>Type</h2>
-      </div>
+      <Paper>
+        <TableContainer className='table-container'>
+          <Table stickyHeader aria-label="customized table">
+            <TableHead>
+              <TableRow>
+                <StyledTableCell>Type</StyledTableCell>
+                <StyledTableCell></StyledTableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
 
-      {/* Bottom portion of the view  */}
-      <div className='type-bottom'>
+              {typeIsPending && <TableRow><TableCell>Gathering Data...</TableCell>
+              <TableCell></TableCell></TableRow>}
+              {data && !typeIsPending && data.length === 0 && <TableRow><TableCell>No data</TableCell><TableCell></TableCell></TableRow>}
 
-        {/* Shows when data is being gathered */}
-        {typeIsPending && <h2>Gathering Data...</h2>}
+              {data && data.map((entity) => (
+                <StyledTableRow key={entity.entries._root.entries[0][1].id}>
 
-        {/* Maps through the data and displays it */}
-        {data && data.map((entity) => (
-          <div className='type-bottom-item' key={entity.entries._root.entries[0][1].id}>
 
-            {/* Visible data that is shown */}
-            <p  id={entity.entries._root.entries[0][1].id} onClick={getPoint}>{entity.entries._root.entries[1][1].id}</p>
+                  <StyledTableCell className='table-cell'>
+                    <p id={entity.entries._root.entries[0][1].id} onClick={getPoint}>{entity.entries._root.entries[1][1].id}</p>
+                  </StyledTableCell>
 
-            {/* Clickable icon to take you to link */}
-            <a href={entity.entries._root.entries[0][1].id} target='_blank' rel="noreferrer">
-              <IconButton size='small'>
-                <OpenInNewIcon fontSize='small'></OpenInNewIcon>
-              </IconButton>
-            </a>
 
-          </div>
-        ))}
+                  <StyledTableCell className='table-cell'>
+                    <a href={entity.entries._root.entries[0][1].id} target='_blank' rel="noreferrer">
+                      <IconButton size='small'>
+                        <OpenInNewIcon fontSize='small'></OpenInNewIcon>
+                      </IconButton>
+                    </a>
+                  </StyledTableCell>
 
-        {/* Shows when no data is available */}
-        {data && !typeIsPending && data.length === 0 && <p>No data</p>}
+                </StyledTableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </Paper>
 
-      </div>
     </div>
   )
 }

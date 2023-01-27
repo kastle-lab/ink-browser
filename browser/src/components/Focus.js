@@ -48,12 +48,12 @@ function Focus({dataFromType}) {
                 <StyledTableRow key={item.entries.o.value}>
 
                   
-                  <StyledTableCell className='focus-table-cell'>
+                  <StyledTableCell className='table-cell'>
                     {item.entries.p.value}
                   </StyledTableCell>
 
                   
-                  <StyledTableCell className='focus-table-cell'>
+                  <StyledTableCell className='table-cell'>
                     {item.entries.o.value}
                   </StyledTableCell>
 

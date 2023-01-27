@@ -104,7 +104,6 @@ body {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   grid-template-rows: repeat(2, minmax(0, 1fr));
-  
 }
 
 .quadrant {
@@ -121,13 +120,6 @@ body {
   border-radius: 15px;
   width: 100%;
   height: var(--innerQuadrantHeight);
-}
-
-.type {
-  height: var(--innerQuadrantHeight);
-  overflow-y: auto;
-  border-radius: 15px;
-  padding-left: 5px;
 }
 
 .type p {
@@ -189,21 +181,11 @@ p {
 
 }
 
-.type-bottom, .search-bottom, .focus-lower {
+.search-bottom {
   margin-left: 10px;
   margin-right: 10px;
   height: calc(var(--innerQuadrantHeight) - 90px);
   overflow: auto;
-}
-
-.type-bottom-item {
-  display: flex;
-  flex-direction: row;
-  /* align-items: center; */
-}
-
-.type-bottom-item p {
-  align-items: center;
 }
 
 .left-search {
@@ -257,9 +239,14 @@ p {
   height: calc(var(--innerQuadrantHeight) - 2px);
 }
 
-.focus-table-cell {
+.table-cell {
   white-space: "normal";
   word-break: break-all;
+}
+
+.table-cell p {
+  padding: 0;
+  margin: 0;
 }
 
 .leaflet-container {
