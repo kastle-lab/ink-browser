@@ -32,7 +32,7 @@ function Focus({dataFromType}) {
   }));
 
   return (
-    <div className='table-div'>
+    <div className='focus'>
 
       <Paper>
         <TableContainer className='table-container'>
@@ -47,13 +47,13 @@ function Focus({dataFromType}) {
               {dataFromType && dataFromType.map((item) => (
                 <StyledTableRow key={item.entries.o.value}>
 
-                  {/* Predicate items on the left */}
-                  <StyledTableCell>
+                  
+                  <StyledTableCell className='focus-table-cell'>
                     {item.entries.p.value}
                   </StyledTableCell>
 
-                  {/* Object item on the right*/}
-                  <StyledTableCell>
+                  
+                  <StyledTableCell className='focus-table-cell'>
                     {item.entries.o.value}
                   </StyledTableCell>
 
