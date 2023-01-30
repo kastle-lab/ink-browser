@@ -19,7 +19,7 @@ function Topbar(layout) {
 
         <ViewsSelect layout={layout} />
 
-        <SettingsMenu  zoomLevel={layout.zoomLevel} setZoomLevel={layout.setZoomLevel} endpoint={layout.endpoint} setEndpoint={layout.setEndpoint}/>
+        <SettingsMenu  zoomLevel={layout.zoomLevel} setZoomLevel={layout.setZoomLevel} endpoint={layout.endpoint} setEndpoint={layout.setEndpoint} theme={layout.theme} setTheme={layout.setTheme}/>
         
       </div>
     </div>

@@ -42,7 +42,7 @@ function Layout(layout) {
   ]
 
   return (
-    <div className='gridlayout'>
+    <div className={`gridlayout ${layout.theme}`}>
 
       {/* Logic for which view to render in the top left qudrant */}
       {views.map((view) => (

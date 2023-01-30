@@ -1,11 +1,10 @@
-import React, { useState } from 'react'
+import React from 'react'
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 
-function ColorMode() {
+function ColorMode({theme, setTheme}) {
 
     // Initailize variable and state for color mode
-    const [colorMode, setColorMode] = useState("Light");
 
     return (
         <>
@@ -13,10 +12,11 @@ function ColorMode() {
             <p>Color Mode</p>
             
             <ToggleButtonGroup
-                value={colorMode}
+                value={theme}
                 exclusive
                 onChange={(e) => {
-                    setColorMode(e.target.value)
+                    setTheme(e.target.value)
+                    localStorage.setItem('theme', e.target.value)
                 }}
             >
                 <ToggleButton value="Light">Light</ToggleButton>

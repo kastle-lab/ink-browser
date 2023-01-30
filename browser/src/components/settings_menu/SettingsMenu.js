@@ -9,7 +9,7 @@ import DataEndpoint from './DataEndpoint';
 import MapZoom from './MapZoom';
 import ColorMode from './ColorMode';
 
-function SettingsMenu({zoomLevel, setZoomLevel, endpoint, setEndpoint}) {
+function SettingsMenu({zoomLevel, setZoomLevel, endpoint, setEndpoint, theme, setTheme}) {
 
     // Initialize variable and state for settings menu to open
     const [DrawerOpen, setDrawerOpen] = useState(false);
@@ -62,7 +62,7 @@ function SettingsMenu({zoomLevel, setZoomLevel, endpoint, setEndpoint}) {
                     {/* Components inside the settings menu */}
                     <DataEndpoint endpoint={endpoint} setEndpoint={setEndpoint}/>
                     <MapZoom zoomLevel={zoomLevel} setZoomLevel={setZoomLevel}/>
-                    <ColorMode />
+                    <ColorMode theme={theme} setTheme={setTheme}/>
                     
                 </div>
             </Drawer>

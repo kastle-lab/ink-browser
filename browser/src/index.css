@@ -207,9 +207,15 @@ p {
 }
 
 .bottombar {
+  display: flex;
+  align-items: center;
   position: absolute;
   bottom: 0;
   font-size: 12px;
+  height: 20px;
+  overflow: hidden;
+  width: 100%;
+  padding-bottom: 2px;
 }
 
 .bottombar p {
@@ -271,4 +277,8 @@ p {
 
 .settings-menu p {
   padding-top: 30px;
+}
+
+.Dark {
+  background-color: #555;
 }

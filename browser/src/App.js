@@ -12,10 +12,11 @@ function App() {
   const [bottomRight, setBottomRight] = useState(localStorage.getItem('bottomRight') != null ? localStorage.getItem('bottomRight') : 'Empty');
   const [zoomLevel, setZoomLevel] = useState(localStorage.getItem('zoomLevel') != null ? localStorage.getItem('zoomLevel') : 8);
   const [endpoint, setEndpoint] = useState(localStorage.getItem('endpoint') != null ? localStorage.getItem('endpoint') : 'http://localhost:3030/earthquake-usgs/');
+  const [theme, setTheme] = useState(localStorage.getItem('theme') != null ? localStorage.getItem('theme') : 'Light');
 
   return (
 
-    <div className="app">
+    <div className={`app ${theme}`}>
 
       {/* Everything above the quadrants is rendered here  */}
       <Topbar 
@@ -31,6 +32,8 @@ function App() {
       setZoomLevel={setZoomLevel}
       endpoint={endpoint}
       setEndpoint={setEndpoint}
+      theme={theme}
+      setTheme={setTheme}
       ></Topbar>
 
       {/* The quadrants and everything inside is rendere here */}
@@ -41,9 +44,10 @@ function App() {
       bottomRight={bottomRight}
       zoomLevel={zoomLevel}
       endpoint={endpoint}
+      theme={theme}
       ></Layout>
 
-      <Bottombar></Bottombar>
+      <Bottombar theme={theme}></Bottombar>
 
     </div>
 
