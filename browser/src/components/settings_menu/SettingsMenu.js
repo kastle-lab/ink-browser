@@ -8,8 +8,9 @@ import CloseIcon from '@mui/icons-material/Close';
 import DataEndpoint from './DataEndpoint';
 import MapZoom from './MapZoom';
 import ColorMode from './ColorMode';
+import ViewSelection from './ViewSelection'
 
-function SettingsMenu({zoomLevel, setZoomLevel, endpoint, setEndpoint, theme, setTheme}) {
+function SettingsMenu({zoomLevel, setZoomLevel, endpoint, setEndpoint, theme, setTheme, viewSelect, setViewSelect}) {
 
     // Initialize variable and state for settings menu to open
     const [DrawerOpen, setDrawerOpen] = useState(false);
@@ -63,6 +64,7 @@ function SettingsMenu({zoomLevel, setZoomLevel, endpoint, setEndpoint, theme, se
                     <DataEndpoint endpoint={endpoint} setEndpoint={setEndpoint}/>
                     <MapZoom zoomLevel={zoomLevel} setZoomLevel={setZoomLevel}/>
                     <ColorMode theme={theme} setTheme={setTheme}/>
+                    <ViewSelection viewSelect={viewSelect} setViewSelect={setViewSelect}></ViewSelection>
                     
                 </div>
             </Drawer>

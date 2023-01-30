@@ -47,7 +47,6 @@ function Focus({dataFromType}) {
               {dataFromType && dataFromType.map((item) => (
                 <StyledTableRow key={item.entries.o.value}>
 
-                  
                   <StyledTableCell className='table-cell'>
                     {item.entries.p.value}
                   </StyledTableCell>

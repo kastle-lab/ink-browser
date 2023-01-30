@@ -10,6 +10,8 @@ import Select from '@mui/material/Select';
 
 function ViewsSelect(layout) {
 
+    console.log(layout.viewSelect)
+
     // Destructuring the variables passed down from the parent component into their own variables
     const { setTopLeft, setTopRight, setBottomLeft, setBottomRight, topLeft, topRight, bottomLeft, bottomRight } = layout.layout;
 
@@ -108,7 +110,7 @@ function ViewsSelect(layout) {
             </div>
 
             {/* View selectors that are visible when screen is wide enough */}
-            <div className='visible-layout'>
+            <div className={`visible-layout ${layout.viewSelect}`}>
                 <div>
                     {quadrants.map((quadrant) => (
                         <FormControl sx={{ m: 1, minWidth: 100 }} size="small" key={quadrant.id}>

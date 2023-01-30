@@ -55,6 +55,10 @@ body {
   font-size: 40px;
 }
 
+.Hide {
+  display: none;
+}
+
 .visible-layout {
   display: flex;
   align-items: center;
