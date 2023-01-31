@@ -9,9 +9,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
 function ViewsSelect(layout) {
-
-    console.log(layout.viewSelect)
-
+    
     // Destructuring the variables passed down from the parent component into their own variables
     const { setTopLeft, setTopRight, setBottomLeft, setBottomRight, topLeft, topRight, bottomLeft, bottomRight } = layout.layout;
 
@@ -52,11 +50,17 @@ function ViewsSelect(layout) {
         setAnchorEl(null);
     };   
 
+    let hidden = 'Show';
+
+    if (layout.viewSelect === 'Show') {
+        hidden = 'Hide'
+    }
+
     return (
         <>
 
             {/* Menu to change views when screen gets too small */}
-            <div className='views-menu'>
+            <div className={`views-menu ${hidden}`}>
 
                 {/* Button to open menu */}
                 <Tooltip title="Change Views">

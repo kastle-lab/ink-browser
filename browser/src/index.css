@@ -55,16 +55,19 @@ body {
   font-size: 40px;
 }
 
-.Hide {
-  display: none;
-}
-
 .visible-layout {
   display: flex;
   align-items: center;
   justify-content: center;
   padding-top: 5px;
 }
+
+
+
+.views-menu {
+  display: flex;
+}
+
 /* Topbar */
 
 /* Diagram */
@@ -155,6 +158,14 @@ p {
 .views-menu {
   display: none;
   padding-right: 5px;
+}
+
+.Show {
+  display: flex;
+}
+
+.Hide {
+  display: none;
 }
 
 @media screen and (max-width: 782px) {
