@@ -208,10 +208,17 @@ p {
   margin-top: 20px;
 }
 
+/* /////////////////////////////////////// */
+/* Schema Diagram */
 .react-flow__node.myNodes {
-  background:#e5e5ff;
+  background:white;
   width: fit-content;
 }
+
+.react-flow {
+  background: #fff7ed;
+}
+/* ////////////////////////////////////// */
 
 .class-box {
   overflow: auto;
