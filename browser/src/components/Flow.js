@@ -11,6 +11,11 @@ import ReactFlow, {
 import 'reactflow/dist/style.css';
 const QueryEngine = require('@comunica/query-sparql').QueryEngine;
 
+// Store as a string on one line
+// Open end ones mean subclass of
+// Leave annotation in the schema file
+// 
+
 const Flow = ({bindings, setData, setTypeIsPending, endpoint}) => {
 
     // Initialize variables and state
