@@ -99,6 +99,8 @@ function Type({ data, bindings, typeIsPending, setCoordinates, endpoint, setData
       border: 0,
     },
   }));
+
+  // console.log(data[0].entries._root.entries)
   
   return (
 
@@ -120,16 +122,16 @@ function Type({ data, bindings, typeIsPending, setCoordinates, endpoint, setData
               {data && !typeIsPending && data.length === 0 && <TableRow><TableCell>No data</TableCell><TableCell></TableCell></TableRow>}
 
               {data && data.map((entity) => (
-                <StyledTableRow key={entity.entries._root.entries[0][1].id}>
+                <StyledTableRow key={entity.entries._root.entries.length > 1 ? entity.entries._root.entries[1][1].id : entity.entries._root.entries[0][1].id}>
 
 
                   <StyledTableCell className='table-cell'>
-                    <p id={entity.entries._root.entries[0][1].id} onClick={getPoint}>{entity.entries._root.entries[1][1].id}</p>
+                    <p id={entity.entries._root.entries.length > 1 ? entity.entries._root.entries[1][1].id : entity.entries._root.entries[0][1].id} onClick={getPoint}>{entity.entries._root.entries.length > 1 ? entity.entries._root.entries[0][1].id : "kwgr:" + (entity.entries._root.entries[0][1].id).split(".").pop()}</p>
                   </StyledTableCell>
 
 
                   <StyledTableCell className='table-cell'>
-                    <a href={entity.entries._root.entries[0][1].id} target='_blank' rel="noreferrer">
+                    <a href={entity.entries._root.entries.length > 1 ? entity.entries._root.entries[1][1].id : entity.entries._root.entries[0][1].id} target='_blank' rel="noreferrer">
                       <IconButton size='small'>
                         <OpenInNewIcon fontSize='small'></OpenInNewIcon>
                       </IconButton>

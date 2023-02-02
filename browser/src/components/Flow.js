@@ -42,8 +42,8 @@ const Flow = ({bindings, setData, setTypeIsPending, endpoint}) => {
                 const bindingsStream = await myEngine.queryBindings(`
                 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
                 select * where {
-                ?s a <${selected}> ;
-                rdfs:label ?label .
+                ?s a <${selected}> .
+                OPTIONAL {?s rdfs:label ?label }
                 }`, {
                     sources: [endpoint],
                 });
@@ -54,6 +54,8 @@ const Flow = ({bindings, setData, setTypeIsPending, endpoint}) => {
 
                 // Converts the results to an array
                 let query = await(await bindingsStream.toArray())
+
+                console.log(query);
 
                 // Sets the data and sets pending to false
                 setData(query);
