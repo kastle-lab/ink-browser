@@ -16,13 +16,20 @@ const QueryEngine = require('@comunica/query-sparql').QueryEngine;
 // Leave annotation in the schema file
 // 
 
-const Flow = ({bindings, setData, setTypeIsPending, endpoint}) => {
+const Flow = ({bindings, setData, setTypeIsPending, endpoint, connections}) => { 
 
     // Initialize variables and state
     const [nodes, setNodes, onNodesChange] = useNodesState([]);
     const [edges, setEdges, onEdgesChange] = useEdgesState([]);
     const onConnect = useCallback((params) => setEdges((els) => addEdge(params, els)), [setEdges]);
     const [selected, setSelected] = useState();
+
+    // Split up the connections string
+    useEffect(() => {
+        let replace = connections.replace(/["]+/g, '')
+        let done = replace.split(/\r\n/)
+        console.log(done)
+    }, [connections])
 
     // useEffect hook is called when the selected node changes
     useEffect(() => {
@@ -54,8 +61,6 @@ const Flow = ({bindings, setData, setTypeIsPending, endpoint}) => {
 
                 // Converts the results to an array
                 let query = await(await bindingsStream.toArray())
-
-                console.log(query);
 
                 // Sets the data and sets pending to false
                 setData(query);

@@ -18,14 +18,15 @@ function Layout(layout) {
   const [typeIsPending, setTypeIsPending] = useState(false);
   const [coordinates, setCoordinates] = useState([39.781710, -84.063274]);
   const [dataFromType, setDataFromType] = useState();
+  const [connections, setConnections] = useState();
 
   // Set view components equal to a variable
   const type = <div className='full-table' key={'type'}><Type data={data} bindings={bindings} typeIsPending={typeIsPending} setCoordinates={setCoordinates} endpoint={layout.endpoint} setDataFromType={setDataFromType}></Type></div>;
-  const schema = <div className='view-full' key={'schema'}><Schema bindings={bindings} data={data} setData={setData} setTypeIsPending={setTypeIsPending} endpoint={layout.endpoint}></Schema></div>;
+  const schema = <div className='view-full' key={'schema'}><Schema bindings={bindings} data={data} setData={setData} setTypeIsPending={setTypeIsPending} endpoint={layout.endpoint} connections={connections}></Schema></div>;
   const focus = <div className='full-table' key={'focus'}><Focus dataFromType={dataFromType}></Focus></div>;
   const classHierarchy = <div className='quadrant' key={'classHierarchy'}><ClassHierarchy></ClassHierarchy></div>;
   const statistics = <div className='full-table' key={'statistics'}><Statistics></Statistics></div>;
-  const search = <div className='quadrant' key={'search'}><Search bindings={bindings} setBindings={setBindings} endpoint={layout.endpoint}></Search></div>;
+  const search = <div className='quadrant' key={'search'}><Search bindings={bindings} setBindings={setBindings} endpoint={layout.endpoint} setConnections={setConnections}></Search></div>;
   const map = <div className='view-full' key={'map'}><LeafMap coordinates={coordinates} zoomLevel={layout.zoomLevel}></LeafMap></div>;
   const empty = <div className='quadrant' key={'empty'}></div>;
 

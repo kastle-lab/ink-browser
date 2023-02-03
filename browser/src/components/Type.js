@@ -99,8 +99,6 @@ function Type({ data, bindings, typeIsPending, setCoordinates, endpoint, setData
       border: 0,
     },
   }));
-
-  // console.log(data[0].entries._root.entries)
   
   return (
 

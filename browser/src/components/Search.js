@@ -4,7 +4,7 @@ import Button from '@mui/material/Button';
 
 const QueryEngine = require('@comunica/query-sparql').QueryEngine;
 
-function Search({bindings, setBindings, endpoint}) {
+function Search({bindings, setBindings, endpoint, setConnections}) {
 
     // Initialize variables and state
     const [search, setSearch] = useState('');
@@ -19,7 +19,7 @@ function Search({bindings, setBindings, endpoint}) {
 
         // Create new query engine and query the endpoint for classes
         const myEngine = new QueryEngine();
-        const bindingsStream = await myEngine.queryBindings(`
+        let bindingsStream = await myEngine.queryBindings(`
         PREFIX owl: <http://www.w3.org/2002/07/owl#>
         select * where {
         ?s a owl:Class .
@@ -36,6 +36,19 @@ function Search({bindings, setBindings, endpoint}) {
         // Set the data binding to the query results and set pending to false
         setBindings(query);
         setIsPending(false)
+
+        // Query for connections
+        bindingsStream = await myEngine.queryBindings(`
+        prefix opla-sd: <http://ontologydesignpatterns.org/opla-sd#>
+        select ?connections where {
+        ?ont opla-sd:hasConnections ?connections .
+        }`, {
+            sources: [endpoint],
+        });
+
+        query = await (await bindingsStream.toArray())
+
+        setConnections(query[0].entries._root.entries[0][1].id)
         
     }
 
