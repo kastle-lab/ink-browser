@@ -7,6 +7,7 @@ import ReactFlow, {
     Controls,
     MiniMap,
     Background,
+    MarkerType,
 } from 'reactflow';
 import 'reactflow/dist/style.css';
 const QueryEngine = require('@comunica/query-sparql').QueryEngine;
@@ -23,13 +24,6 @@ const Flow = ({bindings, setData, setTypeIsPending, endpoint, connections}) => {
     const [edges, setEdges, onEdgesChange] = useEdgesState([]);
     const onConnect = useCallback((params) => setEdges((els) => addEdge(params, els)), [setEdges]);
     const [selected, setSelected] = useState();
-
-    // Split up the connections string
-    useEffect(() => {
-        let replace = connections.replace(/["]+/g, '')
-        let done = replace.split(/\r\n/)
-        console.log(done)
-    }, [connections])
 
     // useEffect hook is called when the selected node changes
     useEffect(() => {
@@ -83,14 +77,14 @@ const Flow = ({bindings, setData, setTypeIsPending, endpoint, connections}) => {
 
         bindings && bindings.forEach((binding) => {
             const div = Math.ceil(bindings.length / 3)
-            let url = binding.entries._root.entries[0][1].id
-            url = url.split("/").pop()
-            url = url.split("#").pop()
+            let label = binding.entries._root.entries[0][1].id
+            label = label.split("/").pop()
+            label = label.split("#").pop()
 
             boxes.push(
                 {
-                    id: binding.entries._root.entries[0][1].id,
-                    data: { label: url },
+                    id: label,
+                    data: { label: label, link: binding.entries._root.entries[0][1].id },
                     position: { x: x, y: y },
                     className: 'myNodes'
                 }
@@ -106,14 +100,48 @@ const Flow = ({bindings, setData, setTypeIsPending, endpoint, connections}) => {
         })
         setNodes(boxes)
 
-    }, [bindings, setNodes])
+        // Split up the connections string
+        let lines = [];
+
+        if (connections) {
+            let replace = connections.replace(/["]+/g, '');
+            let done = replace.split(/\r\n/);
+            let parsedConnections = done;
+
+            parsedConnections.forEach((connection) => {
+
+                const split = connection.split(" ")
+
+                lines.push(
+                    {
+                        id: connection,
+                        source: split[0],
+                        target: split[2],
+                        label: split[1] !== 'subclass' ? split[1] : '',
+                        animated: true,
+                        type: 'smoothstep',
+                        markerEnd: {
+                            type: split[1] !== 'subclass' ? MarkerType.ArrowClosed : MarkerType.Arrow,
+                            width: 20,
+                            height: 20,
+                            color: '#FF0072',
+                        }
+                    }
+                )
+            })
+
+            setEdges(lines)
+
+        }
+
+    }, [bindings, setNodes, connections, setEdges])
 
     // Called when a node is clicked on to figure out which is selected
     function selectionChange() {
         nodes.forEach((node) => {
             if (node.selected === true) {
 
-                setSelected(node.id)
+                setSelected(node.data.link)
 
             }
 

@@ -211,12 +211,12 @@ p {
 /* /////////////////////////////////////// */
 /* Schema Diagram */
 .react-flow__node.myNodes {
-  background:white;
+  background: #e5e5ff;
   width: fit-content;
 }
 
 .react-flow {
-  background: #fff7ed;
+  background: white;
 }
 /* ////////////////////////////////////// */
 
