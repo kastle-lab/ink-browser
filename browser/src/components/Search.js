@@ -21,8 +21,12 @@ function Search({bindings, setBindings, endpoint, setConnections}) {
         const myEngine = new QueryEngine();
         let bindingsStream = await myEngine.queryBindings(`
         PREFIX owl: <http://www.w3.org/2002/07/owl#>
-        select * where {
-        ?s a owl:Class .
+        PREFIX opla-sd: <http://ontologydesignpatterns.org/opla-sd#>
+        select ?c ?x ?y where {
+        ?c a owl:Class ;
+        opla-sd:entityPosition ?eP .
+        ?eP opla-sd:entityPositionX ?x .
+        ?eP opla-sd:entityPositionY ?y .
         }`, {
             sources: [endpoint],
         });
@@ -32,6 +36,8 @@ function Search({bindings, setBindings, endpoint, setConnections}) {
 
         // Convery the query results to an array
         let query = await (await bindingsStream.toArray())
+
+        console.log(query)
 
         // Set the data binding to the query results and set pending to false
         setBindings(query);
@@ -75,7 +81,7 @@ function Search({bindings, setBindings, endpoint, setConnections}) {
             <ol>
                 {bindings && bindings.map((binding) => (
 
-                    <li key={binding.entries._root.entries[0][1].id} href={binding.entries._root.entries[0][1].id}>{binding.entries._root.entries[0][1].id}</li>
+                    <li key={binding.entries._root.entries[2][1].id} href={binding.entries._root.entries[2][1].id}>{binding.entries._root.entries[2][1].id}</li>
 
                 ))}
             </ol>

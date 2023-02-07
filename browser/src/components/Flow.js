@@ -8,6 +8,7 @@ import ReactFlow, {
     MiniMap,
     Background,
     MarkerType,
+    Position,
 } from 'reactflow';
 import 'reactflow/dist/style.css';
 const QueryEngine = require('@comunica/query-sparql').QueryEngine;
@@ -77,16 +78,27 @@ const Flow = ({bindings, setData, setTypeIsPending, endpoint, connections}) => {
 
         bindings && bindings.forEach((binding) => {
             const div = Math.ceil(bindings.length / 3)
-            let label = binding.entries._root.entries[0][1].id
+            let label = binding.entries._root.entries[2][1].id
             label = label.split("/").pop()
             label = label.split("#").pop()
+
+            let x = binding.entries._root.entries[0][1].id
+            let y = binding.entries._root.entries[1][1].id
+            x = x.split("^^")[0]
+            y = y.split("^^")[0]
+            x = x.replace(/["]+/g, '')
+            y = y.replace(/["]+/g, '')
+            x = parseInt(x)
+            y = parseInt(y)
 
             boxes.push(
                 {
                     id: label,
-                    data: { label: label, link: binding.entries._root.entries[0][1].id },
+                    data: { label: label, link: binding.entries._root.entries[2][1].id },
                     position: { x: x, y: y },
-                    className: 'myNodes'
+                    className: 'myNodes',
+                    sourcePosition: Position.Right,
+                    targetPosition: Position.Left,
                 }
             )
             y+=50
@@ -125,7 +137,7 @@ const Flow = ({bindings, setData, setTypeIsPending, endpoint, connections}) => {
                             width: 20,
                             height: 20,
                             color: '#FF0072',
-                        }
+                        },
                     }
                 )
             })
