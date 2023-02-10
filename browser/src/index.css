@@ -304,3 +304,11 @@ p {
 .Dark {
   background-color: #555;
 }
+
+.customNode {
+  height: 45px;
+  border: 1px solid black;
+  padding: 10px;
+  border-radius: 5px;
+  background: #e5e5ff;
+}

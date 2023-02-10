@@ -11,6 +11,7 @@ import ReactFlow, {
     Position,
 } from 'reactflow';
 import 'reactflow/dist/style.css';
+import customNode from './customNode';
 const QueryEngine = require('@comunica/query-sparql').QueryEngine;
 
 // Store as a string on one line
@@ -18,10 +19,13 @@ const QueryEngine = require('@comunica/query-sparql').QueryEngine;
 // Leave annotation in the schema file
 // 
 
+const initialNodes = [{id: 'custom', type: 'custom', position: {x: 0, y: 0}}]
+const nodeTypes = { custom: customNode };
+
 const Flow = ({bindings, setData, setTypeIsPending, endpoint, connections}) => { 
 
     // Initialize variables and state
-    const [nodes, setNodes, onNodesChange] = useNodesState([]);
+    const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
     const [edges, setEdges, onEdgesChange] = useEdgesState([]);
     const onConnect = useCallback((params) => setEdges((els) => addEdge(params, els)), [setEdges]);
     const [selected, setSelected] = useState();
@@ -94,7 +98,8 @@ const Flow = ({bindings, setData, setTypeIsPending, endpoint, connections}) => {
             boxes.push(
                 {
                     id: label,
-                    data: { label: label, link: binding.entries._root.entries[2][1].id },
+                    type: 'custom',
+                    data: { label: label, link: binding.entries._root.entries[2][1].id, outgoing:{}, incoming:{}},
                     position: { x: x, y: y },
                     className: 'myNodes',
                     sourcePosition: Position.Right,
@@ -144,9 +149,20 @@ const Flow = ({bindings, setData, setTypeIsPending, endpoint, connections}) => {
 
             setEdges(lines)
 
+            console.log(nodes)
+            
         }
 
     }, [bindings, setNodes, connections, setEdges])
+
+    nodes.forEach((node) => {
+        // console.log(node.targetPosition);
+        // node.targetPosition = 'bottom'
+    })
+
+    edges.forEach((edge) => {
+        // console.log(edge)
+    })
 
     // Called when a node is clicked on to figure out which is selected
     function selectionChange() {
@@ -174,9 +190,10 @@ const Flow = ({bindings, setData, setTypeIsPending, endpoint, connections}) => {
                         fitView
                         onSelectionChange={selectionChange}
                         onConnect={onConnect}
+                        nodeTypes={nodeTypes}
                     >
                         <Background/>
-                        <MiniMap zoomable pannable nodeColor={'#999'} position={'top-right'}/>
+                        {/* <MiniMap zoomable pannable nodeColor={'#999'} position={'top-right'}/> */}
                         <Controls />
                     </ReactFlow>
                 </div>
