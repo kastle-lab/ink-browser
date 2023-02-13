@@ -129,14 +129,56 @@ const Flow = ({bindings, setData, setTypeIsPending, endpoint, connections}) => {
 
                 const split = connection.split(" ")
 
+                let sourceNode;
+                let targetNode;
+
+                nodes.forEach((node) => {
+                    if (split[0] === node.id) {
+                        sourceNode = node;
+                    }
+
+                    if (split[2] === node.id) {
+                        targetNode = node;
+                    }
+                })
+
+                let sourceHandle;
+                let targetHandle;
+
+                if (sourceNode && targetNode) {
+
+                    if (sourceNode.position.y > targetNode.position.y && sourceNode.position.x === targetNode.position.x) {
+                        sourceHandle = "TopOut"
+                        targetHandle = "BottomIn"
+                    }
+
+                    if (sourceNode.position.y < targetNode.position.y && sourceNode.position.x === targetNode.position.x) {
+                        sourceHandle = "BottomOut"
+                        targetHandle = "TopIn"
+                    }
+
+                    if (sourceNode.position.x < targetNode.position.x) {
+                        sourceHandle = "RightOut"
+                        targetHandle = "LeftIn"
+                    }
+
+                    if ((sourceNode.position.y - targetNode.position.y) < -350) {
+                        sourceHandle = "LeftOut"
+                        targetHandle = "LeftIn"
+                    }
+
+                }
+
                 lines.push(
                     {
                         id: connection,
                         source: split[0],
                         target: split[2],
+                        sourceHandle: sourceHandle,
+                        targetHandle: targetHandle,
                         label: split[1] !== 'subclass' ? split[1] : '',
                         animated: true,
-                        type: 'smoothstep',
+                        // type: 'smoothstep',
                         markerEnd: {
                             type: split[1] !== 'subclass' ? MarkerType.ArrowClosed : MarkerType.Arrow,
                             width: 20,
@@ -148,21 +190,10 @@ const Flow = ({bindings, setData, setTypeIsPending, endpoint, connections}) => {
             })
 
             setEdges(lines)
-
-            console.log(nodes)
             
         }
 
     }, [bindings, setNodes, connections, setEdges])
-
-    nodes.forEach((node) => {
-        // console.log(node.targetPosition);
-        // node.targetPosition = 'bottom'
-    })
-
-    edges.forEach((edge) => {
-        // console.log(edge)
-    })
 
     // Called when a node is clicked on to figure out which is selected
     function selectionChange() {

@@ -3,19 +3,17 @@ import { Handle, Position } from 'reactflow';
 
 function customNode({data}) {
 
-    console.log(data)
-
   return (
     <div className='customNode'>
-        <Handle id="in" type='target' position={Position.Top} />
-        <Handle id='out' type='source' position={Position.Top} />
-        <Handle id="in" type='target' position={Position.Right} />
-        <Handle id='out' type='source' position={Position.Right} />
-        <Handle id="in" type='target' position={Position.Bottom} />
-        <Handle id='out' type='source' position={Position.Bottom} />
-        <Handle id="in" type='target' position={Position.Left} />
-        <Handle id='out' type='source' position={Position.Left} />
-        <p>{data.label}</p>
+        <Handle id="TopIn" type='target' position={Position.Top} style={{}}/>
+        <Handle id='TopOut' type='source' position={Position.Top} />
+        <Handle id="RightIn" type='target' position={Position.Right} />
+        <Handle id='RightOut' type='source' position={Position.Right} />
+        <Handle id="BottomIn" type='target' position={Position.Bottom} />
+        <Handle id='BottomOut' type='source' position={Position.Bottom} />
+        <Handle id="LeftIn" type='target' position={Position.Left} />
+        <Handle id='LeftOut' type='source' position={Position.Left} />
+        {data && <p>{data.label}</p>}
     </div>
   )
 }
