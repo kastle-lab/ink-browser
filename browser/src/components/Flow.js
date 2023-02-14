@@ -13,18 +13,12 @@ import 'reactflow/dist/style.css';
 import customNode from './customNode';
 const QueryEngine = require('@comunica/query-sparql').QueryEngine;
 
-// Store as a string on one line
-// Open end ones mean subclass of
-// Leave annotation in the schema file
-// 
-
-const initialNodes = [{id: 'custom', type: 'custom', position: {x: 0, y: 0}}]
 const nodeTypes = { custom: customNode };
 
 const Flow = ({bindings, setData, setTypeIsPending, endpoint, connections}) => { 
 
     // Initialize variables and state
-    const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
+    const [nodes, setNodes, onNodesChange] = useNodesState([]);
     const [edges, setEdges, onEdgesChange] = useEdgesState([]);
     const onConnect = useCallback((params) => setEdges((els) => addEdge(params, els)), [setEdges]);
     const [selected, setSelected] = useState();
@@ -164,8 +158,6 @@ const Flow = ({bindings, setData, setTypeIsPending, endpoint, connections}) => {
                         sourceHandle = "LeftOut"
                         targetHandle = "LeftIn"
                     }
-
-                    
 
                 }
 
