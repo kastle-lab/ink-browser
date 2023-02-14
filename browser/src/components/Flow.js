@@ -5,7 +5,6 @@ import ReactFlow, {
     useEdgesState,
     addEdge,
     Controls,
-    MiniMap,
     Background,
     MarkerType,
     Position,
@@ -76,12 +75,8 @@ const Flow = ({bindings, setData, setTypeIsPending, endpoint, connections}) => {
     // Logic for setting up the node diagram
     useEffect(() => {
         let boxes = []
-        let y = 0
-        let x = 250
-        let loop = 0
 
         bindings && bindings.forEach((binding) => {
-            const div = Math.ceil(bindings.length / 3)
             let label = binding.entries._root.entries[2][1].id
             label = label.split("/").pop()
             label = label.split("#").pop()
@@ -106,13 +101,6 @@ const Flow = ({bindings, setData, setTypeIsPending, endpoint, connections}) => {
                     targetPosition: Position.Left,
                 }
             )
-            y+=50
-            loop++
-
-            if (loop === div || loop === (div *2)) {
-                x+=250
-                y = 0
-            }
 
         })
         setNodes(boxes)
@@ -147,6 +135,16 @@ const Flow = ({bindings, setData, setTypeIsPending, endpoint, connections}) => {
 
                 if (sourceNode && targetNode) {
 
+                    if ((sourceNode.position.x - targetNode.position.x) <= 100 && sourceNode.position.y !== targetNode.position.y) {
+                        sourceHandle = "TopOut"
+                        targetHandle = "BottomIn"
+                    }
+
+                    if ((sourceNode.position.x - targetNode.position.x) <= 100 && sourceNode.position.y !== targetNode.position.y) {
+                        sourceHandle = "TopOut"
+                        targetHandle = "BottomIn"
+                    }
+
                     if (sourceNode.position.y > targetNode.position.y && sourceNode.position.x === targetNode.position.x) {
                         sourceHandle = "TopOut"
                         targetHandle = "BottomIn"
@@ -162,10 +160,12 @@ const Flow = ({bindings, setData, setTypeIsPending, endpoint, connections}) => {
                         targetHandle = "LeftIn"
                     }
 
-                    if ((sourceNode.position.y - targetNode.position.y) < -350) {
+                    if ((sourceNode.position.y - targetNode.position.y) < -100) {
                         sourceHandle = "LeftOut"
                         targetHandle = "LeftIn"
                     }
+
+                    
 
                 }
 
