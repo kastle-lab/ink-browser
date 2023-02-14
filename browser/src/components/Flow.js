@@ -159,6 +159,11 @@ const Flow = ({bindings, setData, setTypeIsPending, endpoint, connections}) => {
                         targetHandle = "LeftIn"
                     }
 
+                    if ((sourceNode.position.y - targetNode.position.y) <= -200 && (sourceNode.position.y - targetNode.position.y) >= -400) {
+                        sourceHandle = "LeftOut"
+                        targetHandle = "TopIn"
+                    }
+
                 }
 
                 lines.push(
@@ -169,13 +174,13 @@ const Flow = ({bindings, setData, setTypeIsPending, endpoint, connections}) => {
                         sourceHandle: sourceHandle,
                         targetHandle: targetHandle,
                         label: split[1] !== 'subclass' ? split[1] : '',
-                        animated: true,
+                        // animated: true,
                         // type: 'smoothstep',
                         markerEnd: {
                             type: split[1] !== 'subclass' ? MarkerType.ArrowClosed : MarkerType.Arrow,
-                            width: 20,
-                            height: 20,
-                            color: '#FF0072',
+                            width: 40,
+                            height: 40,
+                            color: '#000000',
                         },
                     }
                 )
