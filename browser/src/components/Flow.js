@@ -1,94 +1,56 @@
 import React, { useEffect, useCallback, useState } from 'react';
-import ReactFlow, {
-    ReactFlowProvider,
-    useNodesState,
-    useEdgesState,
-    addEdge,
-    Controls,
-    Background,
-    MarkerType,
-    Position,
-} from 'reactflow';
+import ReactFlow, { ReactFlowProvider, useNodesState, useEdgesState, addEdge, Controls, Background, MarkerType, Position } from 'reactflow';
 import 'reactflow/dist/style.css';
 import customNode from './customNode';
-const QueryEngine = require('@comunica/query-sparql').QueryEngine;
 
+const QueryEngine = require('@comunica/query-sparql').QueryEngine;
 const nodeTypes = { custom: customNode };
 
-const Flow = ({bindings, setData, setTypeIsPending, endpoint, connections}) => { 
+const Flow = ({ bindings, setData, setTypeIsPending, endpoint, connections }) => {
 
     // Initialize variables and state
     const [nodes, setNodes, onNodesChange] = useNodesState([]);
     const [edges, setEdges, onEdgesChange] = useEdgesState([]);
-    const onConnect = useCallback((params) => setEdges((els) => addEdge(params, els)), [setEdges]);
     const [selected, setSelected] = useState();
+    const onConnect = useCallback((params) => setEdges((els) => addEdge(params, els)), [setEdges]);
 
-    // useEffect hook is called when the selected node changes
-    useEffect(() => {
-        
-        if (selected) {
+    function splitLabel(label) {
+        label = label.split("/").pop()
+        label = label.split("#").pop()
+        return label;
+    }
 
-            // Data is set to empty and pending is set to true
-            setData([])
-            setTypeIsPending(true)
+    function splitNodeCoordinates(x, y) {
+        x = x.split("^^")[0]
+        y = y.split("^^")[0]
+        x = x.replace(/["]+/g, '')
+        y = y.replace(/["]+/g, '')
+        x = parseInt(x)
+        y = parseInt(y)
 
-            // function for querying data when a node is clicked
-            async function engine() {
+        return [x, y]
+    }
 
-                const myEngine = new QueryEngine();
+    const prepareNodes = useCallback(() => {
 
-                // Query that is ran
-                const bindingsStream = await myEngine.queryBindings(`
-                prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-                select * where {
-                ?s a <${selected}> .
-                OPTIONAL {?s rdfs:label ?label }
-                }`, {
-                    sources: [endpoint],
-                });
-
-                bindingsStream.on('error', (error) => {
-                    console.error(error);
-                });
-
-                // Converts the results to an array
-                let query = await(await bindingsStream.toArray())
-
-                // Sets the data and sets pending to false
-                setData(query);
-                setTypeIsPending(false)
-
-            }
-
-            engine()
-
-        }
-
-    }, [selected, endpoint, setData, setTypeIsPending])
-
-    // Logic for setting up the node diagram
-    useEffect(() => {
         let boxes = []
 
         bindings && bindings.forEach((binding) => {
+
             let label = binding.entries._root.entries[2][1].id
-            label = label.split("/").pop()
-            label = label.split("#").pop()
+            label = splitLabel(label)
 
             let x = binding.entries._root.entries[0][1].id
             let y = binding.entries._root.entries[1][1].id
-            x = x.split("^^")[0]
-            y = y.split("^^")[0]
-            x = x.replace(/["]+/g, '')
-            y = y.replace(/["]+/g, '')
-            x = parseInt(x)
-            y = parseInt(y)
+            const coordinates = splitNodeCoordinates(x, y);
+            x = coordinates[0]
+            y = coordinates[1]
 
             boxes.push(
                 {
                     id: label,
                     type: 'custom',
-                    data: { label: label, link: binding.entries._root.entries[2][1].id, outgoing:{}, incoming:{}},
+                    data: { label: label, link: binding.entries._root.entries[2][1].id, outgoing: {}, incoming: {} },
                     position: { x: x, y: y },
                     className: 'myNodes',
                     sourcePosition: Position.Right,
@@ -97,15 +59,74 @@ const Flow = ({bindings, setData, setTypeIsPending, endpoint, connections}) => {
             )
 
         })
+
         setNodes(boxes)
+
+    }, [bindings, setNodes])
+
+    const removeJunkFromConnections = useCallback(() => {
+        const removed = connections.replace(/["]+/g, '');
+        const split = removed.split(/\r\n/);
+
+        return split
+    }, [connections])
+
+    function calculateArrows(sourceNode, targetNode) {
+
+        let sourceHandle;
+        let targetHandle;
+
+        if (sourceNode && targetNode) {
+
+            if ((sourceNode.position.x - targetNode.position.x) <= 100 && sourceNode.position.y !== targetNode.position.y) {
+                sourceHandle = "TopOut"
+                targetHandle = "BottomIn"
+            }
+
+            if ((sourceNode.position.x - targetNode.position.x) <= 100 && sourceNode.position.y !== targetNode.position.y) {
+                sourceHandle = "TopOut"
+                targetHandle = "BottomIn"
+            }
+
+            if (sourceNode.position.y > targetNode.position.y && sourceNode.position.x === targetNode.position.x) {
+                sourceHandle = "TopOut"
+                targetHandle = "BottomIn"
+            }
+
+            if (sourceNode.position.y < targetNode.position.y && sourceNode.position.x === targetNode.position.x) {
+                sourceHandle = "BottomOut"
+                targetHandle = "TopIn"
+            }
+
+            if (sourceNode.position.x < targetNode.position.x) {
+                sourceHandle = "RightOut"
+                targetHandle = "LeftIn"
+            }
+
+            if ((sourceNode.position.y - targetNode.position.y) < -100) {
+                sourceHandle = "LeftOut"
+                targetHandle = "LeftIn"
+            }
+
+            if ((sourceNode.position.y - targetNode.position.y) <= -200 && (sourceNode.position.y - targetNode.position.y) >= -400) {
+                sourceHandle = "LeftOut"
+                targetHandle = "TopIn"
+            }
+
+        }
+
+        return [sourceHandle, targetHandle];
+
+    }
+
+    const prepareEdges = useCallback(() => {
 
         // Split up the connections string
         let lines = [];
 
         if (connections) {
-            let replace = connections.replace(/["]+/g, '');
-            let done = replace.split(/\r\n/);
-            let parsedConnections = done;
+            
+            const parsedConnections = removeJunkFromConnections();
 
             parsedConnections.forEach((connection) => {
 
@@ -124,47 +145,10 @@ const Flow = ({bindings, setData, setTypeIsPending, endpoint, connections}) => {
                     }
                 })
 
-                let sourceHandle;
-                let targetHandle;
-
-                if (sourceNode && targetNode) {
-
-                    if ((sourceNode.position.x - targetNode.position.x) <= 100 && sourceNode.position.y !== targetNode.position.y) {
-                        sourceHandle = "TopOut"
-                        targetHandle = "BottomIn"
-                    }
-
-                    if ((sourceNode.position.x - targetNode.position.x) <= 100 && sourceNode.position.y !== targetNode.position.y) {
-                        sourceHandle = "TopOut"
-                        targetHandle = "BottomIn"
-                    }
-
-                    if (sourceNode.position.y > targetNode.position.y && sourceNode.position.x === targetNode.position.x) {
-                        sourceHandle = "TopOut"
-                        targetHandle = "BottomIn"
-                    }
-
-                    if (sourceNode.position.y < targetNode.position.y && sourceNode.position.x === targetNode.position.x) {
-                        sourceHandle = "BottomOut"
-                        targetHandle = "TopIn"
-                    }
-
-                    if (sourceNode.position.x < targetNode.position.x) {
-                        sourceHandle = "RightOut"
-                        targetHandle = "LeftIn"
-                    }
-
-                    if ((sourceNode.position.y - targetNode.position.y) < -100) {
-                        sourceHandle = "LeftOut"
-                        targetHandle = "LeftIn"
-                    }
-
-                    if ((sourceNode.position.y - targetNode.position.y) <= -200 && (sourceNode.position.y - targetNode.position.y) >= -400) {
-                        sourceHandle = "LeftOut"
-                        targetHandle = "TopIn"
-                    }
-
-                }
+                const handles = calculateArrows(sourceNode, targetNode)
+                const sourceHandle = handles[0];
+                const targetHandle = handles[1];
+                
 
                 lines.push(
                     {
@@ -174,8 +158,6 @@ const Flow = ({bindings, setData, setTypeIsPending, endpoint, connections}) => {
                         sourceHandle: sourceHandle,
                         targetHandle: targetHandle,
                         label: split[1] !== 'subclass' ? split[1] : '',
-                        // animated: true,
-                        // type: 'smoothstep',
                         markerEnd: {
                             type: split[1] !== 'subclass' ? MarkerType.ArrowClosed : MarkerType.Arrow,
                             width: 40,
@@ -187,10 +169,46 @@ const Flow = ({bindings, setData, setTypeIsPending, endpoint, connections}) => {
             })
 
             setEdges(lines)
-            
+
         }
 
-    }, [bindings, setNodes, connections, setEdges])
+    }, [connections, nodes, removeJunkFromConnections, setEdges])
+
+    // function for querying data when a node is clicked
+    const queryClickedNode = useCallback(async () => {
+
+        if (selected) {
+
+            // Data is set to empty and pending is set to true
+            setData([])
+            setTypeIsPending(true)
+
+            const myEngine = new QueryEngine();
+
+            // Query that is ran
+            const bindingsStream = await myEngine.queryBindings(`
+            prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+            select * where {
+            ?s a <${selected}> .
+            OPTIONAL {?s rdfs:label ?label }
+            }`, {
+                sources: [endpoint],
+            });
+
+            bindingsStream.on('error', (error) => {
+                console.error(error);
+            });
+
+            // Converts the results to an array
+            let query = await (await bindingsStream.toArray())
+
+            // Sets the data and sets pending to false
+            setData(query);
+            setTypeIsPending(false)
+
+        }
+
+    }, [endpoint, selected, setData, setTypeIsPending])
 
     // Called when a node is clicked on to figure out which is selected
     function selectionChange() {
@@ -204,8 +222,23 @@ const Flow = ({bindings, setData, setTypeIsPending, endpoint, connections}) => {
         })
     }
 
-    return (
+    // useEffect hook is called when the selected node changes
+    useEffect(() => {
 
+        queryClickedNode();
+
+    }, [selected, queryClickedNode])
+
+    // Logic for setting up the node diagram
+    useEffect(() => {
+
+        prepareNodes();
+
+        prepareEdges();
+
+    }, [bindings, connections, prepareEdges, prepareNodes])
+
+    return (
         // React flow Schema Diagram
         <div className="providerflow">
             <ReactFlowProvider>
@@ -220,8 +253,7 @@ const Flow = ({bindings, setData, setTypeIsPending, endpoint, connections}) => {
                         onConnect={onConnect}
                         nodeTypes={nodeTypes}
                     >
-                        <Background/>
-                        {/* <MiniMap zoomable pannable nodeColor={'#999'} position={'top-right'}/> */}
+                        <Background />
                         <Controls />
                     </ReactFlow>
                 </div>
