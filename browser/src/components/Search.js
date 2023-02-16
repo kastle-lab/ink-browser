@@ -9,16 +9,11 @@ function Search({bindings, setBindings, endpoint, setConnections}) {
     // Initialize variables and state
     const [search, setSearch] = useState('');
     const [isPening, setIsPending] = useState(false)
+    const myEngine = new QueryEngine();
 
-    // Function that is called on button click
-    async function engine() {
-
-        // Sets the search box to empty string and sets search pending to true
-        setSearch('');
-        setIsPending(true)
+    async function queryForNodes() {
 
         // Create new query engine and query the endpoint for classes
-        const myEngine = new QueryEngine();
         let bindingsStream = await myEngine.queryBindings(`
         PREFIX owl: <http://www.w3.org/2002/07/owl#>
         PREFIX opla-sd: <http://ontologydesignpatterns.org/opla-sd#>
@@ -35,14 +30,17 @@ function Search({bindings, setBindings, endpoint, setConnections}) {
         });
 
         // Convery the query results to an array
-        let query = await (await bindingsStream.toArray())
+        let query = await bindingsStream.toArray()
 
         // Set the data binding to the query results and set pending to false
         setBindings(query);
-        setIsPending(false)
+
+    }
+
+    async function queryForConnections() {
 
         // Query for connections
-        bindingsStream = await myEngine.queryBindings(`
+        let bindingsStream = await myEngine.queryBindings(`
         prefix opla-sd: <http://ontologydesignpatterns.org/opla-sd#>
         select ?connections where {
         ?ont opla-sd:hasConnections ?connections .
@@ -50,9 +48,24 @@ function Search({bindings, setBindings, endpoint, setConnections}) {
             sources: [endpoint],
         });
 
-        query = await (await bindingsStream.toArray())
+        let query = await bindingsStream.toArray()
 
         setConnections(query[0].entries._root.entries[0][1].id)
+
+    }
+
+    // Function that is called on button click
+    async function onSearch() {
+
+        // Sets the search box to empty string and sets search pending to true
+        setSearch('');
+        setIsPending(true);
+
+        await queryForNodes();
+        await queryForConnections();
+
+
+        setIsPending(false);
         
     }
 
@@ -69,7 +82,7 @@ function Search({bindings, setBindings, endpoint, setConnections}) {
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
                 />
-                <Button onClick={engine} variant="contained" >Search</Button>
+                <Button onClick={onSearch} variant="contained" >Search</Button>
             </div>
         </div>
 

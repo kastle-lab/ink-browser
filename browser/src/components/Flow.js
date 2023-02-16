@@ -200,7 +200,7 @@ const Flow = ({ bindings, setData, setTypeIsPending, endpoint, connections }) =>
             });
 
             // Converts the results to an array
-            let query = await (await bindingsStream.toArray())
+            let query = await bindingsStream.toArray()
 
             // Sets the data and sets pending to false
             setData(query);
