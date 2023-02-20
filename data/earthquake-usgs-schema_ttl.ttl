@@ -1,0 +1,371 @@
+@prefix : <http://stko-kwg.geog.ucsb.edu/lod/ontology/earthquake-usgs/> .
+@prefix geo: <http://www.opengis.net/ont/geosparql#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix kwgr: <http://stko-kwg.geog.ucsb.edu/lod/resource/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sosa: <http://www.w3.org/ns/sosa/> .
+@prefix time: <http://www.w3.org/2006/time#> .
+@prefix kwg-ont: <http://stko-kwg.geog.ucsb.edu/lod/ontology/> .
+@prefix opla-sd: <http://ontologydesignpatterns.org/opla-sd#> .
+
+<http://stko-kwg.geog.ucsb.edu/lod/ontology/earthquake-usgs/> a owl:Ontology ;
+opla-sd:hasConnections """EarthquakeObservableProperty subclass ObservableProperty
+EarthquakeObservation observedProperty EarthquakeObservableProperty
+EarthquakeObservation subclass Observation
+EarthquakeObservation hasSimpleResult literal
+EarthquakeObservationCollection hasMember EarthquakeObservation
+EarthquakeObservationCollection subclass ObservationCollection
+EarthquakeObservationCollection hasFeatureOfInterest Earthquake
+EarthquakeObservationCollection phenomenonTime Instant
+Earthquake subclass FeatureOfInterest
+Earthquake subclass Hazard
+Earthquake subclass Feature
+Earthquake FeatureOfInterestOf EarthquakeObservationCollection
+Earthquake sfWithin AdministrativeRegion_3
+Earthquake hasTemporalScope Instant
+Earthquake hasGeometry;hasDefaultGeometry Point
+Point subclass Geometry
+Instant subclass TemporalEntity
+Instant inXSDDateTime dateTime"""^^xsd:string .
+# 
+# 
+# #################################################################
+# #
+# #    Datatypes
+# #
+# #################################################################
+# 
+# 
+# http://www.opengis.net/ont/geosparql#wktLiteral
+
+geo:wktLiteral a rdfs:Datatype .
+# 
+# 
+# 
+# #################################################################
+# #
+# #    Object Properties
+# #
+# #################################################################
+# 
+# 
+# http://stko-kwg.geog.ucsb.edu/lod/ontology/sfWithin
+
+kwg-ont:sfWithin a owl:ObjectProperty ;
+	rdfs:comment "KWG's spatial within relation" ;
+	rdfs:label "within (simple feature)" .
+# 
+# http://www.opengis.net/ont/geosparql#hasDefaultGeometry
+
+geo:hasDefaultGeometry a owl:ObjectProperty .
+# 
+# http://www.opengis.net/ont/geosparql#hasGeometry
+
+geo:hasGeometry a owl:ObjectProperty .
+# 
+# http://www.w3.org/ns/sosa/hasFeatureOfInterest
+
+sosa:hasFeatureOfInterest a owl:ObjectProperty ;
+	owl:inverseOf sosa:isFeatureOfInterestOf .
+# 
+# http://www.w3.org/ns/sosa/hasMember
+
+sosa:hasMember a owl:ObjectProperty .
+# 
+# http://www.w3.org/ns/sosa/isFeatureOfInterestOf
+
+sosa:isFeatureOfInterestOf a owl:ObjectProperty .
+# 
+# http://www.w3.org/ns/sosa/observedProperty
+
+sosa:observedProperty a owl:ObjectProperty .
+# 
+# http://www.w3.org/ns/sosa/phenomenonTime
+
+sosa:phenomenonTime a owl:ObjectProperty .
+# 
+# 
+# 
+# #################################################################
+# #
+# #    Data properties
+# #
+# #################################################################
+# 
+# 
+# http://www.opengis.net/ont/geosparql#asWKT
+
+geo:asWKT a owl:DatatypeProperty .
+# 
+# http://www.w3.org/2006/time#inXSDDateTime
+
+time:inXSDDateTime a owl:DatatypeProperty .
+# 
+# http://www.w3.org/ns/sosa/hasSimpleResult
+
+sosa:hasSimpleResult a owl:DatatypeProperty .
+# 
+# 
+# 
+# #################################################################
+# #
+# #    Classes
+# #
+# #################################################################
+# 
+# 
+# http://stko-kwg.geog.ucsb.edu/lod/ontology/AdministrativeRegion
+
+kwg-ont:AdministrativeRegion a owl:Class ;
+	rdfs:subClassOf kwg-ont:Region , geo:Feature ;
+	rdfs:comment "Source - Global Administrative area database (GADM) (https://gadm.org/data.html)" ;
+	rdfs:label "Administrative Region" ;
+	opla-sd:entityPosition [opla-sd:entityPositionX "-200"^^xsd:integer ; opla-sd:entityPositionY "0"^^xsd:integer ] .
+# 
+# http://stko-kwg.geog.ucsb.edu/lod/ontology/AdministrativeRegion_3
+
+kwg-ont:AdministrativeRegion_3 a owl:Class ;
+	rdfs:subClassOf kwg-ont:AdministrativeRegion ;
+	rdfs:comment "Administrative Region Level 3 - county/district/equivalent level" , "Source - Global Administrative area database (GADM) (https://gadm.org/data.html)" ;
+	rdfs:label "Administrative Region Level 3" ;
+	opla-sd:entityPosition [opla-sd:entityPositionX "150"^^xsd:integer ; opla-sd:entityPositionY "600"^^xsd:integer ] .
+# 
+# http://stko-kwg.geog.ucsb.edu/lod/ontology/Earthquake
+
+kwg-ont:Earthquake a owl:Class ;
+	rdfs:subClassOf kwg-ont:Hazard , geo:Feature , sosa:FeatureOfInterest ;
+	rdfs:comment "Source - USGS (https://earthquake.usgs.gov/earthquakes/search/)" ;
+	rdfs:label "Earthquake" ;
+	opla-sd:entityPosition [opla-sd:entityPositionX "100"^^xsd:integer ; opla-sd:entityPositionY "400"^^xsd:integer ] .
+# 
+# http://stko-kwg.geog.ucsb.edu/lod/ontology/EarthquakeObservableProperty
+
+kwg-ont:EarthquakeObservableProperty a owl:Class ;
+	rdfs:subClassOf sosa:ObservableProperty ;
+	rdfs:comment "Source - USGS (https://earthquake.usgs.gov/earthquakes/search/)" ;
+	rdfs:label "Earthquake Observable Property" ;
+	opla-sd:entityPosition [opla-sd:entityPositionX "0"^^xsd:integer ; opla-sd:entityPositionY "0"^^xsd:integer ] .
+# 
+# http://stko-kwg.geog.ucsb.edu/lod/ontology/EarthquakeObservationCollection
+
+kwg-ont:EarthquakeObservationCollection a owl:Class ;
+	rdfs:subClassOf sosa:ObservationCollection ;
+	rdfs:comment "Source - USGS (https://earthquake.usgs.gov/earthquakes/search/)" ;
+	rdfs:label "Earthquake Observation Collection" ;
+	opla-sd:entityPosition [opla-sd:entityPositionX "0"^^xsd:integer ; opla-sd:entityPositionY "200"^^xsd:integer ] .
+# 
+# http://stko-kwg.geog.ucsb.edu/lod/ontology/Hazard
+
+kwg-ont:Hazard a owl:Class ;
+	rdfs:comment "The general hazard event class in KWG" ;
+	rdfs:label "Hazard" ;
+	opla-sd:entityPosition [opla-sd:entityPositionX "300"^^xsd:integer ; opla-sd:entityPositionY "400"^^xsd:integer ] .
+# 
+# http://stko-kwg.geog.ucsb.edu/lod/ontology/Region
+
+kwg-ont:Region a owl:Class ;
+	opla-sd:entityPosition [opla-sd:entityPositionX "-200"^^xsd:integer ; opla-sd:entityPositionY "100"^^xsd:integer ] .
+# 
+# http://www.opengis.net/ont/geosparql#Feature
+
+geo:Feature a owl:Class ;
+	opla-sd:entityPosition [opla-sd:entityPositionX "300"^^xsd:integer ; opla-sd:entityPositionY "500"^^xsd:integer ] .
+# 
+# http://www.opengis.net/ont/geosparql#Geometry
+
+geo:Geometry a owl:Class ;
+	opla-sd:entityPosition [opla-sd:entityPositionX "300"^^xsd:integer ; opla-sd:entityPositionY "700"^^xsd:integer ] .
+# 
+# http://www.opengis.net/ont/sf#Point
+
+<http://www.opengis.net/ont/sf#Point> a owl:Class ;
+	rdfs:subClassOf geo:Geometry , _:genid1 ;
+	opla-sd:entityPosition [opla-sd:entityPositionX "75"^^xsd:integer ; opla-sd:entityPositionY "700"^^xsd:integer ] .
+
+_:genid1 a owl:Restriction ;
+	owl:onProperty geo:asWKT ;
+	owl:allValuesFrom geo:wktLiteral .
+# 
+# http://www.w3.org/2006/time#Instant
+
+time:Instant a owl:Class ;
+	rdfs:subClassOf time:TemporalEntity , _:genid2 ;
+	opla-sd:entityPosition [opla-sd:entityPositionX "0"^^xsd:integer ; opla-sd:entityPositionY "800"^^xsd:integer ] .
+
+_:genid2 a owl:Restriction ;
+	owl:onProperty time:inXSDDateTime ;
+	owl:allValuesFrom xsd:dateTime .
+# 
+# http://www.w3.org/2006/time#TemporalEntity
+
+time:TemporalEntity a owl:Class ;
+	opla-sd:entityPosition [opla-sd:entityPositionX "300"^^xsd:integer ; opla-sd:entityPositionY "800"^^xsd:integer ] .
+# 
+# http://www.w3.org/ns/sosa/EarthquakeObservation
+
+sosa:EarthquakeObservation a owl:Class ;
+	rdfs:subClassOf sosa:Observation ;
+	rdfs:comment "Source - USGS (https://earthquake.usgs.gov/earthquakes/search/)" ;
+	rdfs:label "Earthquake Observation" ;
+	opla-sd:entityPosition [opla-sd:entityPositionX "0"^^xsd:integer ; opla-sd:entityPositionY "100"^^xsd:integer ] .
+# 
+# http://www.w3.org/ns/sosa/FeatureOfInterest
+
+sosa:FeatureOfInterest a owl:Class ;
+	opla-sd:entityPosition [opla-sd:entityPositionX "300"^^xsd:integer ; opla-sd:entityPositionY "300"^^xsd:integer ] .
+# 
+# http://www.w3.org/ns/sosa/ObservableProperty
+
+sosa:ObservableProperty a owl:Class ;
+	opla-sd:entityPosition [opla-sd:entityPositionX "300"^^xsd:integer ; opla-sd:entityPositionY "0"^^xsd:integer ] .
+# 
+# http://www.w3.org/ns/sosa/Observation
+
+sosa:Observation a owl:Class ;
+	opla-sd:entityPosition [opla-sd:entityPositionX "300"^^xsd:integer ; opla-sd:entityPositionY "100"^^xsd:integer ] .
+# 
+# http://www.w3.org/ns/sosa/ObservationCollection
+
+sosa:ObservationCollection a owl:Class ;
+	opla-sd:entityPosition [opla-sd:entityPositionX "300"^^xsd:integer ; opla-sd:entityPositionY "200"^^xsd:integer ] .
+# 
+# 
+# 
+# #################################################################
+# #
+# #    Individuals
+# #
+# #################################################################
+# 
+# 
+# http://stko-kwg.geog.ucsb.edu/lod/resource/earthquakeObservableProperty.depth
+
+kwgr:earthquakeObservableProperty.depth a owl:NamedIndividual , kwg-ont:EarthquakeObservableProperty .
+# 
+# http://stko-kwg.geog.ucsb.edu/lod/resource/earthquakeObservableProperty.depthError
+
+kwgr:earthquakeObservableProperty.depthError a owl:NamedIndividual , kwg-ont:EarthquakeObservableProperty .
+# 
+# http://stko-kwg.geog.ucsb.edu/lod/resource/earthquakeObservableProperty.dmin
+
+kwgr:earthquakeObservableProperty.dmin a owl:NamedIndividual , kwg-ont:EarthquakeObservableProperty .
+# 
+# http://stko-kwg.geog.ucsb.edu/lod/resource/earthquakeObservableProperty.gap
+
+kwgr:earthquakeObservableProperty.gap a owl:NamedIndividual , kwg-ont:EarthquakeObservableProperty .
+# 
+# http://stko-kwg.geog.ucsb.edu/lod/resource/earthquakeObservableProperty.horizontalError
+
+kwgr:earthquakeObservableProperty.horizontalError a owl:NamedIndividual , kwg-ont:EarthquakeObservableProperty .
+# 
+# http://stko-kwg.geog.ucsb.edu/lod/resource/earthquakeObservableProperty.locationSource
+
+kwgr:earthquakeObservableProperty.locationSource a owl:NamedIndividual , kwg-ont:EarthquakeObservableProperty .
+# 
+# http://stko-kwg.geog.ucsb.edu/lod/resource/earthquakeObservableProperty.mag
+
+kwgr:earthquakeObservableProperty.mag a owl:NamedIndividual , kwg-ont:EarthquakeObservableProperty .
+# 
+# http://stko-kwg.geog.ucsb.edu/lod/resource/earthquakeObservableProperty.magError
+
+kwgr:earthquakeObservableProperty.magError a owl:NamedIndividual , kwg-ont:EarthquakeObservableProperty .
+# 
+# http://stko-kwg.geog.ucsb.edu/lod/resource/earthquakeObservableProperty.magNst
+
+kwgr:earthquakeObservableProperty.magNst a owl:NamedIndividual , kwg-ont:EarthquakeObservableProperty .
+# 
+# http://stko-kwg.geog.ucsb.edu/lod/resource/earthquakeObservableProperty.magSource
+
+kwgr:earthquakeObservableProperty.magSource a owl:NamedIndividual , kwg-ont:EarthquakeObservableProperty .
+# 
+# http://stko-kwg.geog.ucsb.edu/lod/resource/earthquakeObservableProperty.magType
+
+kwgr:earthquakeObservableProperty.magType a owl:NamedIndividual , kwg-ont:EarthquakeObservableProperty .
+# 
+# http://stko-kwg.geog.ucsb.edu/lod/resource/earthquakeObservableProperty.net
+
+kwgr:earthquakeObservableProperty.net a owl:NamedIndividual , kwg-ont:EarthquakeObservableProperty .
+# 
+# http://stko-kwg.geog.ucsb.edu/lod/resource/earthquakeObservableProperty.nst
+
+kwgr:earthquakeObservableProperty.nst a owl:NamedIndividual , kwg-ont:EarthquakeObservableProperty .
+# 
+# http://stko-kwg.geog.ucsb.edu/lod/resource/earthquakeObservableProperty.rms
+
+kwgr:earthquakeObservableProperty.rms a owl:NamedIndividual , kwg-ont:EarthquakeObservableProperty .
+# 
+# http://stko-kwg.geog.ucsb.edu/lod/resource/earthquakeObservableProperty.status
+
+kwgr:earthquakeObservableProperty.status a owl:NamedIndividual , kwg-ont:EarthquakeObservableProperty .
+# 
+# http://stko-kwg.geog.ucsb.edu/lod/resource/earthquakeObservableProperty.type
+
+kwgr:earthquakeObservableProperty.type a owl:NamedIndividual , kwg-ont:EarthquakeObservableProperty .
+# 
+# 
+# 
+# #################################################################
+# #
+# #    General axioms
+# #
+# #################################################################
+# 
+# 
+
+_:genid3 a owl:Restriction ;
+	owl:onProperty geo:hasDefaultGeometry ;
+	owl:someValuesFrom geo:Geometry ;
+	rdfs:subClassOf kwg-ont:Earthquake .
+# 
+
+_:genid4 a owl:Restriction ;
+	owl:onProperty geo:hasGeometry ;
+	owl:someValuesFrom geo:Geometry ;
+	rdfs:subClassOf kwg-ont:Earthquake .
+# 
+
+_:genid5 a owl:Restriction ;
+	owl:onProperty sosa:hasFeatureOfInterest ;
+	owl:someValuesFrom kwg-ont:Earthquake ;
+	rdfs:subClassOf kwg-ont:EarthquakeObservationCollection .
+# 
+
+_:genid6 a owl:Restriction ;
+	owl:onProperty sosa:hasMember ;
+	owl:someValuesFrom sosa:EarthquakeObservation ;
+	rdfs:subClassOf kwg-ont:EarthquakeObservationCollection .
+# 
+
+_:genid7 a owl:Restriction ;
+	owl:onProperty sosa:observedProperty ;
+	owl:someValuesFrom kwg-ont:EarthquakeObservableProperty ;
+	rdfs:subClassOf sosa:EarthquakeObservation .
+# 
+
+_:genid8 a owl:Restriction ;
+	owl:onProperty kwg-ont:sfWithin ;
+	owl:allValuesFrom kwg-ont:AdministrativeRegion_3 ;
+	rdfs:subClassOf kwg-ont:Earthquake .
+# 
+
+_:genid9 a owl:Restriction ;
+	owl:onProperty geo:asWKT ;
+	owl:someValuesFrom geo:wktLiteral ;
+	rdfs:subClassOf <http://www.opengis.net/ont/sf#Point> .
+# 
+
+_:genid10 a owl:Restriction ;
+	owl:onProperty time:inXSDDateTime ;
+	owl:someValuesFrom xsd:dateTime ;
+	rdfs:subClassOf time:Instant .
+# 
+
+_:genid11 a owl:Restriction ;
+	owl:onProperty sosa:hasSimpleResult ;
+	owl:someValuesFrom rdfs:Literal ;
+	rdfs:subClassOf sosa:EarthquakeObservation .
+# 
+# Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi

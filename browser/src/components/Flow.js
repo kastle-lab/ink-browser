@@ -135,13 +135,15 @@ const Flow = ({ bindings, setData, setTypeIsPending, endpoint, connections }) =>
                 let sourceNode;
                 let targetNode;
 
-                nodes.forEach((node) => {
-                    if (split[0] === node.id) {
-                        sourceNode = node;
+                let boxes = nodes;
+
+                boxes.forEach((box) => {
+                    if (split[0] === box.id) {
+                        sourceNode = box;
                     }
 
-                    if (split[2] === node.id) {
-                        targetNode = node;
+                    if (split[2] === box.id) {
+                        targetNode = box;
                     }
                 })
 
@@ -166,13 +168,17 @@ const Flow = ({ bindings, setData, setTypeIsPending, endpoint, connections }) =>
                         },
                     }
                 )
+
+                setNodes(boxes)
+
             })
 
+            
             setEdges(lines)
 
         }
 
-    }, [connections, nodes, removeJunkFromConnections, setEdges])
+    }, [connections, nodes, setNodes, removeJunkFromConnections, setEdges])
 
     // function for querying data when a node is clicked
     const queryClickedNode = useCallback(async () => {
@@ -233,10 +239,11 @@ const Flow = ({ bindings, setData, setTypeIsPending, endpoint, connections }) =>
     useEffect(() => {
 
         prepareNodes();
-
+        
         prepareEdges();
+        
 
-    }, [bindings, connections, prepareEdges, prepareNodes])
+    }, [prepareEdges, prepareNodes])
 
     return (
         // React flow Schema Diagram
