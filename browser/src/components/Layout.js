@@ -17,13 +17,14 @@ function Layout(layout) {
   const [data, setData] = useState();
   const [bindings, setBindings] = useState();
   const [typeIsPending, setTypeIsPending] = useState(false);
+  const [nodesIsPending, setNodesIsPending] = useState(false);
   const [coordinates, setCoordinates] = useState([39.781710, -84.063274]);
   const [dataFromType, setDataFromType] = useState();
   const [connections, setConnections] = useState();
 
   // Set view components equal to a variable
   const type = <div className='full-table' key={'type'}><Type data={data} bindings={bindings} typeIsPending={typeIsPending} setCoordinates={setCoordinates} endpoint={layout.endpoint} setDataFromType={setDataFromType}></Type></div>;
-  const schema = <div className='view-full' key={'schema'}><Schema bindings={bindings} data={data} setData={setData} setTypeIsPending={setTypeIsPending} endpoint={layout.endpoint} connections={connections}></Schema></div>;
+  const schema = <div className='view-full' key={'schema'}><Schema bindings={bindings} data={data} setData={setData} setTypeIsPending={setTypeIsPending} endpoint={layout.endpoint} connections={connections} nodesIsPending={nodesIsPending}></Schema></div>;
   const focus = <div className='full-table' key={'focus'}><Focus dataFromType={dataFromType}></Focus></div>;
   const classHierarchy = <div className='quadrant' key={'classHierarchy'}><ClassHierarchy></ClassHierarchy></div>;
   const statistics = <div className='full-table' key={'statistics'}><Statistics></Statistics></div>;
@@ -65,7 +66,7 @@ function Layout(layout) {
       {views.map((view) => (
         bottomRight === view.viewString && view.viewComponent
       ))}
-      <QueryEndpoint setBindings={setBindings} endpoint={layout.endpoint} setConnections={setConnections}></QueryEndpoint>
+      <QueryEndpoint setBindings={setBindings} endpoint={layout.endpoint} setConnections={setConnections} setNodesIsPending={setNodesIsPending}></QueryEndpoint>
     </div>
     
   )

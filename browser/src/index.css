@@ -320,3 +320,16 @@ p {
 .endpoint Button {
   margin-top: 5px;
 }
+
+.flowDiv {
+  position: relative;
+  text-align: center;
+}
+
+.schema-pending {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 50%;
+  margin: auto;
+}
