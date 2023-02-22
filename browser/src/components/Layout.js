@@ -6,6 +6,7 @@ import Search from './Search';
 import Statistics from './Statistics';
 import ClassHierarchy from './ClassHierarchy';
 import LeafMap from './LeafMap'
+import QueryEndpoint from './QueryEndpoint';
 
 function Layout(layout) {
 
@@ -64,8 +65,9 @@ function Layout(layout) {
       {views.map((view) => (
         bottomRight === view.viewString && view.viewComponent
       ))}
-
+      <QueryEndpoint setBindings={setBindings} endpoint={layout.endpoint} setConnections={setConnections}></QueryEndpoint>
     </div>
+    
   )
 }
 

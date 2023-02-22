@@ -312,3 +312,11 @@ p {
   border-radius: 5px;
   background: #ffd735;
 }
+
+.endpoint TextField {
+  width: 500px;
+}
+
+.endpoint Button {
+  margin-top: 5px;
+}

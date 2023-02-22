@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 
@@ -29,7 +29,7 @@ function Search({bindings, setBindings, endpoint, setConnections}) {
             console.error(error);
         });
 
-        // Convery the query results to an array
+        // Convert the query results to an array
         let query = await bindingsStream.toArray()
 
         // Set the data binding to the query results and set pending to false
@@ -68,6 +68,10 @@ function Search({bindings, setBindings, endpoint, setConnections}) {
         setIsPending(false);
         
     }
+
+    useEffect (() => {
+        onSearch()
+    }, [endpoint])
 
   return (
     <>

@@ -39,7 +39,7 @@ function SettingsMenu({zoomLevel, setZoomLevel, endpoint, setEndpoint, theme, se
             <Drawer
                 PaperProps={{
                 sx: {
-                    width: 300,
+                    width: 350,
                     height: '100vh',
                     borderRadius: '15px 0 0 15px',
                 }
