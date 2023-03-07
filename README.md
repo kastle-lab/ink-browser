@@ -31,7 +31,7 @@
     - Check the version number
         - `apache-jena-fuseki-X.X.X.tar.gz`
     - Run in terminal to download
-        - `wget https://dlcdn.apache.org/jena/binaries/apache-jena-fuseki-4.6.1.tar.gz`
+        - `wget https://dlcdn.apache.org/jena/binaries/apache-jena-fuseki-X.X.X.tar.gz`
     - Extract the files in the folder
         - `tar -xvzf apache-jena-fuseki-X.X.X.tar.gz`
 - Mac
