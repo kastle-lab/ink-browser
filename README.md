@@ -38,7 +38,7 @@
     - Click `apache-jena-fuseki-X.X.X.tar.gz` to download
     - Double click on the file and extract them
 - Run in terminal
-    - `cd apache-jena-fuseki-4.6.1`
+    - `cd apache-jena-fuseki-X.X.X`
     - `./fuseki-server`
 - View
     - Navigate to: `localhost:3030`
