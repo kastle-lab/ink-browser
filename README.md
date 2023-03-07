@@ -27,7 +27,7 @@
 ## Apache Jena Fuseki
 - Navigate to
     - `https://dlcdn.apache.org/jena/binaries/`
--Linux
+- Linux
     - Check the version number
         - `apache-jena-fuseki-X.X.X.tar.gz`
     - Run in terminal to download
