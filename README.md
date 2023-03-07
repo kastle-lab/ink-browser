@@ -4,7 +4,7 @@
 - Navigate to the main repo folder
     - Make sure you are in the same directory as the `Dockerfile`
 - Building a docker image from the Dockerfile if image is out of date
-    - `sudo docker build -t ink-browser:latest .`
+    - `sudo docker build -f Dockerfile -t ink-browser:latest .`
 - Running the container from a new build
     - `sudo docker run -d --name ink-browser -p 3000:3000 ink-browser:latest`
 - If a container already exists with the name of `ink-browser`
@@ -25,12 +25,19 @@
     - `sudo docker load < ink-browser.tar.gz`
 
 ## Apache Jena Fuseki
-
-- Download
-    - `wget https://dlcdn.apache.org/jena/binaries/apache-jena-fuseki-4.6.1.tar.gz`
-- Extract
-    - `tar -xvzf apache-jena-fuseki-4.6.1.tar.gz`
-- Run
+- Navigate to
+    - `https://dlcdn.apache.org/jena/binaries/`
+-Linux
+    - Check the version number
+        - `apache-jena-fuseki-X.X.X.tar.gz`
+    - Run in terminal to download
+        - `wget https://dlcdn.apache.org/jena/binaries/apache-jena-fuseki-4.6.1.tar.gz`
+    - Extract the files in the folder
+        - `tar -xvzf apache-jena-fuseki-X.X.X.tar.gz`
+- Mac
+    - Click `apache-jena-fuseki-X.X.X.tar.gz` to download
+    - Double click on the file and extract them
+- Run in terminal
     - `cd apache-jena-fuseki-4.6.1`
     - `./fuseki-server`
 - View
