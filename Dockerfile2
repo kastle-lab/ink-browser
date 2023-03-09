@@ -1,0 +1,15 @@
+FROM node:19-alpine
+
+WORKDIR /app
+
+COPY ./data .
+
+RUN apk add openjdk11
+
+RUN wget https://archive.apache.org/dist/jena/binaries/apache-jena-fuseki-4.7.0.tar.gz
+
+RUN tar -xvzf apache-jena-fuseki-4.7.0.tar.gz
+
+EXPOSE 3030
+
+CMD cd ./apache-jena-fuseki-4.7.0 && ./fuseki-server --file=../earthquake-usgs-1.ttl --file=../earthquake-usgs-schema_ttl.ttl /earthquake-usgs

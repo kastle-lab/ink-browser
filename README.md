@@ -1,6 +1,6 @@
 # ink-browser
 
-## Docker
+## Docker Browser
 - Navigate to the main repo folder
     - Make sure you are in the same directory as the `Dockerfile`
 - Building a docker image from the Dockerfile if image is out of date
@@ -10,21 +10,36 @@
 - If a container already exists with the name of `ink-browser`
     - `sudo docker rm -f ink-browser`
     - Try the run command again
-- View the running project
-    - Navigate to: `localhost:3000`
 - Starting the container from an already built image
     - `sudo docker start ink-browser`
 - Stop the container
     - `Sudo docker stop ink-browser`
+- View the running project
+    - Navigate to: `localhost:3000`
+
+## Docker Apache Jena Fuseki
+- Navigate to the main repo folder
+    - Make sure you are in the same directory as the `Dockerfile2`
+- Building a docker image from the Dockerfile if image is out of date
+    - `sudo docker build -f Dockerfile2 -t apache-jena-fuseki:latest .`
+- Running the container from a new build
+    - `sudo docker run -d --name apache-jena-fuseki -p 3030:3030 apache-jena-fuseki:latest`
+- If a container already exists with the name of `apache-jena-fuseki`
+    - `sudo docker rm -f apache-jena-fuseki`
+- Starting the container from an already built image
+    - `sudo docker start apache-jena-fuseki`
+- Stop the container
+    - `sudo docker stop apache-jena-fuseki`
+- View the gui in a browser
+    - Navigate to: `localhost:3030`
 
 ## Docker tar file
-
 - Saving the image to a tar file
     - `sudo docker save ink-browser:latest | gzip > ink-browser.tar.gz`
 - Loading the image from a tar file
     - `sudo docker load < ink-browser.tar.gz`
 
-## Apache Jena Fuseki
+## Apache Jena Fuseki alternative
 - Navigate to
     - `https://dlcdn.apache.org/jena/binaries/`
 - Linux
