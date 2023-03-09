@@ -4,55 +4,13 @@ import Button from '@mui/material/Button';
 
 const QueryEngine = require('@comunica/query-sparql').QueryEngine;
 
-function Search({bindings, setBindings, endpoint, setConnections}) {
+function Search({endpoint}) {
 
     // Initialize variables and state
+    const [data, setData] = useState();
     const [search, setSearch] = useState('');
     const [isPening, setIsPending] = useState(false)
     const myEngine = new QueryEngine();
-
-    async function queryForNodes() {
-
-        // Create new query engine and query the endpoint for classes
-        let bindingsStream = await myEngine.queryBindings(`
-        PREFIX owl: <http://www.w3.org/2002/07/owl#>
-        PREFIX opla-sd: <http://ontologydesignpatterns.org/opla-sd#>
-        select ?c ?x ?y where {
-        ?c a owl:Class ;
-        opla-sd:entityPosition ?eP .
-        ?eP opla-sd:entityPositionX ?x .
-        ?eP opla-sd:entityPositionY ?y .
-        }`, {
-            sources: [endpoint],
-        });
-        bindingsStream.on('error', (error) => {
-            console.error(error);
-        });
-
-        // Convert the query results to an array
-        let query = await bindingsStream.toArray()
-
-        // Set the data binding to the query results and set pending to false
-        setBindings(query);
-
-    }
-
-    async function queryForConnections() {
-
-        // Query for connections
-        let bindingsStream = await myEngine.queryBindings(`
-        prefix opla-sd: <http://ontologydesignpatterns.org/opla-sd#>
-        select ?connections where {
-        ?ont opla-sd:hasConnections ?connections .
-        }`, {
-            sources: [endpoint],
-        });
-
-        let query = await bindingsStream.toArray()
-
-        setConnections(query[0].entries._root.entries[0][1].id)
-
-    }
 
     // Function that is called on button click
     async function onSearch() {
@@ -61,17 +19,27 @@ function Search({bindings, setBindings, endpoint, setConnections}) {
         setSearch('');
         setIsPending(true);
 
-        await queryForNodes();
-        await queryForConnections();
+        const bindingsStream = await myEngine.queryBindings(`
+        PREFIX text: <http://jena.apache.org/text#>
+        prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+        PREFIX owl: <http://www.w3.org/2002/07/owl#>
+        SELECT ?s ?o
+        WHERE {
+        ?s rdfs:label ?o .
+        FILTER regex(?o, '${search}')
+        }`, {
+            sources: [endpoint],
+        });
 
+        let query = await bindingsStream.toArray()
+
+        
+        console.log(query)
+        setData(query);
 
         setIsPending(false);
         
     }
-
-    useEffect (() => {
-        onSearch()
-    }, [endpoint])
 
   return (
     <>
@@ -94,10 +62,9 @@ function Search({bindings, setBindings, endpoint, setConnections}) {
         <div className='search-bottom'>
             {isPening && <h3>Gathering Data...</h3>}
             <ol>
-                {bindings && bindings.map((binding) => (
+                {data && data.map((item) => (
 
-                    <li key={binding.entries._root.entries[2][1].id} href={binding.entries._root.entries[2][1].id}>{binding.entries._root.entries[2][1].id}</li>
-
+                    <li key={item.entries._root.entries[1][1].id} href={item.entries._root.entries[1][1].id}>{item.entries._root.entries[1][1].id}</li>
                 ))}
             </ol>
         </div>

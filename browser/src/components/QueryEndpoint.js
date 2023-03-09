@@ -24,6 +24,8 @@ function QueryEndpoint({ setBindings, endpoint, setConnections, setNodesIsPendin
         // Convery the query results to an array
         let query = await bindingsStream.toArray()
 
+        console.log(query)
+
         // Set the data binding to the query results and set pending to false
         setBindings(query);
 
