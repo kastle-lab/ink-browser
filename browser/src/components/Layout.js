@@ -26,7 +26,7 @@ function Layout(layout) {
   const type = <div className='full-table' key={'type'}><Type data={data} bindings={bindings} typeIsPending={typeIsPending} setCoordinates={setCoordinates} endpoint={layout.endpoint} setDataFromType={setDataFromType}></Type></div>;
   const schema = <div className='view-full' key={'schema'}><Schema bindings={bindings} data={data} setData={setData} setTypeIsPending={setTypeIsPending} endpoint={layout.endpoint} connections={connections} nodesIsPending={nodesIsPending}></Schema></div>;
   const focus = <div className='full-table' key={'focus'}><Focus dataFromType={dataFromType}></Focus></div>;
-  const classHierarchy = <div className='quadrant' key={'classHierarchy'}><ClassHierarchy></ClassHierarchy></div>;
+  const classHierarchy = <div className='quadrant' key={'classHierarchy'}><ClassHierarchy endpoint={layout.endpoint}></ClassHierarchy></div>;
   const statistics = <div className='full-table' key={'statistics'}><Statistics></Statistics></div>;
   const search = <div className='quadrant' key={'search'}><Search bindings={bindings} setBindings={setBindings} endpoint={layout.endpoint} setConnections={setConnections}></Search></div>;
   const map = <div className='view-full' key={'map'}><LeafMap coordinates={coordinates} zoomLevel={layout.zoomLevel}></LeafMap></div>;

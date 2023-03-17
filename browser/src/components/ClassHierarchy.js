@@ -1,10 +1,12 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import SvgIcon from '@mui/material/SvgIcon';
 import { alpha, styled } from '@mui/material/styles';
 import TreeView from '@mui/lab/TreeView';
 import TreeItem, { treeItemClasses } from '@mui/lab/TreeItem';
+
+const QueryEngine = require('@comunica/query-sparql').QueryEngine;
 
 // Function that returns the svg for the Minus square
 function MinusSquare(props) {
@@ -56,10 +58,50 @@ const StyledTreeItem = styled((props) => (
   },
 }));
 
-function ClassHierarchy() {
+function ClassHierarchy({endpoint}) {
 
   const [expanded, setExpanded] = React.useState(['1']);
   const [selected, setSelected] = React.useState([]);
+  const [classes, setClasses] = React.useState();
+  const myEngine = new QueryEngine();
+
+  function splitLabel(label) {
+    label = label.split("/").pop()
+    label = label.split("#").pop()
+    return label;
+  }
+
+  async function query() {
+
+    const bindingsStream = await myEngine.queryBindings(`
+    SELECT ?s ?o
+    WHERE {
+    ?s rdfs:subClassOf ?o .
+    }`, {
+      sources: [endpoint],
+    });
+
+    let query = await bindingsStream.toArray()
+
+    let classList = [];
+
+    query.map((item) => {
+      if (item.entries._root.entries[0][1].id && item.entries._root.entries[1][1].id) {
+        let label = item.entries._root.entries[0][1].id
+        label = splitLabel(label)
+        classList.push({class: label, classes:[]})
+      }
+    })
+
+    console.log(classList)
+
+    setClasses(classList);
+
+  }
+
+  useEffect(() => {
+    query();
+  }, [])
 
   const handleToggle = (event, nodeIds) => {
     setExpanded(nodeIds);
@@ -107,20 +149,9 @@ function ClassHierarchy() {
           onNodeSelect={handleSelect}
           multiSelect
         >
-          <StyledTreeItem nodeId="1" label="Main">
-            <StyledTreeItem nodeId="2" label="Hello" />
-            <StyledTreeItem nodeId="3" label="Subtree with children">
-              <StyledTreeItem nodeId="6" label="Hello" />
-              <StyledTreeItem nodeId="7" label="Sub-subtree with children">
-                <StyledTreeItem nodeId="9" label="Child 1" />
-                <StyledTreeItem nodeId="10" label="Child 2" />
-                <StyledTreeItem nodeId="11" label="Child 3" />
-              </StyledTreeItem>
-              <StyledTreeItem nodeId="8" label="Hello" />
-            </StyledTreeItem>
-            <StyledTreeItem nodeId="4" label="World" />
-            <StyledTreeItem nodeId="5" label="Something something" />
-          </StyledTreeItem>
+          {classes.map((item) => (
+            <StyledTreeItem id={item.class} label={item.class}></StyledTreeItem>
+          ))}
         </TreeView>
       </Box>
     </div>
