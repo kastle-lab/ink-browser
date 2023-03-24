@@ -89,7 +89,15 @@ function ClassHierarchy({endpoint}) {
       if (item.entries._root.entries[0][1].id && item.entries._root.entries[1][1].id) {
         let label = item.entries._root.entries[0][1].id
         label = splitLabel(label)
-        classList.push({class: label, classes:[]})
+        let alreadyIn = false
+        classList.map((classItem) => {
+          if (label === classItem.class) {
+            alreadyIn = true;
+          }
+        })
+        if (!alreadyIn) {
+          classList.push({class: label, classes:[]})
+        }
       }
     })
 
@@ -149,7 +157,7 @@ function ClassHierarchy({endpoint}) {
           onNodeSelect={handleSelect}
           multiSelect
         >
-          {classes.map((item) => (
+          {classes && classes.map((item) => (
             <StyledTreeItem id={item.class} label={item.class}></StyledTreeItem>
           ))}
         </TreeView>
