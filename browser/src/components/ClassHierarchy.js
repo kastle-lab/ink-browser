@@ -103,6 +103,10 @@ function ClassHierarchy({endpoint}) {
 
     console.log(classList)
 
+    // classList.map((item) => {
+    //   console.log(item)
+    // })
+
     setClasses(classList);
 
   }
@@ -158,8 +162,9 @@ function ClassHierarchy({endpoint}) {
           multiSelect
         >
           {classes && classes.map((item) => (
-            <StyledTreeItem id={item.class} label={item.class}></StyledTreeItem>
+            <StyledTreeItem nodeId={item.class} key={item.class} label={item.class}></StyledTreeItem>
           ))}
+
         </TreeView>
       </Box>
     </div>
