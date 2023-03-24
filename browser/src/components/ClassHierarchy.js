@@ -101,11 +101,22 @@ function ClassHierarchy({endpoint}) {
       }
     })
 
-    console.log(classList)
+    query.map((item) => {
+      if (item.entries._root.entries[0][1].id && item.entries._root.entries[1][1].id) {
+        let label = item.entries._root.entries[0][1].id
+        label = splitLabel(label)
 
-    // classList.map((item) => {
-    //   console.log(item)
-    // })
+        let label2 = item.entries._root.entries[1][1].id
+        label2 = splitLabel(label2)
+
+        classList.map((classItem) => {
+          if (classItem.class === label) {
+            classItem.classes.push(label2)
+          }
+        })
+      }
+      
+    })
 
     setClasses(classList);
 
@@ -162,7 +173,11 @@ function ClassHierarchy({endpoint}) {
           multiSelect
         >
           {classes && classes.map((item) => (
-            <StyledTreeItem nodeId={item.class} key={item.class} label={item.class}></StyledTreeItem>
+            <StyledTreeItem nodeId={item.class} key={item.class} label={item.class}>
+              {item.classes && item.classes.map((sub) => (
+                <StyledTreeItem nodeId={sub} key={sub} label={sub}></StyledTreeItem>
+              ))}
+            </StyledTreeItem>
           ))}
 
         </TreeView>
