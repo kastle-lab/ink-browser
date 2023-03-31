@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useCallback} from 'react'
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import SvgIcon from '@mui/material/SvgIcon';
@@ -43,6 +43,7 @@ function CloseSquare(props) {
   );
 }
 
+// Style for each tree item
 const StyledTreeItem = styled((props) => (
   <TreeItem {...props}  />
 ))(({ theme }) => ({
@@ -59,19 +60,21 @@ const StyledTreeItem = styled((props) => (
 }));
 
 function ClassHierarchy({endpoint}) {
-
-  const [expanded, setExpanded] = React.useState(['1']);
+  const [expanded, setExpanded] = React.useState([]);
   const [selected, setSelected] = React.useState([]);
   const [classes, setClasses] = React.useState();
-  const myEngine = new QueryEngine();
 
+  // Splits the links into labels
   function splitLabel(label) {
     label = label.split("/").pop()
     label = label.split("#").pop()
     return label;
   }
 
-  async function query() {
+  // Queries for calsses
+  const query = useCallback(async () => {
+
+    const myEngine = new QueryEngine();
 
     const bindingsStream = await myEngine.queryBindings(`
     SELECT ?s ?o
@@ -85,12 +88,13 @@ function ClassHierarchy({endpoint}) {
 
     let classList = [];
 
-    query.map((item) => {
+    //  Insert classes into the classlist
+    query.forEach((item) => {
       if (item.entries._root.entries[0][1].id && item.entries._root.entries[1][1].id) {
         let label = item.entries._root.entries[0][1].id
         label = splitLabel(label)
         let alreadyIn = false
-        classList.map((classItem) => {
+        classList.forEach((classItem) => {
           if (label === classItem.class) {
             alreadyIn = true;
           }
@@ -101,7 +105,8 @@ function ClassHierarchy({endpoint}) {
       }
     })
 
-    query.map((item) => {
+    // Insert subclasses into the classlist
+    query.forEach((item) => {
       if (item.entries._root.entries[0][1].id && item.entries._root.entries[1][1].id) {
         let label = item.entries._root.entries[0][1].id
         label = splitLabel(label)
@@ -109,7 +114,7 @@ function ClassHierarchy({endpoint}) {
         let label2 = item.entries._root.entries[1][1].id
         label2 = splitLabel(label2)
 
-        classList.map((classItem) => {
+        classList.forEach((classItem) => {
           if (classItem.class === label) {
             classItem.classes.push(label2)
           }
@@ -120,30 +125,27 @@ function ClassHierarchy({endpoint}) {
 
     setClasses(classList);
 
-  }
+  }, [endpoint]);
 
+  // Run the query
   useEffect(() => {
     query();
-  }, [])
+  }, [query])
 
+  // Handle clicking and selecting nodes
   const handleToggle = (event, nodeIds) => {
     setExpanded(nodeIds);
   };
-
   const handleSelect = (event, nodeIds) => {
     setSelected(nodeIds);
   };
 
+  // Handle clicking the reset buttons
   const handleExpandClick = () => {
-    setExpanded((oldExpanded) =>
-      oldExpanded.length === 0 ? ['1', '3', '7'] : [],
-    );
+    setExpanded([]);
   };
-
   const handleSelectClick = () => {
-    setSelected((oldSelected) =>
-      oldSelected.length === 0 ? ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11'] : [],
-    );
+    setSelected([]);
   };
 
   return (
@@ -151,12 +153,8 @@ function ClassHierarchy({endpoint}) {
       <div className='quad-head'>
         <h2 >Class Hierarchy</h2>
         <Box>
-          <Button onClick={handleExpandClick}>
-            {expanded.length === 0 ? 'Expand all' : 'Collapse all'}
-          </Button>
-          <Button onClick={handleSelectClick}>
-            {selected.length === 0 ? 'Select all' : 'Unselect all'}
-          </Button>
+          <Button onClick={handleExpandClick}>Collapse all</Button>
+          <Button onClick={handleSelectClick}>Unselect all</Button>
         </Box>
       </div>
       
@@ -173,13 +171,12 @@ function ClassHierarchy({endpoint}) {
           multiSelect
         >
           {classes && classes.map((item) => (
-            <StyledTreeItem nodeId={item.class} key={item.class} label={item.class}>
+            <StyledTreeItem nodeId={item.class + 1} key={item.class} label={item.class}>
               {item.classes && item.classes.map((sub) => (
                 <StyledTreeItem nodeId={sub} key={sub} label={sub}></StyledTreeItem>
               ))}
             </StyledTreeItem>
           ))}
-
         </TreeView>
       </Box>
     </div>
