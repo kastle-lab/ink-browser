@@ -11,7 +11,7 @@ function App() {
   const [bottomLeft, setBottomLeft] = useState(localStorage.getItem('bottomLeft') != null ? localStorage.getItem('bottomLeft') : 'Focus');
   const [bottomRight, setBottomRight] = useState(localStorage.getItem('bottomRight') != null ? localStorage.getItem('bottomRight') : 'Empty');
   const [zoomLevel, setZoomLevel] = useState(localStorage.getItem('zoomLevel') != null ? localStorage.getItem('zoomLevel') : 8);
-  const [endpoint, setEndpoint] = useState(localStorage.getItem('endpoint') != null ? localStorage.getItem('endpoint') : 'http://localhost:3030/earthquake-usgs/');
+  const [endpoint, setEndpoint] = useState(localStorage.getItem('endpoint') != null ? localStorage.getItem('endpoint') : 'http://localhost:3030/agent-role/');
   const [theme, setTheme] = useState(localStorage.getItem('theme') != null ? localStorage.getItem('theme') : 'Light');
   const [viewSelect, setViewSelect] = useState(localStorage.getItem('showViewSelect') != null ? localStorage.getItem('showViewSelect') : 'Show');
 

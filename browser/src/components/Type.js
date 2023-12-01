@@ -125,6 +125,7 @@ function Type({ data, bindings, typeIsPending, setCoordinates, endpoint, setData
 
                   <StyledTableCell className='table-cell'>
                     <p id={entity.entries._root.entries.length > 1 ? entity.entries._root.entries[1][1].id : entity.entries._root.entries[0][1].id} onClick={getPoint}>{entity.entries._root.entries.length > 1 ? entity.entries._root.entries[0][1].id : "kwgr:" + (entity.entries._root.entries[0][1].id).split(".").pop()}</p>
+                    
                   </StyledTableCell>
 
 

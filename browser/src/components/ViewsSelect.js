@@ -14,7 +14,7 @@ function ViewsSelect(layout) {
     const { setTopLeft, setTopRight, setBottomLeft, setBottomRight, topLeft, topRight, bottomLeft, bottomRight } = layout.layout;
 
     // Array of views that can be chosen from as drop down options
-    const views = ['Type', 'Schema', 'Focus', 'Class Hierarchy', 'Statistics', 'Search', 'Map', 'Empty']
+    const views = ['Type', 'Schema', 'Focus', 'Class Hierarchy', 'Statistics', 'Search', 'Map', 'Empty', 'ShortcutWindow']
     
     // Array to map through for setting up the view select
     const quadrants = [
