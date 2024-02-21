@@ -13,7 +13,7 @@ import { styled } from '@mui/material/styles';
 
 const QueryEngine = require('@comunica/query-sparql').QueryEngine;
 
-function Type({ data, bindings, typeIsPending, setCoordinates, endpoint, setDataFromType }) {
+function Type({ data, bindings, typeIsPending, setCoordinates, endpoint, setDataFromType, selected }) {
 
   // Function is called when type data is clicked
   async function getPoint(e) {
@@ -99,7 +99,7 @@ function Type({ data, bindings, typeIsPending, setCoordinates, endpoint, setData
       border: 0,
     },
   }));
-  
+
   return (
 
     <div className='type'>
@@ -107,16 +107,16 @@ function Type({ data, bindings, typeIsPending, setCoordinates, endpoint, setData
       <Paper>
         <TableContainer className='table-container'>
           <Table stickyHeader aria-label="customized table">
-            <TableHead>
+            <TableHead >
               <TableRow>
-                <StyledTableCell>Type</StyledTableCell>
+                <StyledTableCell>{selected ? selected : 'Type'}</StyledTableCell>
                 <StyledTableCell></StyledTableCell>
               </TableRow>
             </TableHead>
             <TableBody>
 
               {typeIsPending && <TableRow><TableCell>Gathering Data...</TableCell>
-              <TableCell></TableCell></TableRow>}
+                <TableCell></TableCell></TableRow>}
               {data && !typeIsPending && data.length === 0 && <TableRow><TableCell>No data</TableCell><TableCell></TableCell></TableRow>}
 
               {data && data.map((entity) => (

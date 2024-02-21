@@ -1,0 +1,109 @@
+
+@prefix kastle-lab: <http://kastle-lab.org/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix momo: <https://archive.org/services/purl/domain/modular_ontology_design_library/agentrole#> .
+
+kastle-lab:Agent.Antrea a momo:Agent;
+    rdfs:label "Antrea"^^xsd:string ;
+    kastle-lab:performsAgentRole kastle-lab:Agent.Antrea.GradStudent.CIIM,
+        kastle-lab:Agent.Antrea.GradStudent.WrightStateUniversity,
+        kastle-lab:Agent.Antrea.Intern.BankofCyprus,
+        kastle-lab:Agent.Antrea.UndergradStudent.UniversityofLeeds .
+
+kastle-lab:Agent.Brandon a momo:Agent;
+    rdfs:label "Brandon"^^xsd:string ;
+    kastle-lab:performsAgentRole kastle-lab:Agent.Brandon.GradStudent.WrightStateUniversity .
+
+kastle-lab:Agent.Cogan a momo:Agent;
+    rdfs:label "Cogan"^^xsd:string ;
+    kastle-lab:performsAgentRole kastle-lab:Agent.Cogan.GradStudent.WrightStateUniversity,
+        kastle-lab:Agent.Cogan.PhDStudent.KansasStateUniversity,
+        kastle-lab:Agent.Cogan.PhDStudent.WrightStateUniversity,
+        kastle-lab:Agent.Cogan.PostDocResearcher.KansasStateUniversity,
+        kastle-lab:Agent.Cogan.UndergadStudent.OhioStateUniversity,
+        kastle-lab:Agent.Cogan.UndergradStudent.WrightStateUniversity .
+
+kastle-lab:Provider.BankofCyprus rdfs:label "BankofCyprus"^^xsd:string ;
+    kastle-lab:providesAgentRole kastle-lab:Agent.Antrea.Intern.BankofCyprus .
+
+kastle-lab:Provider.CIIM rdfs:label "CIIM"^^xsd:string ;
+    kastle-lab:providesAgentRole kastle-lab:Agent.Antrea.GradStudent.CIIM .
+
+kastle-lab:Provider.KansasStateUniversity rdfs:label "KansasStateUniversity"^^xsd:string ;
+    kastle-lab:providesAgentRole kastle-lab:Agent.Cogan.PhDStudent.KansasStateUniversity,
+        kastle-lab:Agent.Cogan.PostDocResearcher.KansasStateUniversity .
+
+kastle-lab:Provider.OhioStateUniversity rdfs:label "OhioStateUniversity"^^xsd:string ;
+    kastle-lab:providesAgentRole kastle-lab:Agent.Cogan.UndergadStudent.OhioStateUniversity .
+
+kastle-lab:Provider.UniversityofLeeds rdfs:label "UniversityofLeeds"^^xsd:string ;
+    kastle-lab:providesAgentRole kastle-lab:Agent.Antrea.UndergradStudent.UniversityofLeeds .
+
+kastle-lab:Provider.WrightStateUniversity rdfs:label "WrightStateUniversity"^^xsd:string ;
+    kastle-lab:providesAgentRole kastle-lab:Agent.Antrea.GradStudent.WrightStateUniversity,
+        kastle-lab:Agent.Brandon.GradStudent.WrightStateUniversity,
+        kastle-lab:Agent.Cogan.GradStudent.WrightStateUniversity,
+        kastle-lab:Agent.Cogan.PhDStudent.WrightStateUniversity,
+        kastle-lab:Agent.Cogan.UndergradStudent.WrightStateUniversity .
+
+<http://kastle-lab.org/ontology/Agent-Role> a owl:ontology ;
+    kastle-lab:hasShortcut "{Agent} {performsAgentRole}from{performsAgentRole/hasTemporalExtent}At {performsAgentRole/^providesAgentRole}" .
+
+
+kastle-lab:Agent.Antrea.GradStudent.CIIM.2018-2021 rdfs:label "2018-2021"^^xsd:string .
+
+kastle-lab:Agent.Antrea.GradStudent.WrightStateUniversity.2021-present rdfs:label "2021-present"^^xsd:string .
+
+kastle-lab:Agent.Antrea.Intern.BankofCyprus.June2018-December2018 rdfs:label "June2018-December2018"^^xsd:string .
+
+kastle-lab:Agent.Antrea.UndergradStudent.UniversityofLeeds.2015-2018 rdfs:label "2015-2018"^^xsd:string .
+
+kastle-lab:Agent.Brandon.GradStudent.WrightStateUniversity.2021-present rdfs:label "2021-present"^^xsd:string .
+
+kastle-lab:Agent.Cogan.GradStudent.WrightStateUniversity.2015-2017 rdfs:label "2015-2017"^^xsd:string .
+
+kastle-lab:Agent.Cogan.PhDStudent.KansasStateUniversity.2019-2020 rdfs:label "2019-2020"^^xsd:string .
+
+kastle-lab:Agent.Cogan.PhDStudent.WrightStateUniversity.2017-2019 rdfs:label "2017-2019"^^xsd:string .
+
+kastle-lab:Agent.Cogan.PostDocResearcher.KansasStateUniversity.2020-2022 rdfs:label "2020-2022"^^xsd:string .
+
+kastle-lab:Agent.Cogan.UndergadStudent.OhioStateUniversity.2009-2010 rdfs:label "2009-2010"^^xsd:string .
+
+kastle-lab:Agent.Cogan.UndergradStudent.WrightStateUniversity.2013-2016 rdfs:label "2013-2016"^^xsd:string .
+
+kastle-lab:Agent.Antrea.GradStudent.CIIM rdfs:label "GradStudent"^^xsd:string ;
+    kastle-lab:hasTemporalExtent kastle-lab:Agent.Antrea.GradStudent.CIIM.2018-2021 .
+
+kastle-lab:Agent.Antrea.GradStudent.WrightStateUniversity rdfs:label "GradStudent"^^xsd:string ;
+    kastle-lab:hasTemporalExtent kastle-lab:Agent.Antrea.GradStudent.WrightStateUniversity.2021-present .
+
+kastle-lab:Agent.Antrea.Intern.BankofCyprus rdfs:label "Intern"^^xsd:string ;
+    kastle-lab:hasTemporalExtent kastle-lab:Agent.Antrea.Intern.BankofCyprus.June2018-December2018 .
+
+kastle-lab:Agent.Antrea.UndergradStudent.UniversityofLeeds rdfs:label "UndergradStudent"^^xsd:string ;
+    kastle-lab:hasTemporalExtent kastle-lab:Agent.Antrea.UndergradStudent.UniversityofLeeds.2015-2018 .
+
+kastle-lab:Agent.Brandon.GradStudent.WrightStateUniversity rdfs:label "GradStudent"^^xsd:string ;
+    kastle-lab:hasTemporalExtent kastle-lab:Agent.Brandon.GradStudent.WrightStateUniversity.2021-present .
+
+kastle-lab:Agent.Cogan.GradStudent.WrightStateUniversity rdfs:label "GradStudent"^^xsd:string ;
+    kastle-lab:hasTemporalExtent kastle-lab:Agent.Cogan.GradStudent.WrightStateUniversity.2015-2017 .
+
+kastle-lab:Agent.Cogan.PhDStudent.KansasStateUniversity rdfs:label "PhDStudent"^^xsd:string ;
+    kastle-lab:hasTemporalExtent kastle-lab:Agent.Cogan.PhDStudent.KansasStateUniversity.2019-2020 .
+
+kastle-lab:Agent.Cogan.PhDStudent.WrightStateUniversity rdfs:label "PhDStudent"^^xsd:string ;
+    kastle-lab:hasTemporalExtent kastle-lab:Agent.Cogan.PhDStudent.WrightStateUniversity.2017-2019 .
+
+kastle-lab:Agent.Cogan.PostDocResearcher.KansasStateUniversity rdfs:label "PostDocResearcher"^^xsd:string ;
+    kastle-lab:hasTemporalExtent kastle-lab:Agent.Cogan.PostDocResearcher.KansasStateUniversity.2020-2022 .
+
+kastle-lab:Agent.Cogan.UndergadStudent.OhioStateUniversity rdfs:label "UndergadStudent"^^xsd:string ;
+    kastle-lab:hasTemporalExtent kastle-lab:Agent.Cogan.UndergadStudent.OhioStateUniversity.2009-2010 .
+
+kastle-lab:Agent.Cogan.UndergradStudent.WrightStateUniversity rdfs:label "UndergradStudent"^^xsd:string ;
+    kastle-lab:hasTemporalExtent kastle-lab:Agent.Cogan.UndergradStudent.WrightStateUniversity.2013-2016 .
+

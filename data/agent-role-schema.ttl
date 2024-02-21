@@ -1,0 +1,213 @@
+@prefix : <https://archive.org/services/purl/domain/modular_ontology_design_library/agentrole#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix opla: <http://ontologydesignpatterns.org/opla#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix opla-cp: <http://ontologydesignpatterns.org/opla-cp#> .
+@prefix opla-sd: <http://ontologydesignpatterns.org/opla-sd#> .
+@prefix opla-core: <http://ontologydesignpatterns.org/opla-core#> .
+@base <https://archive.org/services/purl/domain/modular_ontology_design_library/agentrole#> .
+
+<https://archive.org/services/purl/domain/modular_ontology_design_library/agentrole#> rdf:type owl:Ontology ;
+                                                                                       opla:hasRelatedPattern "http://ontologydesignpatterns.org/wiki/Submissions:AgentRole"^^rdfs:Literal ,
+                                                                                                              "https://archive.org/services/purl/domain/modular_ontology_design_library/temporalextent"^^rdfs:Literal ;
+                                                                                       opla-core:hasEntanglement "Agent Role Entanglement" ;
+                                                                                       opla-core:hasPatternName "Agent Role Pattern" ;
+                                                                                       opla-core:hasShortcutFor "Agent Role" ;
+                                                                                       opla-cp:addressesScenario """Use Case
+Use Case Description""" ;
+                                                                                       opla-cp:hasCompetencyQuestion "When was Cogan Shimizu a student at Wright State University?" ,
+                                                                                                                     "Who was on the World Cup winning team in 2017?" ,
+                                                                                                                     "Who was the lead actor for the movie, Sharknado?" ;
+                                                                                       opla-sd:hasConnections """Agent performsAgentRole AgentRole
+Thing providesAgentRole AgentRole
+AgentRole hasTemporalExtent TemporalExtent""" ;
+                                                                                       opla-sd:hasExampleDiagramFileName "agent-role-example.pdf" ;
+                                                                                       opla-sd:hasSchemaDiagramFileName "agent-role-pattern.pdf" ;
+                                                                                       opla-sd:hasShortcutDiagramFileName "agent-role-shortcuts.pdf" ;
+                                                                                       dc:contributor "" ;
+                                                                                       dc:creator "" .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://ontologydesignpatterns.org/opla#hasRelatedPattern
+opla:hasRelatedPattern rdf:type owl:AnnotationProperty .
+
+
+###  http://ontologydesignpatterns.org/opla#isNativeTo
+opla:isNativeTo rdf:type owl:AnnotationProperty .
+
+
+###  http://ontologydesignpatterns.org/opla#ofExternalType
+opla:ofExternalType rdf:type owl:AnnotationProperty .
+
+
+###  http://ontologydesignpatterns.org/opla-core#hasEntanglement
+opla-core:hasEntanglement rdf:type owl:AnnotationProperty .
+
+
+###  http://ontologydesignpatterns.org/opla-core#hasPatternName
+opla-core:hasPatternName rdf:type owl:AnnotationProperty .
+
+
+###  http://ontologydesignpatterns.org/opla-core#hasShortcutFor
+opla-core:hasShortcutFor rdf:type owl:AnnotationProperty .
+
+
+###  http://ontologydesignpatterns.org/opla-cp#addressesScenario
+opla-cp:addressesScenario rdf:type owl:AnnotationProperty .
+
+
+###  http://ontologydesignpatterns.org/opla-cp#hasCompetencyQuestion
+opla-cp:hasCompetencyQuestion rdf:type owl:AnnotationProperty .
+
+
+###  http://ontologydesignpatterns.org/opla-sd#entityPosition
+opla-sd:entityPosition rdf:type owl:AnnotationProperty .
+
+
+###  http://ontologydesignpatterns.org/opla-sd#entityPositionX
+opla-sd:entityPositionX rdf:type owl:AnnotationProperty .
+
+
+###  http://ontologydesignpatterns.org/opla-sd#entityPositionY
+opla-sd:entityPositionY rdf:type owl:AnnotationProperty .
+
+
+###  http://ontologydesignpatterns.org/opla-sd#hasConnections
+opla-sd:hasConnections rdf:type owl:AnnotationProperty .
+
+
+###  http://ontologydesignpatterns.org/opla-sd#hasExampleDiagramFileName
+opla-sd:hasExampleDiagramFileName rdf:type owl:AnnotationProperty .
+
+
+###  http://ontologydesignpatterns.org/opla-sd#hasSchemaDiagramFileName
+opla-sd:hasSchemaDiagramFileName rdf:type owl:AnnotationProperty .
+
+
+###  http://ontologydesignpatterns.org/opla-sd#hasShortcutDiagramFileName
+opla-sd:hasShortcutDiagramFileName rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/elements/1.1/contributor
+dc:contributor rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/elements/1.1/creator
+dc:creator rdf:type owl:AnnotationProperty .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  https://archive.org/services/purl/domain/modular_ontology_design_library/agentrolehasTemporalExtent
+<https://archive.org/services/purl/domain/modular_ontology_design_library/agentrolehasTemporalExtent> rdf:type owl:ObjectProperty ;
+                                                                                                      opla:isNativeTo "https://archive.org/services/purl/domain/modular_ontology_design_library/agentrole"^^rdfs:Literal .
+
+
+###  https://archive.org/services/purl/domain/modular_ontology_design_library/agentroleisPerformedBy
+<https://archive.org/services/purl/domain/modular_ontology_design_library/agentroleisPerformedBy> rdf:type owl:ObjectProperty ;
+                                                                                                  owl:inverseOf <https://archive.org/services/purl/domain/modular_ontology_design_library/agentroleperformsAgentRole> ;
+                                                                                                  opla:isNativeTo "https://archive.org/services/purl/domain/modular_ontology_design_library/agentrole"^^rdfs:Literal .
+
+
+###  https://archive.org/services/purl/domain/modular_ontology_design_library/agentroleisProvidedBy
+<https://archive.org/services/purl/domain/modular_ontology_design_library/agentroleisProvidedBy> rdf:type owl:ObjectProperty ;
+                                                                                                 owl:inverseOf <https://archive.org/services/purl/domain/modular_ontology_design_library/agentroleprovidesAgentRole> ;
+                                                                                                 opla:isNativeTo "https://archive.org/services/purl/domain/modular_ontology_design_library/agentrole"^^rdfs:Literal .
+
+
+###  https://archive.org/services/purl/domain/modular_ontology_design_library/agentroleperformsAgentRole
+<https://archive.org/services/purl/domain/modular_ontology_design_library/agentroleperformsAgentRole> rdf:type owl:ObjectProperty ;
+                                                                                                      opla:isNativeTo "https://archive.org/services/purl/domain/modular_ontology_design_library/agentrole"^^rdfs:Literal .
+
+
+###  https://archive.org/services/purl/domain/modular_ontology_design_library/agentroleprovidesAgentRole
+<https://archive.org/services/purl/domain/modular_ontology_design_library/agentroleprovidesAgentRole> rdf:type owl:ObjectProperty ;
+                                                                                                      opla:isNativeTo "https://archive.org/services/purl/domain/modular_ontology_design_library/agentrole"^^rdfs:Literal .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://www.w3.org/2002/07/owl#Thing
+owl:Thing rdfs:subClassOf [ rdf:type owl:Restriction ;
+                            owl:onProperty <https://archive.org/services/purl/domain/modular_ontology_design_library/agentrolehasTemporalExtent> ;
+                            owl:allValuesFrom :TemporalExtent
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty <https://archive.org/services/purl/domain/modular_ontology_design_library/agentroleprovidesAgentRole> ;
+                            owl:allValuesFrom :AgentRole
+                          ] .
+
+
+###  https://archive.org/services/purl/domain/modular_ontology_design_library/agentrole#Agent
+:Agent rdf:type owl:Class ;
+       opla:isNativeTo "https://archive.org/services/purl/domain/modular_ontology_design_library/agentrole"^^rdfs:Literal ;
+       opla:ofExternalType "ofExternalType"^^rdfs:Literal ;
+       opla-sd:entityPosition [ opla-sd:entityPositionX "205.25893282938395"^^xsd:double ;
+                                opla-sd:entityPositionY "70.34523204334127"^^xsd:double ;
+                                rdfs:comment "This is an entity positioning annotation generated by CoModIDE (https://comodide.com/). Removing this annotation will break rendering the CoModIDE schema diagram view."@en
+                              ] .
+
+
+###  https://archive.org/services/purl/domain/modular_ontology_design_library/agentrole#AgentRole
+:AgentRole rdf:type owl:Class ;
+           rdfs:subClassOf [ rdf:type owl:Restriction ;
+                             owl:onProperty <https://archive.org/services/purl/domain/modular_ontology_design_library/agentroleisPerformedBy> ;
+                             owl:allValuesFrom :Agent
+                           ] ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty <https://archive.org/services/purl/domain/modular_ontology_design_library/agentrolehasTemporalExtent> ;
+                             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                             owl:onClass :TemporalExtent
+                           ] ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty <https://archive.org/services/purl/domain/modular_ontology_design_library/agentroleisPerformedBy> ;
+                             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                             owl:onClass :Agent
+                           ] ;
+           opla:isNativeTo "https://archive.org/services/purl/domain/modular_ontology_design_library/agentrole"^^rdfs:Literal ;
+           opla-sd:entityPosition [ opla-sd:entityPositionX "225.808985531683"^^xsd:double ;
+                                    opla-sd:entityPositionY "139.3645955671122"^^xsd:double ;
+                                    rdfs:comment "This is an entity positioning annotation generated by CoModIDE (https://comodide.com/). Removing this annotation will break rendering the CoModIDE schema diagram view."@en
+                                  ] .
+
+
+###  https://archive.org/services/purl/domain/modular_ontology_design_library/agentrole#TemporalExtent
+:TemporalExtent rdf:type owl:Class ;
+                opla:isNativeTo "https://archive.org/services/purl/domain/modular_ontology_design_library/agentrole"^^rdfs:Literal ;
+                opla:ofExternalType "ofExternalType"^^rdfs:Literal ;
+                opla-sd:entityPosition [ opla-sd:entityPositionX "202.6805222453952"^^xsd:double ;
+                                         opla-sd:entityPositionY "69.39621993453703"^^xsd:double ;
+                                         rdfs:comment "This is an entity positioning annotation generated by CoModIDE (https://comodide.com/). Removing this annotation will break rendering the CoModIDE schema diagram view."@en
+                                       ] .
+
+
+#################################################################
+#    General axioms
+#################################################################
+
+[ rdf:type owl:Restriction ;
+  owl:onProperty <https://archive.org/services/purl/domain/modular_ontology_design_library/agentrolehasTemporalExtent> ;
+  owl:someValuesFrom :TemporalExtent ;
+  rdfs:subClassOf :AgentRole
+] .
+
+
+[ rdf:type owl:Restriction ;
+  owl:onProperty <https://archive.org/services/purl/domain/modular_ontology_design_library/agentroleisPerformedBy> ;
+  owl:someValuesFrom :Agent ;
+  rdfs:subClassOf :AgentRole
+] .
+
+
+###  Generated by the OWL API (version 4.5.25.2023-02-15T19:15:49Z) https://github.com/owlcs/owlapi

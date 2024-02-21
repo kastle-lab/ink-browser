@@ -11,7 +11,7 @@ import QueryEndpoint from './QueryEndpoint';
 function Layout(layout) {
 
   // Destructuring the variables passed down from the parent component into their own variables
-  const {topLeft, topRight, bottomLeft, bottomRight} = layout;
+  const { topLeft, topRight, bottomLeft, bottomRight } = layout;
 
   // Variable that is used to transfer data between different quadrants
   const [data, setData] = useState();
@@ -22,9 +22,11 @@ function Layout(layout) {
   const [dataFromType, setDataFromType] = useState();
   const [connections, setConnections] = useState();
 
+  const [selected, setSelected] = useState();
+
   // Set view components equal to a variable
-  const type = <div className='full-table' key={'type'}><Type data={data} bindings={bindings} typeIsPending={typeIsPending} setCoordinates={setCoordinates} endpoint={layout.endpoint} setDataFromType={setDataFromType}></Type></div>;
-  const schema = <div className='view-full' key={'schema'}><Schema bindings={bindings} data={data} setData={setData} setTypeIsPending={setTypeIsPending} endpoint={layout.endpoint} connections={connections} nodesIsPending={nodesIsPending}></Schema></div>;
+  const type = <div className='full-table' key={'type'}><Type data={data} bindings={bindings} typeIsPending={typeIsPending} setCoordinates={setCoordinates} endpoint={layout.endpoint} setDataFromType={setDataFromType} selected={selected}></Type></div>;
+  const schema = <div className='view-full' key={'schema'}><Schema bindings={bindings} data={data} setData={setData} setTypeIsPending={setTypeIsPending} endpoint={layout.endpoint} connections={connections} nodesIsPending={nodesIsPending} selected={selected} setSelected={setSelected}></Schema></div>;
   const focus = <div className='full-table' key={'focus'}><Focus dataFromType={dataFromType}></Focus></div>;
   const classHierarchy = <div className='quadrant' key={'classHierarchy'}><ClassHierarchy endpoint={layout.endpoint}></ClassHierarchy></div>;
   const statistics = <div className='full-table' key={'statistics'}><Statistics></Statistics></div>;
@@ -68,7 +70,7 @@ function Layout(layout) {
       ))}
       <QueryEndpoint setBindings={setBindings} endpoint={layout.endpoint} setConnections={setConnections} setNodesIsPending={setNodesIsPending}></QueryEndpoint>
     </div>
-    
+
   )
 }
 

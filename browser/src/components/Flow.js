@@ -6,12 +6,11 @@ import customNode from './customNode';
 const QueryEngine = require('@comunica/query-sparql').QueryEngine;
 const nodeTypes = { custom: customNode };
 
-const Flow = ({ bindings, setData, setTypeIsPending, endpoint, connections }) => {
+const Flow = ({ bindings, setData, setTypeIsPending, endpoint, connections, selected, setSelected }) => {
 
     // Initialize variables and state
     const [nodes, setNodes, onNodesChange] = useNodesState([]);
     const [edges, setEdges, onEdgesChange] = useEdgesState([]);
-    const [selected, setSelected] = useState();
     const onConnect = useCallback((params) => setEdges((els) => addEdge(params, els)), [setEdges]);
 
     function splitLabel(label) {
@@ -125,7 +124,7 @@ const Flow = ({ bindings, setData, setTypeIsPending, endpoint, connections }) =>
         let lines = [];
 
         if (connections) {
-            
+
             const parsedConnections = removeJunkFromConnections();
 
             parsedConnections.forEach((connection) => {
@@ -150,7 +149,7 @@ const Flow = ({ bindings, setData, setTypeIsPending, endpoint, connections }) =>
                 const handles = calculateArrows(sourceNode, targetNode)
                 const sourceHandle = handles[0];
                 const targetHandle = handles[1];
-                
+
 
                 lines.push(
                     {
@@ -173,7 +172,7 @@ const Flow = ({ bindings, setData, setTypeIsPending, endpoint, connections }) =>
 
             })
 
-            
+
             setEdges(lines)
 
         }
@@ -239,9 +238,9 @@ const Flow = ({ bindings, setData, setTypeIsPending, endpoint, connections }) =>
     useEffect(() => {
 
         prepareNodes();
-        
+
         prepareEdges();
-        
+
 
     }, [prepareEdges, prepareNodes])
 
