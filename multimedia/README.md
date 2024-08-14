@@ -8,4 +8,4 @@
 
 ### Draft overview of the goal - a superficial view (starting point)
 
-![Front End]()
+![Front End](https://github.com/kastle-lab/ink-browser/blob/master/multimedia/multimedia-plan.png)
