@@ -101,16 +101,50 @@ function Type({ data, bindings, typeIsPending, setCoordinates, endpoint, setData
   }));
 
   return (
-    <iframe 
-    width="560" 
-    height="315" 
-    src="https://www.youtube.com/embed/y7sXDpffzQQ?si=fLAVlojPQW0P6CE-"
-    title="YouTube video player" 
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-    referrerPolicy="strict-origin-when-cross-origin" 
-    allowFullScreen
-  ></iframe>
-  );
+
+    <div className='type'>
+
+      <Paper>
+        <TableContainer className='table-container'>
+          <Table stickyHeader aria-label="customized table">
+            <TableHead >
+              <TableRow>
+                <StyledTableCell>{selected ? selected : 'Type'}</StyledTableCell>
+                <StyledTableCell></StyledTableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+
+              {typeIsPending && <TableRow><TableCell>Gathering Data...</TableCell>
+                <TableCell></TableCell></TableRow>}
+              {data && !typeIsPending && data.length === 0 && <TableRow><TableCell>No data</TableCell><TableCell></TableCell></TableRow>}
+
+              {data && data.map((entity) => (
+                <StyledTableRow key={entity.entries._root.entries.length > 1 ? entity.entries._root.entries[1][1].id : entity.entries._root.entries[0][1].id}>
+
+
+                  <StyledTableCell className='table-cell'>
+                    <p id={entity.entries._root.entries.length > 1 ? entity.entries._root.entries[1][1].id : entity.entries._root.entries[0][1].id} onClick={getPoint}>{entity.entries._root.entries.length > 1 ? entity.entries._root.entries[0][1].id : "kwgr:" + (entity.entries._root.entries[0][1].id).split(".").pop()}</p>
+                  </StyledTableCell>
+
+
+                  <StyledTableCell className='table-cell'>
+                    <a href={entity.entries._root.entries.length > 1 ? entity.entries._root.entries[1][1].id : entity.entries._root.entries[0][1].id} target='_blank' rel="noreferrer">
+                      <IconButton size='small'>
+                        <OpenInNewIcon fontSize='small'></OpenInNewIcon>
+                      </IconButton>
+                    </a>
+                  </StyledTableCell>
+
+                </StyledTableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </Paper>
+
+    </div>
+  )
 }
 
 export default Type
