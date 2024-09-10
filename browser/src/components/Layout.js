@@ -85,9 +85,8 @@ function Layout(layout) {
   );
 
   const video = (
-    // Need to display title of video
     <div className="quadrant" key={"video"}>
-      <iframe></iframe>
+      <Video></Video>
     </div>
   );
 
