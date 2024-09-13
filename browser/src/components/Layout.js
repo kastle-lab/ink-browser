@@ -7,6 +7,8 @@ import Statistics from './Statistics';
 import ClassHierarchy from './ClassHierarchy';
 import LeafMap from './LeafMap'
 import QueryEndpoint from './QueryEndpoint';
+import DetailedInfoDisplay from './DetailedInfoDisplay';
+import ShortcutDisplay from './ShortcutDisplay';
 
 function Layout(layout) {
 
@@ -33,6 +35,15 @@ function Layout(layout) {
   const search = <div className='quadrant' key={'search'}><Search bindings={bindings} setBindings={setBindings} endpoint={layout.endpoint} setConnections={setConnections}></Search></div>;
   const map = <div className='view-full' key={'map'}><LeafMap coordinates={coordinates} zoomLevel={layout.zoomLevel}></LeafMap></div>;
   const empty = <div className='quadrant' key={'empty'}></div>;
+  const detail = <div className='full-table' key={'detail'}><DetailedInfoDisplay dataFromType={dataFromType}></DetailedInfoDisplay></div>;
+  const shortcut = (
+    <div className='full-table' key={'shortcut'}>
+      <ShortcutDisplay endpoint={layout.endpoint} dataFromType={dataFromType} />
+    </div>
+  );
+  
+
+
 
   // Array that holds view data to be mapped through for rendering
   const views = [
@@ -44,6 +55,9 @@ function Layout(layout) {
     { viewString: 'Search', viewComponent: search },
     { viewString: 'Map', viewComponent: map },
     { viewString: 'Empty', viewComponent: empty },
+    { viewString: 'DetailedInfoDisplay', viewComponent: detail },
+    { viewString: 'ShortcutDisplay', viewComponent: shortcut }
+
   ]
 
   return (

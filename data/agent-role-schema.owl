@@ -1,0 +1,330 @@
+<?xml version="1.0"?>
+<Ontology xmlns="http://www.w3.org/2002/07/owl#"
+     xml:base="https://archive.org/services/purl/domain/modular_ontology_design_library/agentrole#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     ontologyIRI="https://archive.org/services/purl/domain/modular_ontology_design_library/agentrole#">
+    <Prefix name="" IRI="https://archive.org/services/purl/domain/modular_ontology_design_library/agentrole#"/>
+    <Prefix name="dc" IRI="http://purl.org/dc/elements/1.1/"/>
+    <Prefix name="owl" IRI="http://www.w3.org/2002/07/owl#"/>
+    <Prefix name="rdf" IRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#"/>
+    <Prefix name="xml" IRI="http://www.w3.org/XML/1998/namespace"/>
+    <Prefix name="xsd" IRI="http://www.w3.org/2001/XMLSchema#"/>
+    <Prefix name="opla" IRI="http://ontologydesignpatterns.org/opla#"/>
+    <Prefix name="rdfs" IRI="http://www.w3.org/2000/01/rdf-schema#"/>
+    <Prefix name="opla-cp" IRI="http://ontologydesignpatterns.org/opla-cp#"/>
+    <Prefix name="opla-sd" IRI="http://ontologydesignpatterns.org/opla-sd#"/>
+    <Prefix name="opla-core" IRI="http://ontologydesignpatterns.org/opla-core#"/>
+    <Annotation>
+        <AnnotationProperty abbreviatedIRI="opla:hasRelatedPattern"/>
+        <Literal datatypeIRI="http://www.w3.org/2000/01/rdf-schema#Literal">http://ontologydesignpatterns.org/wiki/Submissions:AgentRole</Literal>
+    </Annotation>
+    <Annotation>
+        <AnnotationProperty abbreviatedIRI="opla:hasRelatedPattern"/>
+        <Literal datatypeIRI="http://www.w3.org/2000/01/rdf-schema#Literal">https://archive.org/services/purl/domain/modular_ontology_design_library/temporalextent</Literal>
+    </Annotation>
+    <Annotation>
+        <AnnotationProperty abbreviatedIRI="opla-core:hasEntanglement"/>
+        <Literal>Agent Role Entanglement</Literal>
+    </Annotation>
+    <Annotation>
+        <AnnotationProperty abbreviatedIRI="opla-core:hasPatternName"/>
+        <Literal>Agent Role Pattern</Literal>
+    </Annotation>
+    <Annotation>
+        <AnnotationProperty abbreviatedIRI="opla-core:hasShortcutFor"/>
+        <Literal>Agent Role</Literal>
+    </Annotation>
+    <Annotation>
+        <AnnotationProperty abbreviatedIRI="opla-cp:addressesScenario"/>
+        <Literal>Use Case
+Use Case Description</Literal>
+    </Annotation>
+    <Annotation>
+        <AnnotationProperty abbreviatedIRI="opla-cp:hasCompetencyQuestion"/>
+        <Literal>When was Cogan Shimizu a student at Wright State University?</Literal>
+    </Annotation>
+    <Annotation>
+        <AnnotationProperty abbreviatedIRI="opla-cp:hasCompetencyQuestion"/>
+        <Literal>Who was on the World Cup winning team in 2017?</Literal>
+    </Annotation>
+    <Annotation>
+        <AnnotationProperty abbreviatedIRI="opla-cp:hasCompetencyQuestion"/>
+        <Literal>Who was the lead actor for the movie, Sharknado?</Literal>
+    </Annotation>
+    <Annotation>
+        <AnnotationProperty abbreviatedIRI="opla-sd:hasConnections"/>
+        <Literal>Agent performsAgentRole AgentRole
+Thing providesAgentRole AgentRole
+AgentRole hasTemporalExtent TemporalExtent</Literal>
+    </Annotation>
+    <Annotation>
+        <AnnotationProperty abbreviatedIRI="opla-sd:hasExampleDiagramFileName"/>
+        <Literal>agent-role-example.pdf</Literal>
+    </Annotation>
+    <Annotation>
+        <AnnotationProperty abbreviatedIRI="opla-sd:hasSchemaDiagramFileName"/>
+        <Literal>agent-role-pattern.pdf</Literal>
+    </Annotation>
+    <Annotation>
+        <AnnotationProperty abbreviatedIRI="opla-sd:hasShortcutDiagramFileName"/>
+        <Literal>agent-role-shortcuts.pdf</Literal>
+    </Annotation>
+    <Annotation>
+        <AnnotationProperty abbreviatedIRI="dc:contributor"/>
+        <Literal></Literal>
+    </Annotation>
+    <Annotation>
+        <AnnotationProperty abbreviatedIRI="dc:creator"/>
+        <Literal></Literal>
+    </Annotation>
+    <Declaration>
+        <Class IRI="Agent"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="AgentRole"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="TemporalExtent"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="https://archive.org/services/purl/domain/modular_ontology_design_library/agentrolehasTemporalExtent"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="https://archive.org/services/purl/domain/modular_ontology_design_library/agentroleisPerformedBy"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="https://archive.org/services/purl/domain/modular_ontology_design_library/agentroleisProvidedBy"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="https://archive.org/services/purl/domain/modular_ontology_design_library/agentroleperformsAgentRole"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="https://archive.org/services/purl/domain/modular_ontology_design_library/agentroleprovidesAgentRole"/>
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty abbreviatedIRI="opla:hasRelatedPattern"/>
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty abbreviatedIRI="opla:isNativeTo"/>
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty abbreviatedIRI="opla:ofExternalType"/>
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty abbreviatedIRI="opla-core:hasEntanglement"/>
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty abbreviatedIRI="opla-core:hasPatternName"/>
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty abbreviatedIRI="opla-core:hasShortcutFor"/>
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty abbreviatedIRI="opla-cp:addressesScenario"/>
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty abbreviatedIRI="opla-cp:hasCompetencyQuestion"/>
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty abbreviatedIRI="opla-sd:entityPosition"/>
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty abbreviatedIRI="opla-sd:entityPositionX"/>
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty abbreviatedIRI="opla-sd:entityPositionY"/>
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty abbreviatedIRI="opla-sd:hasConnections"/>
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty abbreviatedIRI="opla-sd:hasExampleDiagramFileName"/>
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty abbreviatedIRI="opla-sd:hasSchemaDiagramFileName"/>
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty abbreviatedIRI="opla-sd:hasShortcutDiagramFileName"/>
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty abbreviatedIRI="dc:contributor"/>
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty abbreviatedIRI="dc:creator"/>
+    </Declaration>
+    <SubClassOf>
+        <Class abbreviatedIRI="owl:Thing"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="https://archive.org/services/purl/domain/modular_ontology_design_library/agentrolehasTemporalExtent"/>
+            <Class IRI="TemporalExtent"/>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class abbreviatedIRI="owl:Thing"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="https://archive.org/services/purl/domain/modular_ontology_design_library/agentroleprovidesAgentRole"/>
+            <Class IRI="AgentRole"/>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="AgentRole"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="https://archive.org/services/purl/domain/modular_ontology_design_library/agentroleisPerformedBy"/>
+            <Class IRI="Agent"/>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="AgentRole"/>
+        <ObjectExactCardinality cardinality="1">
+            <ObjectProperty IRI="https://archive.org/services/purl/domain/modular_ontology_design_library/agentrolehasTemporalExtent"/>
+            <Class IRI="TemporalExtent"/>
+        </ObjectExactCardinality>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="AgentRole"/>
+        <ObjectExactCardinality cardinality="1">
+            <ObjectProperty IRI="https://archive.org/services/purl/domain/modular_ontology_design_library/agentroleisPerformedBy"/>
+            <Class IRI="Agent"/>
+        </ObjectExactCardinality>
+    </SubClassOf>
+    <SubClassOf>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="https://archive.org/services/purl/domain/modular_ontology_design_library/agentrolehasTemporalExtent"/>
+            <Class IRI="TemporalExtent"/>
+        </ObjectSomeValuesFrom>
+        <Class IRI="AgentRole"/>
+    </SubClassOf>
+    <SubClassOf>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="https://archive.org/services/purl/domain/modular_ontology_design_library/agentroleisPerformedBy"/>
+            <Class IRI="Agent"/>
+        </ObjectSomeValuesFrom>
+        <Class IRI="AgentRole"/>
+    </SubClassOf>
+    <InverseObjectProperties>
+        <ObjectProperty IRI="https://archive.org/services/purl/domain/modular_ontology_design_library/agentroleisPerformedBy"/>
+        <ObjectProperty IRI="https://archive.org/services/purl/domain/modular_ontology_design_library/agentroleperformsAgentRole"/>
+    </InverseObjectProperties>
+    <InverseObjectProperties>
+        <ObjectProperty IRI="https://archive.org/services/purl/domain/modular_ontology_design_library/agentroleisProvidedBy"/>
+        <ObjectProperty IRI="https://archive.org/services/purl/domain/modular_ontology_design_library/agentroleprovidesAgentRole"/>
+    </InverseObjectProperties>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="opla:isNativeTo"/>
+        <IRI>https://archive.org/services/purl/domain/modular_ontology_design_library/agentrolehasTemporalExtent</IRI>
+        <Literal datatypeIRI="http://www.w3.org/2000/01/rdf-schema#Literal">https://archive.org/services/purl/domain/modular_ontology_design_library/agentrole</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="opla:isNativeTo"/>
+        <IRI>https://archive.org/services/purl/domain/modular_ontology_design_library/agentroleisPerformedBy</IRI>
+        <Literal datatypeIRI="http://www.w3.org/2000/01/rdf-schema#Literal">https://archive.org/services/purl/domain/modular_ontology_design_library/agentrole</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="opla:isNativeTo"/>
+        <IRI>https://archive.org/services/purl/domain/modular_ontology_design_library/agentroleisProvidedBy</IRI>
+        <Literal datatypeIRI="http://www.w3.org/2000/01/rdf-schema#Literal">https://archive.org/services/purl/domain/modular_ontology_design_library/agentrole</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="opla:isNativeTo"/>
+        <IRI>https://archive.org/services/purl/domain/modular_ontology_design_library/agentroleperformsAgentRole</IRI>
+        <Literal datatypeIRI="http://www.w3.org/2000/01/rdf-schema#Literal">https://archive.org/services/purl/domain/modular_ontology_design_library/agentrole</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="opla:isNativeTo"/>
+        <IRI>https://archive.org/services/purl/domain/modular_ontology_design_library/agentroleprovidesAgentRole</IRI>
+        <Literal datatypeIRI="http://www.w3.org/2000/01/rdf-schema#Literal">https://archive.org/services/purl/domain/modular_ontology_design_library/agentrole</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="opla:isNativeTo"/>
+        <IRI>Agent</IRI>
+        <Literal datatypeIRI="http://www.w3.org/2000/01/rdf-schema#Literal">https://archive.org/services/purl/domain/modular_ontology_design_library/agentrole</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="opla:ofExternalType"/>
+        <IRI>Agent</IRI>
+        <Literal datatypeIRI="http://www.w3.org/2000/01/rdf-schema#Literal">ofExternalType</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="opla-sd:entityPosition"/>
+        <IRI>Agent</IRI>
+        <AnonymousIndividual nodeID="_:genid2147483649"/>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="opla:isNativeTo"/>
+        <IRI>AgentRole</IRI>
+        <Literal datatypeIRI="http://www.w3.org/2000/01/rdf-schema#Literal">https://archive.org/services/purl/domain/modular_ontology_design_library/agentrole</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="opla-sd:entityPosition"/>
+        <IRI>AgentRole</IRI>
+        <AnonymousIndividual nodeID="_:genid2147483648"/>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="opla:isNativeTo"/>
+        <IRI>TemporalExtent</IRI>
+        <Literal datatypeIRI="http://www.w3.org/2000/01/rdf-schema#Literal">https://archive.org/services/purl/domain/modular_ontology_design_library/agentrole</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="opla:ofExternalType"/>
+        <IRI>TemporalExtent</IRI>
+        <Literal datatypeIRI="http://www.w3.org/2000/01/rdf-schema#Literal">ofExternalType</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="opla-sd:entityPosition"/>
+        <IRI>TemporalExtent</IRI>
+        <AnonymousIndividual nodeID="_:genid2147483650"/>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="opla-sd:entityPositionX"/>
+        <AnonymousIndividual nodeID="_:genid2147483648"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#double">225.808985531683</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="opla-sd:entityPositionY"/>
+        <AnonymousIndividual nodeID="_:genid2147483648"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#double">139.3645955671122</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <AnonymousIndividual nodeID="_:genid2147483648"/>
+        <Literal xml:lang="en">This is an entity positioning annotation generated by CoModIDE (https://comodide.com/). Removing this annotation will break rendering the CoModIDE schema diagram view.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="opla-sd:entityPositionX"/>
+        <AnonymousIndividual nodeID="_:genid2147483649"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#double">205.25893282938395</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="opla-sd:entityPositionY"/>
+        <AnonymousIndividual nodeID="_:genid2147483649"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#double">70.34523204334127</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <AnonymousIndividual nodeID="_:genid2147483649"/>
+        <Literal xml:lang="en">This is an entity positioning annotation generated by CoModIDE (https://comodide.com/). Removing this annotation will break rendering the CoModIDE schema diagram view.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="opla-sd:entityPositionX"/>
+        <AnonymousIndividual nodeID="_:genid2147483650"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#double">202.6805222453952</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="opla-sd:entityPositionY"/>
+        <AnonymousIndividual nodeID="_:genid2147483650"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#double">69.39621993453703</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <AnonymousIndividual nodeID="_:genid2147483650"/>
+        <Literal xml:lang="en">This is an entity positioning annotation generated by CoModIDE (https://comodide.com/). Removing this annotation will break rendering the CoModIDE schema diagram view.</Literal>
+    </AnnotationAssertion>
+</Ontology>
+
+
+
+<!-- Generated by the OWL API (version 4.5.26.2023-07-17T20:34:13Z) https://github.com/owlcs/owlapi -->
+

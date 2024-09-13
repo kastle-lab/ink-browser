@@ -1,7 +1,4 @@
-import React from 'react'
-import IconButton from '@mui/material/IconButton';
-import OpenInNewIcon from '@mui/icons-material/OpenInNew';
-
+import React from 'react';
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -17,67 +14,75 @@ function Type({ data, bindings, typeIsPending, setCoordinates, endpoint, setData
 
   // Function is called when type data is clicked
   async function getPoint(e) {
-
-    // Create query engine and run query
     const myEngine = new QueryEngine();
     let bindingsStream = await myEngine.queryBindings(`
-    select * where {
-    <${e.currentTarget.id}> ?p ?o.
-    }`, {
-      sources: [endpoint],
-    });
+      PREFIX kastle-lab: <http://kastle-lab.org/>
+      SELECT * WHERE {
+        <${e.currentTarget.id}> kastle-lab:affiliatedWithInstitution ?affiliatedInstitution.
+        <${e.currentTarget.id}> kastle-lab:hasEmailAddress ?emailAddress .
+        <${e.currentTarget.id}> kastle-lab:hasFamilyName ?familyName .
+        <${e.currentTarget.id}> kastle-lab:hasFirstName ?firstName .
+        <${e.currentTarget.id}> kastle-lab:performsRole ?roleString .
+        BIND (IRI(CONCAT("http://kastle-lab.org/", ?roleString)) AS ?role) .
+        ?role ?roleProperty ?roleValue .
+        BIND (IRI(CONCAT("http://kastle-lab.org/", ?roleValue)) AS ?roles) .
+        ?roles kastle-lab:dateOfPost ?postDates .
+        ?roles kastle-lab:dateOfPublication ?publicationDate .
+        ?roles kastle-lab:dateOfSubmission ?submissionDate .
+        ?roles kastle-lab:hasAbstract ?abstract .
+        ?roles kastle-lab:hasPublicationType ?publicationType .
+        ?roles kastle-lab:hasSourcePublication ?sourcePublication .
+        ?roles kastle-lab:hasTitle ?title .
+        ?roles kastle-lab:publicationState ?publicationState .
+        ?roles kastle-lab:submittedBy ?submittedBy .
+        ?roles kastle-lab:associatedFieldOfStudy ?field .
+        ?roles kastle-lab:hasVolumeNumber ?volumeNumber .
+      }
+    `, { sources: [endpoint] });
+    
     bindingsStream.on('error', (error) => {
       console.error(error);
     });
 
-    // Converts the results to an array and set the data
-    let query = (await bindingsStream.toArray())
-    query = JSON.stringify(query)
-    query = JSON.parse(query)
-    setDataFromType(query)
+    let query = (await bindingsStream.toArray());
+    query = JSON.stringify(query);
+    query = JSON.parse(query);
+    setDataFromType(query);
 
-    // Create variable to and if the item has geometry data set the variable
     let geometry = null;
     query && query.forEach((item) => {
       if (item.entries.p.value === "http://www.opengis.net/ont/geosparql#hasGeometry") {
-        geometry = item.entries.o.value;
+        geometry = item.entries.affiliatedInstitution.value;
       }
-    })
+    });
 
-    // If there is geometry data continue
     if (geometry != null) {
-
-      // Query for specific geometry data
       bindingsStream = await myEngine.queryBindings(`
-      select * where {
-      <${geometry}> ?p ?o.
-      }`, {
-        sources: [endpoint],
-      });
+        SELECT * WHERE {
+          <${geometry}> ?p ?o.
+        }
+      `, { sources: [endpoint] });
+      
       bindingsStream.on('error', (error) => {
         console.error(error);
       });
 
-      // Set the query with updated geometry data 
-      query = (await bindingsStream.toArray())
-      query = JSON.stringify(query)
-      query = JSON.parse(query)
-
+      query = (await bindingsStream.toArray());
+      query = JSON.stringify(query);
+      query = JSON.parse(query);
     }
 
-    // Initialize variable to store the coordinates, parse out the corrdinates and set the coordinates
     let point = null;
     query.forEach((item) => {
       if (item.entries.p.value === "http://www.opengis.net/ont/geosparql#asWKT") {
-        point = item.entries.o.value;
-        point = point.split("(").pop()
-        point = point.substring(0, point.length - 1)
-        point = point.split(' ')
+        point = item.entries.affiliatedInstitution.value;
+        point = point.split("(").pop();
+        point = point.substring(0, point.length - 1);
+        point = point.split(' ');
         point = [point[1] * 1, point[0] * 1];
-        setCoordinates(point)
+        setCoordinates(point);
       }
-    })
-
+    });
   }
 
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -94,57 +99,53 @@ function Type({ data, bindings, typeIsPending, setCoordinates, endpoint, setData
     '&:nth-of-type(odd)': {
       backgroundColor: theme.palette.action.hover,
     },
-    // hide last border
     '&:last-child td, &:last-child th': {
       border: 0,
     },
   }));
 
   return (
-
     <div className='type'>
-
       <Paper>
         <TableContainer className='table-container'>
           <Table stickyHeader aria-label="customized table">
-            <TableHead >
+            <TableHead>
               <TableRow>
-                <StyledTableCell>{selected ? selected : 'Type'}</StyledTableCell>
+                <StyledTableCell>Agent Names</StyledTableCell>
                 <StyledTableCell></StyledTableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-
-              {typeIsPending && <TableRow><TableCell>Gathering Data...</TableCell>
-                <TableCell></TableCell></TableRow>}
-              {data && !typeIsPending && data.length === 0 && <TableRow><TableCell>No data</TableCell><TableCell></TableCell></TableRow>}
-
+              {typeIsPending && (
+                <TableRow>
+                  <StyledTableCell>Gathering Data...</StyledTableCell>
+                  <StyledTableCell></StyledTableCell>
+                </TableRow>
+              )}
+              {data && !typeIsPending && data.length === 0 && (
+                <TableRow>
+                  <StyledTableCell>No data</StyledTableCell>
+                  <StyledTableCell></StyledTableCell>
+                </TableRow>
+              )}
               {data && data.map((entity) => (
                 <StyledTableRow key={entity.entries._root.entries.length > 1 ? entity.entries._root.entries[1][1].id : entity.entries._root.entries[0][1].id}>
-
-
                   <StyledTableCell className='table-cell'>
-                    <p id={entity.entries._root.entries.length > 1 ? entity.entries._root.entries[1][1].id : entity.entries._root.entries[0][1].id} onClick={getPoint}>{entity.entries._root.entries.length > 1 ? entity.entries._root.entries[0][1].id : "kwgr:" + (entity.entries._root.entries[0][1].id).split(".").pop()}</p>
+                    <p id={entity.entries._root.entries.length > 1 ? entity.entries._root.entries[1][1].id : entity.entries._root.entries[0][1].id} onClick={getPoint}>
+                      {entity.entries._root.entries.length > 1 ? entity.entries._root.entries[0][1].id : "kwgr:" + (entity.entries._root.entries[0][1].id).split(".").pop()}
+                    </p>
                   </StyledTableCell>
-
-
                   <StyledTableCell className='table-cell'>
-                    <a href={entity.entries._root.entries.length > 1 ? entity.entries._root.entries[1][1].id : entity.entries._root.entries[0][1].id} target='_blank' rel="noreferrer">
-                      <IconButton size='small'>
-                        <OpenInNewIcon fontSize='small'></OpenInNewIcon>
-                      </IconButton>
-                    </a>
+                    {/* Removed the hyperlink and icon button */}
                   </StyledTableCell>
-
                 </StyledTableRow>
               ))}
             </TableBody>
           </Table>
         </TableContainer>
       </Paper>
-
     </div>
-  )
+  );
 }
 
-export default Type
+export default Type;
