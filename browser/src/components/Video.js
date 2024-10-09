@@ -23,7 +23,9 @@ function Video() {
   // Function takes in default YouTube URL and converts it to an embedded video
   function convertUrl(url) {
     if (String(url).includes('watch?v=')) {
-      return url.replace(/watch\?v=/, 'embed/')
+      url = url.replace(/watch\?v=/, 'embed/')
+      url = url.replace(/&list=.*/, '')
+      return url
     }
     return url 
   }
@@ -40,8 +42,8 @@ function Video() {
       />
       <p align="center">
       <iframe
-        width="640"
-        height="480"
+        width= "100%"
+        height= "210px"
         src={videoUrl}
         title="YouTube video player"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
