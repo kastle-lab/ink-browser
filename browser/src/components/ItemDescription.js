@@ -1,10 +1,13 @@
-import React from 'react'
-import Tooltip from '@mui/material/Tooltip';
+import React from "react";
+import Tooltip from "@mui/material/Tooltip";
+import MarkdownComponent from "./MarkdownComponent";
 
 // Predefined logos for different resource types (Wikipedia and YouTube).
 // These will be displayed on resource "cards" depending on the link type.
-const WIKI_LOGO = "https://upload.wikimedia.org/wikipedia/commons/6/63/Wikipedia-logo.png";
-const YT_LOGO = "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Logo_of_YouTube_%282015-2017%29.svg/1280px-Logo_of_YouTube_%282015-2017%29.svg.png";
+const WIKI_LOGO =
+  "https://upload.wikimedia.org/wikipedia/commons/6/63/Wikipedia-logo.png";
+const YT_LOGO =
+  "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Logo_of_YouTube_%282015-2017%29.svg/1280px-Logo_of_YouTube_%282015-2017%29.svg.png";
 
 /**
  * ItemDescription Component
@@ -22,11 +25,16 @@ const YT_LOGO = "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Logo_
  * - itemDescriptionReferences: An array of URLs containing additional info sources.
  * - videoId: The YouTube video ID (if any) to generate a video reference link.
  */
-function ItemDescription({ itemName, itemDescription, itemDescriptionReferences = [], videoId }) {
+function ItemDescription({
+  itemName,
+  itemDescription,
+  itemDescriptionReferences = [],
+  videoId,
+}) {
   // Initialize references list.
   let refs = itemDescriptionReferences || [];
   let finalRefs = [];
-
+  console.log(itemDescription, "this is the descrition");
   // If a videoId is provided, generate a YouTube link.
   if (videoId) {
     const ytUrl = `https://www.youtube.com/watch?v=${videoId}`;
@@ -44,7 +52,8 @@ function ItemDescription({ itemName, itemDescription, itemDescriptionReferences 
   });
 
   // Capitalize the first character of the itemName for display purposes.
-  const capitalizedTitleName = (itemName || '').charAt(0).toUpperCase() + (itemName || '').slice(1);
+  const capitalizedTitleName =
+    (itemName || "").charAt(0).toUpperCase() + (itemName || "").slice(1);
 
   /**
    * getType
@@ -55,7 +64,8 @@ function ItemDescription({ itemName, itemDescription, itemDescriptionReferences 
   const getType = (url = "") => {
     const u = url.toLowerCase();
     if (u.includes("wikipedia.org")) return "wikipedia";
-    if (u.includes("youtube.com/watch") || u.includes("youtu.be")) return "youtube";
+    if (u.includes("youtube.com/watch") || u.includes("youtu.be"))
+      return "youtube";
     if (u.includes("google.com/search")) return "search";
     return "link"; // default: generic link
   };
@@ -78,15 +88,16 @@ function ItemDescription({ itemName, itemDescription, itemDescriptionReferences 
     if (type === "search") return null;
 
     // Decide which logo to display (Wikipedia, YouTube, or none).
-    const logo = type === "wikipedia" ? WIKI_LOGO : type === "youtube" ? YT_LOGO : null;
+    const logo =
+      type === "wikipedia" ? WIKI_LOGO : type === "youtube" ? YT_LOGO : null;
 
     // Decide the label text shown under the logo.
     const label =
       type === "wikipedia"
         ? `${capitalizedTitleName || "| Wikipedia"}`
         : type === "youtube"
-        ? `${capitalizedTitleName || "| Youtube"}`
-        : url;
+          ? `${capitalizedTitleName || "| Youtube"}`
+          : url;
 
     // Return a styled anchor tag as the "card".
     return (
@@ -112,7 +123,12 @@ function ItemDescription({ itemName, itemDescription, itemDescriptionReferences 
           <img
             src={logo}
             alt={type}
-            style={{ width: 48, height: 48, objectFit: "contain", display: "block" }}
+            style={{
+              width: 48,
+              height: 48,
+              objectFit: "contain",
+              display: "block",
+            }}
           />
         ) : (
           <div style={{ width: 48, height: 48 }} />
@@ -140,32 +156,32 @@ function ItemDescription({ itemName, itemDescription, itemDescriptionReferences 
       {/* Top section: shows the title or "Item Description" tooltip */}
       <div className="search-top">
         <h2 className="left-search">
-          {itemName
-            ? capitalizedTitleName
-            : (
-              <Tooltip
-                title="Detailed of the Topics extracted from the frames available under open-kg-curriculum"
-                arrow
-              >
-                Item Description
-              </Tooltip>
-            )}
+          {itemName ? (
+            capitalizedTitleName
+          ) : (
+            <Tooltip
+              title="Detailed of the Topics extracted from the frames available under open-kg-curriculum"
+              arrow
+            >
+              Item Description
+            </Tooltip>
+          )}
         </h2>
       </div>
 
       {/* Bottom section: description text and references */}
-      <div className="description-bottom">
+      {/* <div className="description-bottom">
         {/* Show item description if available, else show fallback message */}
-        {itemDescription && <p>{itemDescription ? itemDescription : "No description available."}</p>}
+      {/* {itemDescription && <p>{itemDescription ? itemDescription : "No description available."}</p>} */}
 
-        {/* Only show references if description is valid and not a placeholder */}
-        {itemDescription !== undefined && !itemDescription.startsWith("No module details available for") &&
-          <div className="references mt-4" style={{ marginTop: 12 }}>
-            <h3 style={{ fontWeight: "bold", marginTop: 10 }}>Related Resources</h3>
+      {/* Only show references if description is valid and not a placeholder */}
+      {/* {itemDescription !== undefined && !itemDescription.startsWith("No module details available for") && */}
+      {/* <div className="references mt-4" style={{ marginTop: 12 }}> */}
+      {/* <h3 style={{ fontWeight: "bold", marginTop: 10 }}>Related Resources</h3> */}
 
-            {/* If no references found, show message, else render reference cards */}
-            {finalRefs.length === 0 ? (
-              <p style={{ fontStyle: "italic", color: "#666" }}>No related resources found.</p>
+      {/* If no references found, show message, else render reference cards */}
+      {/* {finalRefs.length === 0 ? ( */}
+      {/* <p style={{ fontStyle: "italic", color: "#666" }}>No related resources found.</p>
             ) : (
               <div
                 style={{
@@ -175,12 +191,13 @@ function ItemDescription({ itemName, itemDescription, itemDescriptionReferences 
                   marginTop: 8,
                   flexWrap: "wrap",
                 }}
-              >
-                {finalRefs.map((url, idx) => renderCard(url, idx))}
-              </div>
-            )}
-          </div>}
-      </div>
+              > */}
+      {/* {finalRefs.map((url, idx) => renderCard(url, idx))}
+              </div> */}
+      {/* )} */}
+      {/* // </div>} */}
+      {/* // </div> */}
+      <MarkdownComponent markdownData={itemDescription} />
     </>
   );
 }

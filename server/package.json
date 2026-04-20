@@ -4,7 +4,7 @@
   "type": "module",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "nodemon server.js"
   },
   "author": "",
   "license": "ISC",
@@ -15,6 +15,7 @@
     "fluent-ffmpeg": "^2.1.3",
     "keyword-extractor": "^0.0.28",
     "node-rake": "^1.0.1",
+    "nodemon": "^3.1.14",
     "retext": "^9.0.0",
     "retext-english": "^5.0.0",
     "retext-keywords": "^8.0.2",

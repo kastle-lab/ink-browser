@@ -1,4 +1,8 @@
-import { similarity } from './stringUtils.js';
+import { similarity } from "./stringUtils.js";
+
+// Cache for module list (avoid hitting GitHub API rate limit)
+let moduleListCache = null;
+let cacheTimestamp = 0;
 
 /**
  * getModuleDescriptionForKeyword
@@ -10,7 +14,7 @@ import { similarity } from './stringUtils.js';
  * - Extracts the content (especially after the "## Content" header).
  *
  * How it works:
- * 1. Fetch list of modules (folders) from the GitHub repo.
+ * 1. Fetch list of modules (folders) from the GitHub repo (cached for 1 hour to avoid rate limits).
  * 2. Normalize the keyword (lowercase, trim spaces).
  * 3. Look for the "best match":
  *    - If folder name contains the keyword (or vice versa), pick it immediately.
@@ -23,27 +27,41 @@ import { similarity } from './stringUtils.js';
  */
 export async function getModuleDescriptionForKeyword(keyword) {
   try {
-    const apiUrl = 'https://api.github.com/repos/KGConf/open-kg-curriculum/contents/curriculum/modules';
-    const response = await fetch(apiUrl);
+    const apiUrl =
+      "https://api.github.com/repos/KGConf/open-kg-curriculum/contents/curriculum/modules";
+    
+    // Use cached module list if available and not expired (1 hour cache)
+    let modules = moduleListCache;
+    if (!modules || Date.now() - cacheTimestamp > 3600000) {
+      const response = await fetch(apiUrl);
 
-    // Handle GitHub API error (e.g., rate limit or network issue)
-    if (!response.ok) {
-      console.error(`Error fetching module list from GitHub: ${response.status}`);
-      return "";
+      // Handle GitHub API error (e.g., rate limit or network issue)
+      if (!response.ok) {
+        console.error(
+          `Error fetching module list from GitHub: ${response.status}`,
+        );
+        return "";
+      }
+
+      modules = await response.json(); // List of module folders
+      moduleListCache = modules;
+      cacheTimestamp = Date.now();
+      console.log(`Fetched ${modules.length} modules from GitHub (cached for 1 hour)`);
     }
-
-    const modules = await response.json(); // List of module folders
     const normKeyword = keyword.toLowerCase().trim(); // Normalize keyword
 
     let bestMatch = { similarity: 0, item: null };
 
     // Loop through modules to find the closest match
     for (const item of modules) {
-      if (item.type === 'dir') {
-        const modNameNormalized = item.name.toLowerCase().replace(/_/g, ' ');
+      if (item.type === "dir") {
+        const modNameNormalized = item.name.toLowerCase().replace(/_/g, " ");
 
         // Direct substring match (strongest)
-        if (modNameNormalized.includes(normKeyword) || normKeyword.includes(modNameNormalized)) {
+        if (
+          modNameNormalized.includes(normKeyword) ||
+          normKeyword.includes(modNameNormalized)
+        ) {
           bestMatch = { similarity: 1, item: item };
           break; // stop searching, exact-enough match found
         } else {
@@ -72,7 +90,8 @@ export async function getModuleDescriptionForKeyword(keyword) {
 
       // If file is found, extract its content
       if (fileResponse.ok) {
-        let content = await fileResponse.text();
+        let contents = await fileResponse.text();
+        let content = contents;
 
         // Try to isolate content after "## Content" section
         const parts = content.split(/##\s*Content\s*#+/i);
@@ -83,7 +102,7 @@ export async function getModuleDescriptionForKeyword(keyword) {
         } else {
           content = content.trim(); // fallback: return whole content
         }
-        return content;
+        return { content, result: contents };
       }
     }
   } catch (e) {
@@ -111,7 +130,9 @@ export async function getModuleDescriptionForKeyword(keyword) {
 export async function getReferenceLinks(keyword) {
   const links = [];
   links.push(`https://en.wikipedia.org/wiki/${encodeURIComponent(keyword)}`);
-  links.push(`https://www.youtube.com/results?search_query=${encodeURIComponent(keyword)}`);
+  links.push(
+    `https://www.youtube.com/results?search_query=${encodeURIComponent(keyword)}`,
+  );
   // Optional: Google search link (commented out)
   // links.push(`https://www.google.com/search?q=${encodeURIComponent(keyword)} tutorial`);
   return links;
