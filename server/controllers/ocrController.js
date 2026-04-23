@@ -6,7 +6,10 @@ import os from "os"; // Provides system temp directory
 import path from "path"; // For working with file paths
 import { execPromise } from "../utils/execPromise.js"; // Utility to run shell commands
 import { normalizeKeyword } from "../utils/stringUtils.js"; // Cleans and standardizes keywords
-import { getModuleDescriptionForKeyword, getReferenceLinks } from "../utils/githubUtils.js"; // Fetches extra info and references from GitHub modules
+import {
+  getModuleDescriptionForKeyword,
+  getReferenceLinks,
+} from "../utils/githubUtils.js"; // Fetches extra info and references from GitHub modules
 
 /**
  * =============================================================
@@ -97,7 +100,7 @@ export async function processOcrRequest(req, res) {
     const videoPath = path.join(tmpDir, `${videoId}.mp4`); // path to cached video
     const framesDir = path.join(tmpDir, `${videoId}_frames`); // directory for frames
     await fs.mkdir(framesDir, { recursive: true }); // ensure frames directory exists
-
+    console.log(framesDir, "framesDir");
     // Step 2: Check if video already cached, else download
     try {
       await fs.access(videoPath);
@@ -166,24 +169,28 @@ export async function processOcrRequest(req, res) {
     const enrichedKeywords = (
       await Promise.all(
         keywords.map(async (keyword) => {
-          const moduleDescription = await getModuleDescriptionForKeyword(keyword);
+          const moduleDescription =
+            await getModuleDescriptionForKeyword(keyword);
           const references = await getReferenceLinks(keyword);
-
           // Only include keywords that have meaningful module descriptions
-          if (moduleDescription && !moduleDescription.startsWith("No module")) {
+          console.log(moduleDescription, "this is module description");
+          if (moduleDescription?.content) {
+            console.log("I am inside");
             return {
               name: keyword,
               summary: `Keyword: ${keyword}`,
-              description: moduleDescription || `No module details available for ${keyword}.`,
+              description:
+                moduleDescription ||
+                `No module details available for ${keyword}.`,
               references,
-              hasReferences: references.length > 0
+              hasReferences: references.length > 0,
             };
           }
           return null; // skip keywords without module info
-        })
+        }),
       )
     ).filter(Boolean); // remove nulls
-    console.log("Enriched Keywords:", enrichedKeywords);
+    console.log("Enriched Keywords:", enrichedKeywords, keywords);
 
     // Step 11: Send final enriched keywords back to client
     res.json({ keywords: enrichedKeywords });
