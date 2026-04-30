@@ -169,35 +169,33 @@ function ItemDescription({
         </h2>
       </div>
 
-      {/* Bottom section: description text and references */}
-      {/* <div className="description-bottom">
-        {/* Show item description if available, else show fallback message */}
-      {/* {itemDescription && <p>{itemDescription ? itemDescription : "No description available."}</p>} */}
-
-      {/* Only show references if description is valid and not a placeholder */}
-      {/* {itemDescription !== undefined && !itemDescription.startsWith("No module details available for") && */}
-      {/* <div className="references mt-4" style={{ marginTop: 12 }}> */}
-      {/* <h3 style={{ fontWeight: "bold", marginTop: 10 }}>Related Resources</h3> */}
+      <div className="description-bottom" style={{ textWrap: "balance" }}>
+        {/* using markdown component to render the description text with proper
+        formatting */}
+        <MarkdownComponent markdownData={itemDescription} />
+      </div>
+      <div className="references mt-4" style={{ marginTop: 12 }}>
+        <h3 style={{ fontWeight: "bold", marginTop: 10 }}>Related Resources</h3>
+      </div>
 
       {/* If no references found, show message, else render reference cards */}
-      {/* {finalRefs.length === 0 ? ( */}
-      {/* <p style={{ fontStyle: "italic", color: "#666" }}>No related resources found.</p>
-            ) : (
-              <div
-                style={{
-                  display: "flex",
-                  gap: 20,
-                  alignItems: "flex-start",
-                  marginTop: 8,
-                  flexWrap: "wrap",
-                }}
-              > */}
-      {/* {finalRefs.map((url, idx) => renderCard(url, idx))}
-              </div> */}
-      {/* )} */}
-      {/* // </div>} */}
-      {/* // </div> */}
-      <MarkdownComponent markdownData={itemDescription} />
+      {finalRefs.length === 0 ? (
+        <p style={{ fontStyle: "italic", color: "#666" }}>
+          No related resources found.
+        </p>
+      ) : (
+        <div
+          style={{
+            display: "flex",
+            gap: 20,
+            alignItems: "flex-start",
+            marginTop: 8,
+            flexWrap: "wrap",
+          }}
+        >
+          {finalRefs.map((url, idx) => renderCard(url, idx))}
+        </div>
+      )}
     </>
   );
 }

@@ -1,4 +1,6 @@
-*, ::before, ::after {
+*,
+::before,
+::after {
   box-sizing: inherit;
 }
 
@@ -6,7 +8,9 @@ body {
   margin: 0;
   width: 100%;
   background: #f9f9f9;
-  font-family: 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  font-family:
+    "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
+    "Droid Sans", "Helvetica Neue", sans-serif;
 }
 
 /* Scrollbar */
@@ -37,7 +41,10 @@ body {
   --quadrantBorderThickness: 2px;
   --restOfScreenHeight: calc(100vh - var(--topbarHeight));
   --halfRestOfScreenHeight: calc(var(--restOfScreenHeight)/2);
-  --innerQuadrantHeight: calc(var(--halfRestOfScreenHeight) - (var(--quadrantMargin) * 2) - var(--quadrantPadding) * 2 - var(--quadrantBorderThickness));
+  --innerQuadrantHeight: calc(
+    var(--halfRestOfScreenHeight) - (var(--quadrantMargin) * 2) -
+      var(--quadrantPadding) * 2 - var(--quadrantBorderThickness)
+  );
 }
 
 /* Topbar */
@@ -61,8 +68,6 @@ body {
   justify-content: center;
   padding-top: 5px;
 }
-
-
 
 .views-menu {
   display: flex;
@@ -139,12 +144,12 @@ p {
   margin-bottom: 15px;
 }
 
-.search-top, .quad-head {
+.search-top,
+.quad-head {
   display: flex;
   justify-content: space-between;
   align-items: center;
   border-bottom: 3px solid black;
-  margin-left: 10px;
   margin-right: 10px;
   margin-bottom: 15px;
 }
@@ -169,7 +174,6 @@ p {
 }
 
 @media screen and (max-width: 782px) {
-
   .right-search {
     display: none;
   }
@@ -185,15 +189,12 @@ p {
   button {
     display: none;
   }
-
 }
 
 @media (max-width: 835px) {
-
   .right-search input {
     width: 140px;
   }
-
 }
 
 .search-bottom {
