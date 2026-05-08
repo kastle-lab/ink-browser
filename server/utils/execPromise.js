@@ -1,16 +1,16 @@
-export async function execPromise(command) {
-  // Dynamically import 'child_process'
-  const { exec } = await import('child_process');
-  return new Promise((resolve, reject) => {
-    exec(command, (error, stdout, stderr) => {
-      if (error) {
-        reject(error);
-      } else {
-        resolve({ stdout, stderr });
-      }
-    });
-  });
-}
+// export async function execPromise(command) {
+//   // Dynamically import 'child_process'
+//   const { exec } = await import('child_process');
+//   return new Promise((resolve, reject) => {
+//     exec(command, (error, stdout, stderr) => {
+//       if (error) {
+//         reject(error);
+//       } else {
+//         resolve({ stdout, stderr });
+//       }
+//     });
+//   });
+// }
 /**
  * execPromise
  * -----------
@@ -31,7 +31,7 @@ export async function execPromise(command) {
 export async function execPromise(command) {
   // Dynamically import 'child_process' module (built into Node.js)
   // This avoids loading it until needed.
-  const { exec } = await import('child_process');
+  const { exec } = await import("child_process");
 
   // Return a new Promise that resolves/rejects based on command result
   return new Promise((resolve, reject) => {

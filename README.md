@@ -160,7 +160,7 @@ pip install yt-dlp
 ```bash
 cd server
 npm install
-node server.js
+npm start (nodemon has been used for running server continuously reflecting live changes)
 ```
 
 ---
@@ -247,7 +247,6 @@ Once installed, you can start everything quickly:
 - **Ontology** (schema files, diagrams, usecases, competency questions, sample and survey data) is licensed under the  
   [Creative Commons Attribution-ShareAlike 4.0 International License](./LICENSE.ontology).  
   This includes:
-
   - RDF/OWL files (`.ttl`, `.owl`)
   - Schema diagrams & Analysis data (`.graphml`, `.png`, `.pdf`)
   - Initial data loaded into the browser
